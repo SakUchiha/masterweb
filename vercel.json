@@ -1,15 +1,36 @@
 {
   "version": 2,
-  "buildCommand": "cd code-understanding-app && npm install && npm run build",
+  "buildCommand": "cd code-understanding-app && npm install && npm run vercel-build",
   "outputDirectory": "code-understanding-app/dist",
   "functions": {
     "api/**/*.js": {
-      "runtime": "nodejs18.x"
+      "runtime": "nodejs@18.x",
+      "memory": 1024,
+      "maxDuration": 10
     }
   },
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/(.*)", "dest": "/code-understanding-app/dist/$1" }
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1",
+      "headers": {
+        "Cache-Control": "no-cache, no-store, must-revalidate"
+      }
+    },
+    {
+      "src": "/(.*)\\.(?:js|css|html|json|ico)$",
+      "dest": "/code-understanding-app/dist/$1.$2",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/code-understanding-app/dist/index.html",
+      "headers": {
+        "Cache-Control": "no-cache, no-store, must-revalidate"
+      }
+    }
   ],
   "env": {
     "NODE_ENV": "production",

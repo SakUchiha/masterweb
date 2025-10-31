@@ -1,0 +1,16 @@
+{
+  "projectId": "prj_bgbLfsB0D0498kK6VNSlqYOClKgs",
+  "orgId": "team_lTMgk0sdwZbhFIhhvZgQeWzH",
+  "projectName": "vibing",
+  "settings": {
+    "createdAt": 1761878884205,
+    "framework": null,
+    "devCommand": null,
+    "installCommand": null,
+    "buildCommand": null,
+    "outputDirectory": null,
+    "rootDirectory": null,
+    "directoryListing": false,
+    "nodeVersion": "22.x"
+  }
+}

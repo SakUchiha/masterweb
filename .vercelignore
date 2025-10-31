@@ -1,0 +1,14 @@
+.git
+.env
+.env.local
+node_modules
+_.log
+.DS_Store
+.vscode
+_.test.js
+**tests**
+coverage
+.github
+.gitignore
+README.md
+LICENSE
