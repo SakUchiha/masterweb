@@ -1,35 +1,25 @@
 {
   "version": 2,
+  "buildCommand": "cd vibing && npm install",
+  "outputDirectory": "vibing/code-understanding-app/dist",
   "builds": [
     {
-      "src": "api/*.js",
+      "src": "api/**",
       "use": "@vercel/node"
     },
     {
-      "src": "vibing/code-understanding-app/frontend/**",
+      "src": "vibing/code-understanding-app/**",
       "use": "@vercel/static"
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "api/$1"
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
     },
     {
-      "src": "/favicon.ico",
-      "dest": "vibing/code-understanding-app/frontend/favicon.ico"
-    },
-    {
-      "src": "/(css|js|images)/(.*)",
-      "dest": "vibing/code-understanding-app/frontend/$1/$2"
-    },
-    {
-      "src": "/(.*)\\.(?:html|json|ico|png)$",
-      "dest": "vibing/code-understanding-app/frontend/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "vibing/code-understanding-app/frontend/index.html"
+      "source": "/(.*)",
+      "destination": "/vibing/code-understanding-app/frontend/$1"
     }
   ]
 }
