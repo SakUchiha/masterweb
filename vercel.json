@@ -4,7 +4,7 @@
   "outputDirectory": "vibing/code-understanding-app/dist",
   "functions": {
     "api/**/*.js": {
-      "runtime": "@vercel/node@18.x",
+      "runtime": "vercel-node@1.15.4",
       "memory": 1024,
       "maxDuration": 10
     }
