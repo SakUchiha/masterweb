@@ -4,35 +4,14 @@
     {
       "src": "api/*.js",
       "use": "@vercel/node"
-    },
-    {
-      "src": "code-understanding-app/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "buildCommand": "npm install && npm run vercel-build",
-        "outputDirectory": "dist"
-      }
     }
   ],
   "routes": [
     {
-      "src": "/api/groq/health",
-      "dest": "/api/groq.js"
-    },
-    {
-      "src": "/api/groq",
-      "methods": ["POST", "OPTIONS"],
-      "dest": "/api/groq.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/code-understanding-app/dist/$1"
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
     }
   ],
-  "env": {
-    "NODE_ENV": "production"
-  }
-}
   "env": {
     "NODE_ENV": "production",
     "VERCEL": "true"
