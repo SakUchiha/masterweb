@@ -4,12 +4,37 @@
     {
       "src": "api/*.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "code-understanding-app/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "src": "/api/groq/health",
+      "dest": "/api/groq.js"
+    },
+    {
+      "src": "/api/groq",
+      "methods": ["POST", "OPTIONS"],
+      "dest": "/api/groq.js"
+    },
+    {
+      "src": "/favicon.ico",
+      "dest": "/code-understanding-app/frontend/favicon.ico"
+    },
+    {
+      "src": "/favicon-dark.ico",
+      "dest": "/code-understanding-app/frontend/favicon-dark.ico"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/code-understanding-app/frontend/$1",
+      "continue": true
     }
   ],
   "env": {
