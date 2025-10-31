@@ -1,7 +1,5 @@
-const fs = require("fs");
-const path = require("path");
-
-export default function handler(req, res) {
+// No need for fs and path since we're embedding the data
+export default async function handler(req, res) {
   // Enable CORS
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
@@ -18,52 +16,85 @@ export default function handler(req, res) {
   try {
     // Handle specific lesson request
     const lessonId = req.query.id;
-    const lessonsPath = path.join(process.cwd(), "api", "data", "lessons.json");
 
-    if (!fs.existsSync(lessonsPath)) {
-      // Fallback to development paths
-      const devPath = path.join(
-        process.cwd(),
-        "vibing",
-        "code-understanding-app",
-        "backend",
-        "server.js",
-        "data",
-        "lessons.json"
-      );
-      if (!fs.existsSync(devPath)) {
-        return res.status(404).json({ error: "Lessons data not found" });
-      }
-      const lessonsData = fs.readFileSync(devPath, "utf8");
-      const lessons = JSON.parse(lessonsData);
-
-      // If lessonId is provided, return specific lesson
-      if (lessonId) {
-        const lesson = lessons.find((l) => l.id === lessonId);
-        if (!lesson) {
-          return res.status(404).json({ error: "Lesson not found" });
-        }
-        return res.status(200).json(lesson);
-      }
-
-      return res.status(200).json(lessons);
-    }
-
-    const lessonsData = fs.readFileSync(lessonsPath, "utf8");
-    const lessons = JSON.parse(lessonsData);
+    // Embedded lessons data
+    const lessons = [
+      {
+        id: "html-intro",
+        title: "HTML Introduction",
+        category: "HTML",
+        difficulty: "Beginner",
+        duration: "25 minutes",
+        summary: "Learn the basics of HTML structure, tags, and elements.",
+        description:
+          "HTML (HyperText Markup Language) is the foundation of web development. In this lesson, you'll learn about HTML structure, basic tags, elements, attributes, and how to create your first webpage.",
+        slides: [
+          {
+            id: 1,
+            title: "What is HTML?",
+            content:
+              "<h2>What is HTML?</h2><p>HTML (HyperText Markup Language) is the foundation of web development.</p><p>It's the standard markup language for creating web pages and web applications.</p><p>HTML provides the structure and content of web pages.</p>",
+            type: "content",
+          },
+          {
+            id: 2,
+            title: "HTML Structure",
+            content:
+              "<h2>HTML Structure</h2><p>HTML describes the structure of a web page using markup.</p><div class='code-example'><code>&lt;h1&gt;Hello World&lt;/h1&gt;</code></div>",
+            type: "content",
+          },
+        ],
+        learningObjectives: [
+          "Understand what HTML is and its purpose",
+          "Learn basic HTML structure and syntax",
+          "Create well-structured HTML documents",
+        ],
+      },
+      {
+        id: "css-intro",
+        title: "CSS Introduction",
+        category: "CSS",
+        difficulty: "Beginner",
+        duration: "30 minutes",
+        summary:
+          "Learn CSS basics, including selectors, properties, and styling.",
+        description:
+          "CSS (Cascading Style Sheets) controls the visual appearance of web pages. Learn about CSS syntax, selectors, properties, and how to style your HTML.",
+        slides: [
+          {
+            id: 1,
+            title: "What is CSS?",
+            content:
+              "<h2>What is CSS?</h2><p>CSS stands for Cascading Style Sheets.</p><p>It controls the visual presentation of HTML elements.</p>",
+            type: "content",
+          },
+        ],
+        learningObjectives: [
+          "Understand what CSS is and its purpose",
+          "Learn CSS syntax and selectors",
+          "Apply styles to HTML elements",
+        ],
+      },
+    ];
 
     // If lessonId is provided, return specific lesson
     if (lessonId) {
+      console.log("Looking for lesson with ID:", lessonId);
       const lesson = lessons.find((l) => l.id === lessonId);
       if (!lesson) {
-        return res.status(404).json({ error: "Lesson not found" });
+        return res
+          .status(404)
+          .json({ error: "Lesson not found", id: lessonId });
       }
       return res.status(200).json(lesson);
     }
 
-    res.status(200).json(lessons);
+    return res.status(200).json(lessons);
   } catch (error) {
-    console.error("Error loading lessons:", error);
-    res.status(500).json({ error: "Failed to load lessons" });
+    console.error("Error serving lessons:", error);
+    return res.status(500).json({
+      error: "Failed to serve lessons",
+      details: error.message,
+    });
   }
 }
