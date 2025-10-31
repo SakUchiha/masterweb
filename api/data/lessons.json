@@ -1,10 +1,100 @@
-{
-  "lessons": [
-    {
-      "id": "demo-lesson",
-      "title": "Demo Lesson",
-      "description": "This is a demo lesson for initial deployment",
-      "content": "Welcome to the demo lesson. Replace this with your actual lesson content."
-    }
-  ]
-}
+[
+  {
+    "id": "html-intro",
+    "title": "HTML Introduction",
+    "category": "HTML",
+    "difficulty": "Beginner",
+    "duration": "25 minutes",
+    "summary": "Learn the basics of HTML structure, tags, and elements.",
+    "description": "HTML (HyperText Markup Language) is the foundation of web development. In this lesson, you'll learn about HTML structure, basic tags, elements, attributes, and how to create your first webpage.",
+    "slides": [
+      {
+        "id": 1,
+        "title": "What is HTML?",
+        "content": "<h2>What is HTML?</h2><p>HTML (HyperText Markup Language) is the foundation of web development.</p><p>It's the standard markup language for creating web pages and web applications.</p><p>HTML provides the structure and content of web pages.</p>",
+        "type": "content"
+      },
+      {
+        "id": 2,
+        "title": "HTML Structure",
+        "content": "<h2>HTML Structure</h2><p>HTML describes the structure of a web page using markup.</p><div class='code-example'><code>&lt;h1&gt;Hello World&lt;/h1&gt;</code></div>",
+        "type": "content"
+      },
+      {
+        "id": 3,
+        "title": "HTML Elements and Tags",
+        "content": "<h2>HTML Elements and Tags</h2><p>HTML elements are the building blocks of HTML pages.</p><ul><li>Elements are represented by tags</li><li>Most elements have opening and closing tags</li><li>Some elements are self-closing</li></ul><div class='code-example'><code><p>This is a paragraph.</p></code></div>",
+        "type": "content"
+      }
+    ],
+    "learningObjectives": [
+      "Understand what HTML is and its purpose",
+      "Learn basic HTML structure and syntax",
+      "Identify HTML elements, tags, and attributes",
+      "Use common HTML tags appropriately",
+      "Create well-structured HTML documents",
+      "Follow HTML best practices"
+    ],
+    "exercise": {
+      "description": "Create a simple webpage with headings, paragraphs, links, images, and proper HTML structure.",
+      "starter": "<!DOCTYPE html>\n<html>\n<head>\n  <title>My First Webpage</title>\n</head>\n<body>\n  <h1>Welcome to My Website!</h1>\n  <p>This is my first paragraph.</p>\n  <!-- Add more content here -->\n</body>\n</html>",
+      "hints": [
+        "Use h1 for main headings and h2 for subheadings",
+        "Use p for paragraphs",
+        "Always include alt attributes for images",
+        "Use a tags for links with href attributes",
+        "Add comments to explain your code"
+      ]
+    },
+    "nextLesson": "html-structure"
+  },
+  {
+    "id": "css-intro",
+    "title": "CSS Introduction",
+    "category": "CSS",
+    "difficulty": "Beginner",
+    "duration": "30 minutes",
+    "summary": "Learn CSS basics, including selectors, properties, and styling techniques.",
+    "description": "CSS (Cascading Style Sheets) controls the visual appearance of web pages. Learn about CSS syntax, selectors, properties, and how to apply styles to your HTML.",
+    "slides": [
+      {
+        "id": 1,
+        "title": "What is CSS?",
+        "content": "<h2>What is CSS?</h2><p>CSS stands for Cascading Style Sheets.</p><p>It controls the visual presentation of HTML elements.</p><p>CSS lets you create beautiful and responsive web designs.</p>",
+        "type": "content"
+      },
+      {
+        "id": 2,
+        "title": "CSS Syntax",
+        "content": "<h2>CSS Syntax</h2><p>CSS rules have a selector and declarations:</p><div class='code-example'><code>h1 {\n  color: blue;\n  font-size: 24px;\n}</code></div>",
+        "type": "content"
+      },
+      {
+        "id": 3,
+        "title": "CSS Selectors",
+        "content": "<h2>CSS Selectors</h2><p>Selectors target HTML elements to style:</p><ul><li>Element selectors: h1, p, div</li><li>Class selectors: .class-name</li><li>ID selectors: #element-id</li></ul>",
+        "type": "content"
+      }
+    ],
+    "learningObjectives": [
+      "Understand what CSS is and its purpose",
+      "Learn CSS syntax and selectors",
+      "Apply styles to HTML elements",
+      "Use classes and IDs effectively",
+      "Create responsive designs",
+      "Implement CSS best practices"
+    ],
+    "exercise": {
+      "description": "Style a webpage using various CSS techniques.",
+      "starter": "/* Style your webpage */\nbody {\n  font-family: Arial, sans-serif;\n  margin: 0;\n  padding: 20px;\n}\n\nh1 {\n  color: #333;\n}\n\n/* Add more styles below */",
+      "hints": [
+        "Use different selectors (element, class, ID)",
+        "Apply colors and fonts",
+        "Add margins and padding",
+        "Style links and buttons",
+        "Make it responsive"
+      ]
+    },
+    "nextLesson": "css-layout"
+  }
+]
