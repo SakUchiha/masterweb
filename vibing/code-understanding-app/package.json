@@ -12,7 +12,7 @@
     "start": "node backend/server.js/server.js",
     "dev": "webpack serve --mode development --port 3002",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "vercel-build": "echo 'Installing dependencies...' && npm ci && echo 'Building frontend...' && npm run build:frontend && echo 'Installing backend dependencies...' && npm run build:backend && echo 'Build complete!'",
+    "vercel-build": "npm install && npm run build:frontend && cd backend/server.js && npm install",
     "postinstall": "cd backend/server.js && npm install"
   },
   "keywords": [],
