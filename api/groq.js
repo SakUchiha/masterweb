@@ -1,10 +1,14 @@
 const fetch = require("node-fetch");
 
-export default async function handler(req, res) {
-  // Enable CORS
+module.exports = async function handler(req, res) {
+  // Enable CORS (using headers from vercel.json)
+  res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Allow-Methods", "GET,DELETE,PATCH,POST,PUT");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+  );
 
   if (req.method === "OPTIONS") {
     return res.status(200).end();
@@ -75,4 +79,4 @@ export default async function handler(req, res) {
         process.env.NODE_ENV === "development" ? error.message : undefined,
     });
   }
-}
+};
