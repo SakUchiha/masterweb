@@ -1,14 +1,19 @@
 {
   "version": 2,
-  "buildCommand": "cd code-understanding-app && npm install && npm run vercel-build",
-  "outputDirectory": "code-understanding-app/dist",
-  "functions": {
-    "api/*.js": {
-      "runtime": "now-node@2.0.0",
-      "memory": 1024,
-      "maxDuration": 10
+  "builds": [
+    {
+      "src": "api/*.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "code-understanding-app/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "buildCommand": "npm install && npm run vercel-build",
+        "outputDirectory": "dist"
+      }
     }
-  },
+  ],
   "routes": [
     {
       "src": "/api/groq/health",
@@ -20,13 +25,14 @@
       "dest": "/api/groq.js"
     },
     {
-      "src": "/((?!api).*)",
-      "dest": "/code-understanding-app/dist/$1",
-      "headers": {
-        "Cache-Control": "public, max-age=0, must-revalidate"
-      }
+      "src": "/(.*)",
+      "dest": "/code-understanding-app/dist/$1"
     }
   ],
+  "env": {
+    "NODE_ENV": "production"
+  }
+}
   "env": {
     "NODE_ENV": "production",
     "VERCEL": "true"
