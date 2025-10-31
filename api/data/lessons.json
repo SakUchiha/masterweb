@@ -1,0 +1,10 @@
+{
+  "lessons": [
+    {
+      "id": "demo-lesson",
+      "title": "Demo Lesson",
+      "description": "This is a demo lesson for initial deployment",
+      "content": "Welcome to the demo lesson. Replace this with your actual lesson content."
+    }
+  ]
+}
