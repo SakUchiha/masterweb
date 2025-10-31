@@ -6,39 +6,30 @@
       "use": "@vercel/node"
     },
     {
-      "src": "code-understanding-app/**",
+      "src": "vibing/code-understanding-app/frontend/**",
       "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/api/groq/health",
-      "dest": "/api/groq.js"
-    },
-    {
-      "src": "/api/groq",
-      "methods": ["POST", "OPTIONS"],
-      "dest": "/api/groq.js"
+      "src": "/api/(.*)",
+      "dest": "api/$1"
     },
     {
       "src": "/favicon.ico",
-      "dest": "/code-understanding-app/frontend/favicon.ico"
+      "dest": "vibing/code-understanding-app/frontend/favicon.ico"
     },
     {
-      "src": "/favicon-dark.ico",
-      "dest": "/code-understanding-app/frontend/favicon-dark.ico"
+      "src": "/(css|js|images)/(.*)",
+      "dest": "vibing/code-understanding-app/frontend/$1/$2"
     },
     {
-      "handle": "filesystem"
+      "src": "/(.*)\\.(?:html|json|ico|png)$",
+      "dest": "vibing/code-understanding-app/frontend/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "/code-understanding-app/frontend/$1",
-      "continue": true
+      "dest": "vibing/code-understanding-app/frontend/index.html"
     }
-  ],
-  "env": {
-    "NODE_ENV": "production",
-    "VERCEL": "true"
-  }
+  ]
 }
