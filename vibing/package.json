@@ -2,7 +2,7 @@
   "name": "vibing",
   "version": "1.0.0",
   "engines": {
-    "node": "18.x"
+    "node": ">=18.x"
   },
   "description": "",
   "main": "index.js",
