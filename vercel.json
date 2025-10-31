@@ -4,7 +4,7 @@
   "outputDirectory": "code-understanding-app/dist",
   "functions": {
     "api/**/*.js": {
-      "runtime": "nodejs@18.x",
+      "runtime": "now-node@1.0.0",
       "memory": 1024,
       "maxDuration": 10
     }
