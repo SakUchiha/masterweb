@@ -1,0 +1,41 @@
+{
+  "name": "code-understanding-app",
+  "version": "1.0.0",
+  "description": "A modern, interactive web development learning platform designed to teach HTML, CSS, and JavaScript through hands-on coding exercises.",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "webpack --mode=production",
+    "build:backend": "cd backend/server.js && npm install",
+    "build:dev": "webpack --mode=development",
+    "serve": "cd backend/server.js && node server.js",
+    "start": "node backend/server.js/server.js",
+    "dev": "webpack serve --mode development --port 3002",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "vercel-build": "echo 'Installing dependencies...' && npm ci && echo 'Building frontend...' && npm run build:frontend && echo 'Installing backend dependencies...' && npm run build:backend && echo 'Build complete!'",
+    "postinstall": "cd backend/server.js && npm install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@babel/core": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
+    "babel-loader": "^10.0.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^12.0.2",
+    "css-loader": "^7.1.2",
+    "css-minimizer-webpack-plugin": "^7.0.2",
+    "html-webpack-plugin": "^5.6.4",
+    "mini-css-extract-plugin": "^2.9.4",
+    "style-loader": "^4.0.0",
+    "terser-webpack-plugin": "^5.3.14",
+    "webpack": "^5.102.1",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2"
+  },
+  "dependencies": {
+    "socket.io": "^4.8.1"
+  }
+}

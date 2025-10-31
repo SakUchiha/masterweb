@@ -1,0 +1,211 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' https://*.vercel.app;"><title>KidLearner - Interactive Code Learning Platform</title><link rel="stylesheet" href="css/styles.css?v=1.0.4"><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="css/lessons.css"><link rel="manifest" href="manifest.json"><link rel="icon" type="image/x-icon" href="favicon.ico"><link rel="apple-touch-icon" href="favicon.ico"><meta name="theme-color" content="#667eea"><base href="/"><meta name="description" content="Interactive web development learning platform with AI assistance"><meta name="keywords" content="HTML, CSS, JavaScript, coding, learning, interactive, AI"><base href="/"><script defer="defer" src="/js/main.f5a9d9bc9d0c09ab7cbe.js"></script><script defer="defer" src="/js/app.3c3d3a5959c970f18af0.js"></script><script defer="defer" src="/js/ui.f949bd7b08304618e339.js"></script><script defer="defer" src="/js/api.a58629a86ffbe7e7136d.js"></script><script defer="defer" src="/js/navigation.265e2d283d0d64f32201.js"></script><script defer="defer" src="/js/lazy-loader.300979d2a89395b8e993.js"></script></head><body class="lessons-page"><section class="lessons-hero"><div class="container"><h1>Welcome to KidLearner</h1><p>Learn to code interactively with our fun and engaging lessons</p></div></section><div id="app" class="container"><header class="main-header" role="banner"><div class="container"><div class="logo"><i class="fas fa-code" aria-hidden="true"></i><h1>KidLearner</h1></div><nav class="main-nav" role="navigation" aria-label="Main navigation" id="navigation"><a href="index.html" class="nav-link active" aria-current="page"><i class="fas fa-home" aria-hidden="true"></i> Home </a><a href="lessons.html" class="nav-link"><i class="fas fa-book" aria-hidden="true"></i> Lessons </a><a href="study-guide.html" class="nav-link"><i class="fas fa-file-lines" aria-hidden="true"></i> Study Guide </a><a href="editor.html" class="nav-link"><i class="fas fa-code" aria-hidden="true"></i> Code Editor </a><a href="ask-ai.html" class="nav-link"><i class="fas fa-robot" aria-hidden="true"></i> Ask AI </a><a href="code-explainer.html" class="nav-link"><i class="fas fa-question-circle" aria-hidden="true"></i> Code Explainer</a></nav><button class="theme-toggle" id="theme-toggle" aria-label="Toggle between dark and light theme" title="Toggle dark/light mode" tabindex="0"><i class="fas fa-moon" aria-hidden="true"></i></button> <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" tabindex="0"><i class="fas fa-bars" aria-hidden="true"></i></button></div></header><section class="hero" role="main" aria-labelledby="hero-title" id="main-content"><div class="container"><div class="hero-content"><h2 id="hero-title" class="hero-title">Master Web Development</h2><p class="hero-subtitle">Learn HTML, CSS, and JavaScript through interactive coding exercises with AI assistance.</p><div class="hero-buttons" role="group" aria-label="Primary actions"><a href="lessons.html" class="btn btn-primary" role="button" tabindex="0"><i class="fas fa-play" aria-hidden="true"></i> Start Learning </a><a href="editor.html" class="btn btn-secondary" role="button" tabindex="0"><i class="fas fa-code" aria-hidden="true"></i> Try Code Editor</a></div></div><div class="hero-visual" role="img" aria-label="Code example showing basic HTML structure"><div class="code-preview"><div class="code-header"><div class="code-dots" aria-hidden="true"><span class="dot red"></span> <span class="dot yellow"></span> <span class="dot green"></span></div><span class="code-title">index.html</span></div><div class="code-content"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;My Website&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hello World!&lt;/h1&gt;
+  &lt;p&gt;Welcome to coding!&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div></div></div></section><section class="progress-dashboard-section" aria-labelledby="dashboard-title"><div class="container"><div class="progress-dashboard" id="progressDashboard"><div class="dashboard-header"><div class="welcome-section"><div class="user-avatar"><i class="fas fa-user-circle" aria-hidden="true"></i></div><div class="user-info"><h3 id="dashboard-title">Welcome back, Learner!</h3><div class="user-stats"><span class="streak-badge" id="streakBadge"><i class="fas fa-fire" aria-hidden="true"></i> <span id="currentStreak">0</span> day streak </span><span class="level-badge" id="levelBadge"><span class="level-icon">🌱</span> Level <span id="currentLevel">1</span></span></div></div></div><div class="dashboard-actions"><button class="btn btn-outline" onclick="viewAnalytics()" aria-label="View learning analytics and progress charts"><i class="fas fa-chart-line" aria-hidden="true"></i> View Analytics</button></div></div><div class="dashboard-stats"><div class="stat-card daily-progress"><div class="stat-icon"><i class="fas fa-tasks" aria-hidden="true"></i></div><div class="stat-info"><div class="stat-value" id="dailyLessons">0/5</div><div class="stat-label">Today's Lessons</div><div class="progress-container"><div class="progress-bar"><div class="progress-fill" id="dailyLessonsProgress" style="width: 0%"></div></div></div></div></div><div class="stat-card weekly-goals"><div class="stat-icon"><i class="fas fa-target" aria-hidden="true"></i></div><div class="stat-info"><div class="stat-value" id="weeklyGoals">0/7</div><div class="stat-label">Weekly Goals</div><div class="progress-container"><div class="progress-bar"><div class="progress-fill" id="weeklyGoalsProgress" style="width: 0%"></div></div></div></div></div><div class="stat-card achievements"><div class="stat-icon"><i class="fas fa-trophy" aria-hidden="true"></i></div><div class="stat-info"><div class="stat-value" id="totalAchievements">0</div><div class="stat-label">Achievements</div><div class="achievement-preview" id="recentAchievements"><span class="no-achievements">Keep learning to unlock achievements!</span></div></div></div><div class="stat-card time-spent"><div class="stat-icon"><i class="fas fa-clock" aria-hidden="true"></i></div><div class="stat-info"><div class="stat-value" id="timeSpent">0h</div><div class="stat-label">Time This Week</div><div class="time-breakdown" id="timeBreakdown"><small>Keep up the great work!</small></div></div></div></div><div class="learning-path-section"><h4>Your Learning Journey</h4><div class="learning-path-visualization" id="learningPath"><div class="path-stage" data-stage="beginner"><div class="stage-icon"><i class="fas fa-seedling" aria-hidden="true"></i></div><div class="stage-info"><h5>Beginner</h5><div class="stage-progress"><div class="progress-bar"><div class="progress-fill" id="beginnerProgress" style="width: 0%"></div></div><span class="progress-text" id="beginnerText">0/3 lessons</span></div></div></div><div class="path-connector"><div class="connector-line"></div></div><div class="path-stage" data-stage="intermediate"><div class="stage-icon"><i class="fas fa-tree" aria-hidden="true"></i></div><div class="stage-info"><h5>Intermediate</h5><div class="stage-progress"><div class="progress-bar"><div class="progress-fill" id="intermediateProgress" style="width: 0%"></div></div><span class="progress-text" id="intermediateText">0/3 lessons</span></div></div></div><div class="path-connector"><div class="connector-line"></div></div><div class="path-stage locked" data-stage="advanced"><div class="stage-icon"><i class="fas fa-mountain" aria-hidden="true"></i></div><div class="stage-info"><h5>Advanced</h5><div class="stage-progress"><div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div><span class="progress-text">Locked</span></div></div></div></div></div><div class="quick-actions"><h4>Continue Learning</h4><div class="action-buttons"><button class="btn btn-primary" onclick="continueLearning()" aria-label="Continue your current lesson"><i class="fas fa-play" aria-hidden="true"></i> Continue Lesson</button> <button class="btn btn-secondary" onclick="takeQuiz()" aria-label="Take a coding quiz to test your knowledge"><i class="fas fa-brain" aria-hidden="true"></i> Take Quiz</button> <button class="btn btn-outline" onclick="viewAchievements()" aria-label="View your earned achievements and badges"><i class="fas fa-trophy" aria-hidden="true"></i> View Achievements</button></div></div><div class="motivational-quote" id="motivationalQuote"><blockquote><p>"The beautiful thing about learning is that no one can take it away from you."</p><cite>— B.B. King</cite></blockquote></div></div></div></section><section class="features" aria-labelledby="features-title"><div class="container"><h2 id="features-title" class="section-title">Why Choose Us</h2><div class="features-grid" role="list"><div class="feature-card" role="listitem"><div class="feature-icon"><i class="fas fa-play-circle" aria-hidden="true"></i></div><h3>Interactive Lessons</h3><p>Step-by-step tutorials with hands-on coding exercises that build real skills.</p></div><div class="feature-card" role="listitem"><div class="feature-icon"><i class="fas fa-bolt" aria-hidden="true"></i></div><h3>Auto-Run Mode</h3><p>See your code execute in real-time as you type. No more clicking run buttons!</p></div><div class="feature-card" role="listitem"><div class="feature-icon"><i class="fas fa-robot" aria-hidden="true"></i></div><h3>AI Assistant</h3><p>Get instant help and explanations from our intelligent coding tutor.</p></div><div class="feature-card" role="listitem"><div class="feature-icon"><i class="fas fa-code" aria-hidden="true"></i></div><h3>Live Editor</h3><p>Practice coding with our built-in editor that supports HTML, CSS, and JavaScript.</p></div><div class="feature-card" role="listitem"><div class="feature-icon"><i class="fas fa-trophy" aria-hidden="true"></i></div><h3>Gamification & Achievements</h3><p>Earn points, unlock achievements, and level up as you learn coding.</p></div><div class="feature-card" role="listitem"><div class="feature-icon"><i class="fas fa-chart-line" aria-hidden="true"></i></div><h3>Progress Analytics</h3><p>Detailed insights into your learning progress with personalized recommendations.</p></div></div></div></section><section class="quick-start"><div class="container"><h2 class="section-title">Get Started in 3 Steps</h2><div class="steps"><div class="step"><div class="step-number">1</div><div class="step-content"><h3>Choose a Lesson</h3><p>Browse our curated lessons covering HTML, CSS, and JavaScript fundamentals.</p><a href="lessons.html" class="step-link">View Lessons <i class="fas fa-arrow-right"></i></a></div></div><div class="step"><div class="step-number">2</div><div class="step-content"><h3>Code & Learn</h3><p>Follow along with interactive exercises and see your code come to life instantly.</p><a href="editor.html" class="step-link">Start Coding <i class="fas fa-arrow-right"></i></a></div></div><div class="step"><div class="step-number">3</div><div class="step-content"><h3>Get AI Help</h3><p>Stuck? Ask our AI assistant for explanations, tips, and debugging help.</p><a href="ai.html" class="step-link">Ask AI <i class="fas fa-arrow-right"></i></a></div></div></div></div></section><section class="stats"><div class="container"><div class="stats-grid"><div class="stat"><div class="stat-number">3+</div><div class="stat-label">Programming Languages</div></div><div class="stat"><div class="stat-number">10+</div><div class="stat-label">Interactive Lessons</div></div><div class="stat"><div class="stat-number">100%</div><div class="stat-label">Free to Use</div></div><div class="stat"><div class="stat-number">24/7</div><div class="stat-label">AI Support</div></div></div></div></section><section class="cta"><div class="container"><div class="cta-content"><h2>Ready to Start Your Coding Journey?</h2><p>Join thousands of learners who are mastering web development with KidLearner.</p><div class="cta-buttons"><a href="lessons.html" class="btn btn-primary btn-large"><i class="fas fa-rocket"></i> Start Learning Now </a><a href="editor.html" class="btn btn-outline btn-large"><i class="fas fa-code"></i> Try the Editor</a></div></div></div></section><section class="features"><div class="container"><h2 class="section-title">What Learners Say</h2><div class="features-grid"><div class="feature-card"><div class="feature-icon"><i class="fas fa-user-graduate"></i></div><h3>“So engaging!”</h3><p>KidLearner made HTML and CSS finally click for me. The AI tips are gold.</p></div><div class="feature-card"><div class="feature-icon"><i class="fas fa-star"></i></div><h3>“Love the editor”</h3><p>Typing and seeing instant results keeps me motivated to learn more.</p></div><div class="feature-card"><div class="feature-icon"><i class="fas fa-robot"></i></div><h3>“AI is super helpful”</h3><p>The explanations are clear and actionable. I learn faster with guidance.</p></div></div></div></section><footer class="main-footer"><div class="container"><div class="footer-content"><div class="footer-section"><h3>KidLearner</h3><p>Interactive web development learning platform</p></div><div class="footer-section"><h4>Learn</h4><ul><li><a href="lessons.html">HTML Lessons</a></li><li><a href="lessons.html">CSS Lessons</a></li><li><a href="lessons.html">JavaScript Lessons</a></li></ul></div><div class="footer-section"><h4>Tools</h4><ul><li><a href="editor.html">Code Editor</a></li><li><a href="ai.html">AI Assistant</a></li><li><a href="editor.html">Auto-Run Mode</a></li></ul></div><div class="footer-section"><h4>Support</h4><ul><li><a href="ai.html">Get Help</a></li><li><a href="editor.html">Practice</a></li><li><a href="lessons.html">Tutorials</a></li></ul></div></div><div class="footer-bottom"><p>&copy; 2025 KidLearner. Made with Web Programmer for learners.</p></div></div></footer><script src="js/router.js?v=2025.10.27.1"></script><script src="js/config.js?v=2025.10.27.1"></script><script src="js/error-boundary.js?v=2025.10.27.1"></script><script src="js/api.js?v=2025.10.27.1"></script><script src="js/ui.js?v=2025.10.27.1"></script><script src="js/progress-tracker.js?v=2025.10.27.1"></script><script src="js/achievement-system.js?v=2025.10.27.1"></script><script src="js/main.js?v=1.0.4" type="module"></script><script>// Service Worker Version
+      const APP_VERSION = '1.0.4';
+      
+      // Register service worker for PWA (only in production and HTTPS)
+      if ("serviceWorker" in navigator && window.location.protocol === 'https:' && !window.location.hostname.includes('localhost')) {
+        window.addEventListener("load", () => {
+          // Unregister any existing service workers first
+          navigator.serviceWorker.getRegistrations().then(registrations => {
+            for (let registration of registrations) {
+              registration.unregister();
+              console.log('Unregistered old service worker');
+            }
+            
+            // Register new service worker with cache-busting URL
+            navigator.serviceWorker
+              .register(`/sw.js?v=${APP_VERSION}`)
+              .then((registration) => {
+                console.log(`ServiceWorker registration successful with scope: ${registration.scope}`);
+                
+                // Check for updates every time the page loads
+                registration.update().then(() => {
+                  console.log('Checked for service worker updates');
+                });
+                
+                // Force update if waiting
+                if (registration.waiting) {
+                  console.log('New service worker found, reloading...');
+                  window.location.reload();
+                }
+                
+                // Listen for controller change (when a new service worker takes over)
+                navigator.serviceWorker.addEventListener('controllerchange', () => {
+                  console.log('Controller changed, reloading...');
+                  window.location.reload();
+                });
+                
+              })
+              .catch((error) => {
+                console.error(`ServiceWorker registration failed: ${error}`);
+              });
+          });
+        });
+      });
+    }
+
+    // Enhanced Dashboard Functions
+    function viewAnalytics() {
+      window.location.href = 'analytics.html';
+    }
+
+    function continueLearning() {
+      // Find the most recent incomplete lesson
+      const progress = window.progressTracker?.getProgress();
+      if (progress && progress.lessonsCompleted.length > 0) {
+        // For now, redirect to lessons page - could be enhanced to find specific lesson
+        window.location.href = 'lessons.html';
+      } else {
+        window.location.href = 'lessons.html';
+      }
+    }
+
+    function takeQuiz() {
+      window.location.href = 'editor.html?mode=quiz';
+    }
+
+    function viewAchievements() {
+      window.location.href = 'achievements.html';
+    }
+
+    // Initialize Enhanced Dashboard
+    function initializeDashboard() {
+      if (window.progressTracker) {
+        updateDashboardData();
+      }
+    }
+
+    function updateDashboardData() {
+      const progress = window.progressTracker.getProgress();
+      const stats = window.progressTracker.getStats();
+
+      // Update welcome message
+      const welcomeEl = document.getElementById('dashboard-title');
+      if (welcomeEl) {
+        const hour = new Date().getHours();
+        let greeting = 'Welcome back';
+        if (hour < 12) greeting = 'Good morning';
+        else if (hour < 18) greeting = 'Good afternoon';
+        else greeting = 'Good evening';
+        welcomeEl.textContent = `${greeting}, Learner!`;
+      }
+
+      // Update streak
+      const streakEl = document.getElementById('currentStreak');
+      if (streakEl) streakEl.textContent = stats.currentStreak;
+
+      // Update level
+      const levelEl = document.getElementById('currentLevel');
+      if (levelEl) levelEl.textContent = stats.level.level;
+
+      // Update daily lessons
+      const dailyLessonsEl = document.getElementById('dailyLessons');
+      const dailyProgressEl = document.getElementById('dailyLessonsProgress');
+      if (dailyLessonsEl && dailyProgressEl) {
+        const dailyLessons = progress.dailyGoals?.lessons || 0;
+        dailyLessonsEl.textContent = `${dailyLessons}/5`;
+        dailyProgressEl.style.width = `${(dailyLessons / 5) * 100}%`;
+      }
+
+      // Update weekly goals
+      const weeklyGoalsEl = document.getElementById('weeklyGoals');
+      const weeklyProgressEl = document.getElementById('weeklyGoalsProgress');
+      if (weeklyGoalsEl && weeklyProgressEl) {
+        const weeklyLessons = progress.lessonsCompleted.length;
+        weeklyGoalsEl.textContent = `${weeklyLessons}/7`;
+        weeklyProgressEl.style.width = `${Math.min((weeklyLessons / 7) * 100, 100)}%`;
+      }
+
+      // Update achievements
+      const achievementsEl = document.getElementById('totalAchievements');
+      if (achievementsEl) achievementsEl.textContent = stats.achievementsCount;
+
+      // Update time spent
+      const timeSpentEl = document.getElementById('timeSpent');
+      if (timeSpentEl) {
+        const hours = Math.floor(stats.timeSpent / 60);
+        timeSpentEl.textContent = `${hours}h`;
+      }
+
+      // Update learning path progress
+      updateLearningPathProgress(progress);
+    }
+
+    function updateLearningPathProgress(progress) {
+      const beginnerProgress = document.getElementById('beginnerProgress');
+      const beginnerText = document.getElementById('beginnerText');
+      const intermediateProgress = document.getElementById('intermediateProgress');
+      const intermediateText = document.getElementById('intermediateText');
+
+      // Calculate beginner progress (first 3 lessons)
+      const beginnerLessons = ['html-intro', 'html-structure', 'html-links-images'];
+      const beginnerCompleted = beginnerLessons.filter(id => progress.lessonsCompleted.includes(id)).length;
+      if (beginnerProgress && beginnerText) {
+        const beginnerPercent = (beginnerCompleted / 3) * 100;
+        beginnerProgress.style.width = `${beginnerPercent}%`;
+        beginnerText.textContent = `${beginnerCompleted}/3 lessons`;
+      }
+
+      // Calculate intermediate progress (next 3 lessons)
+      const intermediateLessons = ['css-intro', 'css-colors-fonts', 'css-layout'];
+      const intermediateCompleted = intermediateLessons.filter(id => progress.lessonsCompleted.includes(id)).length;
+      if (intermediateProgress && intermediateText) {
+        const intermediatePercent = (intermediateCompleted / 3) * 100;
+        intermediateProgress.style.width = `${intermediatePercent}%`;
+        intermediateText.textContent = `${intermediateCompleted}/3 lessons`;
+      }
+
+      // Unlock advanced stage if intermediate is complete
+      const advancedStage = document.querySelector('.path-stage[data-stage="advanced"]');
+      if (advancedStage && intermediateCompleted >= 3) {
+        advancedStage.classList.remove('locked');
+      }
+    }
+
+    // Initialize dashboard when progress tracker is ready
+    document.addEventListener('DOMContentLoaded', function() {
+      // Wait for progress tracker to be available
+      const checkProgressTracker = setInterval(() => {
+        if (window.progressTracker) {
+          clearInterval(checkProgressTracker);
+          initializeDashboard();
+        }
+      }, 100);
+    });
+
+    // Add smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
+
+      // Add animation on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-in");
+          }
+        });
+      }, observerOptions);
+
+      // Observe all feature cards and steps
+      document.querySelectorAll(".feature-card, .step").forEach((el) => {
+        observer.observe(el);
+      });</script></div></body></html>

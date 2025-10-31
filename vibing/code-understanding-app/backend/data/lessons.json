@@ -1,0 +1,32 @@
+[
+  {
+    "id": "html-intro",
+    "title": "Introduction to HTML",
+    "category": "HTML",
+    "difficulty": "Beginner",
+    "duration": "15 minutes",
+    "summary": "Learn the basics of HTML structure and tags.",
+    "description": "HTML (HyperText Markup Language) is the foundation of web development. This lesson covers the basic structure of an HTML document and common HTML elements.",
+    "learningObjectives": [
+      "Understand what HTML is and its purpose",
+      "Learn basic HTML structure",
+      "Create your first HTML page",
+      "Use common HTML tags"
+    ]
+  },
+  {
+    "id": "css-basics",
+    "title": "CSS Fundamentals",
+    "category": "CSS",
+    "difficulty": "Beginner",
+    "duration": "20 minutes",
+    "summary": "Learn how to style your HTML with CSS.",
+    "description": "Cascading Style Sheets (CSS) is used to style and layout web pages. This lesson covers the basics of CSS selectors, properties, and values.",
+    "learningObjectives": [
+      "Understand CSS syntax and selectors",
+      "Learn how to apply styles to HTML elements",
+      "Work with colors, fonts, and spacing",
+      "Understand the box model"
+    ]
+  }
+]
