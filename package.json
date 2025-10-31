@@ -1,0 +1,15 @@
+{
+  "name": "vibing",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "cd vibing/code-understanding-app && npm install && npm run build",
+    "start": "vercel dev"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

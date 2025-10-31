@@ -1,25 +1,12 @@
 {
   "version": 2,
-  "buildCommand": "cd vibing && npm install",
-  "outputDirectory": "vibing/code-understanding-app/dist",
-  "builds": [
-    {
-      "src": "api/**",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "vibing/code-understanding-app/**",
-      "use": "@vercel/static"
-    }
-  ],
+  "buildCommand": "npm run build",
+  "outputDirectory": "vibing/code-understanding-app/frontend",
+  "public": true,
   "rewrites": [
     {
       "source": "/api/lessons/:id",
       "destination": "/api/lessons?id=:id"
-    },
-    {
-      "source": "/api/groq",
-      "destination": "/api/groq"
     },
     {
       "source": "/api/(.*)",
@@ -30,15 +17,30 @@
       "destination": "/vibing/code-understanding-app/frontend/$1"
     }
   ],
+  "builds": [
+    {
+      "src": "api/**",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["api/**"],
+        "regions": ["all"],
+        "maxDuration": 10
+      }
+    },
+    {
+      "src": "vibing/code-understanding-app/frontend/**",
+      "use": "@vercel/static"
+    }
+  ],
   "headers": [
     {
-      "source": "/api/(.*)",
+      "source": "/(.*)",
       "headers": [
         { "key": "Access-Control-Allow-Credentials", "value": "true" },
         { "key": "Access-Control-Allow-Origin", "value": "*" },
         {
           "key": "Access-Control-Allow-Methods",
-          "value": "GET,DELETE,PATCH,POST,PUT"
+          "value": "GET,DELETE,PATCH,POST,PUT,OPTIONS"
         },
         {
           "key": "Access-Control-Allow-Headers",
