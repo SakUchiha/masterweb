@@ -86,6 +86,19 @@ class AIChatOnly {
     }
   }
 
+  // Clean special characters from AI responses
+  cleanSpecialCharacters(text) {
+    if (!text || typeof text !== 'string') return text;
+    
+    // Remove control characters but keep common formatting
+    return text
+      .replace(/[\x00-\x08\x0B-\x0C\x0E-\x1F\x7F]/g, '') // Remove control chars
+      .replace(/[\u200B-\u200D\uFEFF]/g, '') // Remove zero-width spaces
+      .replace(/\u0000/g, '') // Remove null characters
+      .replace(/[\u2028\u2029]/g, ' ') // Replace line/paragraph separators with space
+      .trim();
+  }
+
   formatResponse(text) {
     // Convert markdown-style code blocks to HTML
     text = text.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
@@ -151,11 +164,12 @@ class AIChatOnly {
         uiManager.setButtonLoading("sendButton", false);
         this.hideTypingIndicator();
 
-        const reply =
+        let reply =
           response.response ||
           response.explanation ||
           response.choices?.[0]?.message?.content ||
           "Sorry, I couldn't generate a code explanation.";
+        reply = this.cleanSpecialCharacters(reply);
         this.addMessage("ai", this.formatResponse(reply));
       } else {
         const response = await apiService.post("/api/groq", {
@@ -166,10 +180,11 @@ class AIChatOnly {
         uiManager.setButtonLoading("sendButton", false);
         this.hideTypingIndicator();
 
-        const reply =
+        let reply =
           response.response ||
           response.choices?.[0]?.message?.content ||
           "Sorry, I couldn't generate a response.";
+        reply = this.cleanSpecialCharacters(reply);
         this.addMessage("ai", this.formatResponse(reply));
       }
 
