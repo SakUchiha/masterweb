@@ -6,7 +6,7 @@ This guide will help you deploy your project to Vercel with all features working
 
 - A Vercel account (sign up at https://vercel.com)
 - Git repository (GitHub, GitLab, or Bitbucket)
-- Your Groq API key: `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`
+- Your Groq API key (get it from https://console.groq.com/)
 
 ## Step 1: Push Your Code to Git
 
@@ -32,7 +32,7 @@ git push origin main
 1. In your Vercel project dashboard, go to **Settings** → **Environment Variables**
 2. Add a new environment variable:
    - **Name**: `GROQ_API_KEY`
-   - **Value**: `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`
+   - **Value**: `YOUR_GROQ_API_KEY_HERE` (get it from https://console.groq.com/)
    - **Environment**: Select all (Production, Preview, Development)
 3. Click **Save**
 

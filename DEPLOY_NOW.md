@@ -14,7 +14,7 @@ git push
 2. Import your Git repository
 3. **IMPORTANT**: Click "Environment Variables" and add:
    - **Name**: `GROQ_API_KEY`
-   - **Value**: `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`
+   - **Value**: `YOUR_GROQ_API_KEY_HERE` (get it from https://console.groq.com/)
    - **Environment**: Select all (Production, Preview, Development)
 4. Click "Deploy"
 
