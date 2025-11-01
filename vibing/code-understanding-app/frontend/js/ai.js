@@ -184,7 +184,9 @@ class AIAssistant {
 
     // Main explanation content
     html += '<div class="explanation-content">';
-    html += `<div class="explanation-text">${this.formatResponse(explanation.response || explanation.explanation || explanation)}</div>`;
+    let explanationText = explanation.response || explanation.explanation || explanation;
+    explanationText = this.cleanSpecialCharacters(explanationText);
+    html += `<div class="explanation-text">${this.formatResponse(explanationText)}</div>`;
     html += '</div>';
 
     // Add copy button for code snippets
@@ -332,6 +334,19 @@ class AIAssistant {
     } catch (error) {
       console.error('Error loading example:', error);
     }
+  }
+
+  // Clean special characters from AI responses
+  cleanSpecialCharacters(text) {
+    if (!text || typeof text !== 'string') return text;
+    
+    // Remove control characters but keep common formatting
+    return text
+      .replace(/[\x00-\x08\x0B-\x0C\x0E-\x1F\x7F]/g, '') // Remove control chars
+      .replace(/[\u200B-\u200D\uFEFF]/g, '') // Remove zero-width spaces
+      .replace(/\u0000/g, '') // Remove null characters
+      .replace(/[\u2028\u2029]/g, ' ') // Replace line/paragraph separators with space
+      .trim();
   }
 
   addMessage(sender, content) {
@@ -1635,7 +1650,11 @@ Before I provide a detailed answer, could you tell me:
       uiManager.setButtonLoading('sendButton', false);
       this.hideTypingIndicator();
 
-      const reply = response.response || (response.choices && response.choices[0] && response.choices[0].message && response.choices[0].message.content) || "Sorry, I couldn't generate a response.";
+      let reply = response.response || (response.choices && response.choices[0] && response.choices[0].message && response.choices[0].message.content) || "Sorry, I couldn't generate a response.";
+      
+      // Clean special characters from AI response
+      reply = this.cleanSpecialCharacters(reply);
+      
       console.log('Extracted reply:', reply);
       this.addMessage('ai', this.formatResponse(reply));
 

@@ -162,15 +162,33 @@ module.exports = async function handler(req, res) {
 
     const data = await response.json();
     
+    // Function to clean special characters from AI response
+    function cleanSpecialCharacters(text) {
+      if (!text || typeof text !== 'string') return text;
+      
+      // Remove control characters but keep common formatting
+      return text
+        .replace(/[\x00-\x08\x0B-\x0C\x0E-\x1F\x7F]/g, '') // Remove control chars
+        .replace(/[\u200B-\u200D\uFEFF]/g, '') // Remove zero-width spaces
+        .replace(/\u0000/g, '') // Remove null characters
+        .replace(/[\u2028\u2029]/g, ' ') // Replace line/paragraph separators with space
+        .trim();
+    }
+    
     // Handle both response formats (chat completions and code explanation)
     if (isCodeExplanation) {
       if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
+        const cleanedContent = cleanSpecialCharacters(data.choices[0].message.content);
         return res.status(200).json({ 
-          response: data.choices[0].message.content, 
+          response: cleanedContent, 
           model: requestBody.model 
         });
       }
     } else {
+      // Clean response content in chat format
+      if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
+        data.choices[0].message.content = cleanSpecialCharacters(data.choices[0].message.content);
+      }
       // Return full OpenAI-compatible format for chat
       return res.status(200).json(data);
     }
