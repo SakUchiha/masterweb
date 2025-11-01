@@ -1,10 +1,9 @@
 {
   "version": 2,
   "buildCommand": "cd vibing/code-understanding-app && npm install && npm run build:frontend",
-  "outputDirectory": "vibing/code-understanding-app/frontend",
+  "outputDirectory": "vibing/code-understanding-app/dist",
   "functions": {
     "api/**/*.js": {
-      "runtime": "nodejs18.x",
       "maxDuration": 10
     }
   },
@@ -27,31 +26,31 @@
     },
     {
       "source": "/css/:file*",
-      "destination": "/vibing/code-understanding-app/frontend/css/:file*"
+      "destination": "/vibing/code-understanding-app/dist/css/:file*"
     },
     {
       "source": "/js/:file*",
-      "destination": "/vibing/code-understanding-app/frontend/js/:file*"
+      "destination": "/vibing/code-understanding-app/dist/js/:file*"
     },
     {
       "source": "/data/:file*",
-      "destination": "/vibing/code-understanding-app/frontend/data/:file*"
+      "destination": "/vibing/code-understanding-app/dist/data/:file*"
     },
     {
       "source": "/:file*\\.(ico|png|jpg|jpeg|gif|webp|svg|woff|woff2|ttf|eot|json)",
-      "destination": "/vibing/code-understanding-app/frontend/:file*.$1"
+      "destination": "/vibing/code-understanding-app/dist/:file*.$1"
     },
     {
       "source": "/:file*\\.html",
-      "destination": "/vibing/code-understanding-app/frontend/:file*.html"
+      "destination": "/vibing/code-understanding-app/dist/:file*.html"
     },
     {
       "source": "/",
-      "destination": "/vibing/code-understanding-app/frontend/index.html"
+      "destination": "/vibing/code-understanding-app/dist/index.html"
     },
     {
       "source": "/(.*)",
-      "destination": "/vibing/code-understanding-app/frontend/index.html"
+      "destination": "/vibing/code-understanding-app/dist/index.html"
     }
   ],
   "headers": [
