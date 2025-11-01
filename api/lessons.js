@@ -23,17 +23,43 @@ module.exports = async function handler(req, res) {
 
   try {
     // Handle specific lesson request
-    const lessonId = req.query.id;
+    const lessonId = req.query.id || req.query.lessonId;
 
     // Try to load lessons from JSON file first
     let lessons = [];
     try {
-      const lessonsPath = path.join(process.cwd(), "api", "data", "lessons.json");
-      if (fs.existsSync(lessonsPath)) {
-        const lessonsData = fs.readFileSync(lessonsPath, "utf-8");
-        lessons = JSON.parse(lessonsData);
-      } else {
-        throw new Error("Lessons file not found");
+      // Try multiple methods to load lessons.json
+      // Method 1: Try require (works best in Vercel serverless)
+      try {
+        lessons = require("./data/lessons.json");
+        console.log(`Successfully loaded ${lessons.length} lessons using require`);
+      } catch (requireError) {
+        // Method 2: Try fs.readFileSync with multiple paths
+        const possiblePaths = [
+          path.join(__dirname, "data", "lessons.json"),
+          path.join(process.cwd(), "api", "data", "lessons.json"),
+          path.join(process.cwd(), "lessons.json"),
+        ];
+
+        let lessonsPath = null;
+        for (const testPath of possiblePaths) {
+          try {
+            if (fs.existsSync(testPath)) {
+              lessonsPath = testPath;
+              break;
+            }
+          } catch (e) {
+            // Continue to next path
+          }
+        }
+
+        if (lessonsPath) {
+          const lessonsData = fs.readFileSync(lessonsPath, "utf-8");
+          lessons = JSON.parse(lessonsData);
+          console.log(`Successfully loaded ${lessons.length} lessons from ${lessonsPath}`);
+        } else {
+          throw new Error("Lessons file not found in any expected location");
+        }
       }
     } catch (error) {
       console.warn("Could not load lessons from file, using embedded data:", error.message);
@@ -97,10 +123,16 @@ module.exports = async function handler(req, res) {
       },
     ];
 
+    // Ensure lessons is an array
+    if (!Array.isArray(lessons)) {
+      console.warn("Lessons is not an array, using empty array");
+      lessons = [];
+    }
+
     // If lessonId is provided, return specific lesson
     if (lessonId) {
       console.log("Looking for lesson with ID:", lessonId);
-      const lesson = lessons.find((l) => l.id === lessonId);
+      const lesson = lessons.find((l) => l && l.id === lessonId);
       if (!lesson) {
         return res
           .status(404)
@@ -109,12 +141,16 @@ module.exports = async function handler(req, res) {
       return res.status(200).json(lesson);
     }
 
-    return res.status(200).json(lessons);
+    // Return all lessons
+    return res.status(200).json(lessons || []);
   } catch (error) {
     console.error("Error serving lessons:", error);
+    console.error("Error stack:", error.stack);
+    
+    // Return a proper error response
     return res.status(500).json({
       error: "Failed to serve lessons",
-      details: error.message,
+      details: process.env.NODE_ENV === "development" ? error.message : "Internal server error",
     });
   }
 };
