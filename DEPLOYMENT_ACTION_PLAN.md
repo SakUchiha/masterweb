@@ -39,7 +39,7 @@ Since you already have a Vercel project (masterweb-rho.vercel.app):
    - Click **Add New**
    - Enter:
      - **Name**: `GROQ_API_KEY`
-     - **Value**: `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`
+     - **Value**: `YOUR_API_KEY_HERE` (get it from https://console.groq.com/)
      - **Environment**: ✅ Production, ✅ Preview, ✅ Development
    - Click **Save**
 
@@ -121,9 +121,9 @@ After Vercel redeploys, test these URLs:
 5. Test your site!
 
 **Your API Key** (only add in Vercel, never commit):
-```
-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
-```
+- Get your API key from: https://console.groq.com/
+- Copy the key (starts with `gsk_`)
+- Paste it when adding the environment variable in Vercel
 
 ## 🎉 Success Checklist
 
