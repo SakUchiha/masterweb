@@ -1,40 +1,62 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
+  "buildCommand": "cd vibing/code-understanding-app && npm install && npm run build:frontend",
   "outputDirectory": "vibing/code-understanding-app/frontend",
-  "public": true,
+  "functions": {
+    "api/**/*.js": {
+      "runtime": "nodejs18.x",
+      "maxDuration": 10
+    }
+  },
   "rewrites": [
     {
-      "source": "/api/lessons/:id",
-      "destination": "/api/lessons?id=:id"
+      "source": "/api/groq",
+      "destination": "/api/groq.js"
     },
     {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
+      "source": "/api/groq/health",
+      "destination": "/api/groq.js?health=true"
+    },
+    {
+      "source": "/api/lessons",
+      "destination": "/api/lessons.js"
+    },
+    {
+      "source": "/api/lessons/:id",
+      "destination": "/api/lessons.js?id=:id"
+    },
+    {
+      "source": "/css/:file*",
+      "destination": "/vibing/code-understanding-app/frontend/css/:file*"
+    },
+    {
+      "source": "/js/:file*",
+      "destination": "/vibing/code-understanding-app/frontend/js/:file*"
+    },
+    {
+      "source": "/data/:file*",
+      "destination": "/vibing/code-understanding-app/frontend/data/:file*"
+    },
+    {
+      "source": "/:file*\\.(ico|png|jpg|jpeg|gif|webp|svg|woff|woff2|ttf|eot|json)",
+      "destination": "/vibing/code-understanding-app/frontend/:file*.$1"
+    },
+    {
+      "source": "/:file*\\.html",
+      "destination": "/vibing/code-understanding-app/frontend/:file*.html"
+    },
+    {
+      "source": "/",
+      "destination": "/vibing/code-understanding-app/frontend/index.html"
     },
     {
       "source": "/(.*)",
-      "destination": "/vibing/code-understanding-app/frontend/$1"
-    }
-  ],
-  "builds": [
-    {
-      "src": "api/**",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["api/**"],
-        "regions": ["all"],
-        "maxDuration": 10
-      }
-    },
-    {
-      "src": "vibing/code-understanding-app/frontend/**",
-      "use": "@vercel/static"
+      "destination": "/vibing/code-understanding-app/frontend/index.html"
     }
   ],
   "headers": [
     {
-      "source": "/(.*)",
+      "source": "/api/(.*)",
       "headers": [
         { "key": "Access-Control-Allow-Credentials", "value": "true" },
         { "key": "Access-Control-Allow-Origin", "value": "*" },

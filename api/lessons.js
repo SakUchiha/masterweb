@@ -1,4 +1,7 @@
 // Vercel Serverless Function
+const fs = require("fs");
+const path = require("path");
+
 module.exports = async function handler(req, res) {
   // Enable CORS
   res.setHeader("Access-Control-Allow-Credentials", "true");
@@ -22,8 +25,20 @@ module.exports = async function handler(req, res) {
     // Handle specific lesson request
     const lessonId = req.query.id;
 
-    // Embedded lessons data
-    const lessons = [
+    // Try to load lessons from JSON file first
+    let lessons = [];
+    try {
+      const lessonsPath = path.join(process.cwd(), "api", "data", "lessons.json");
+      if (fs.existsSync(lessonsPath)) {
+        const lessonsData = fs.readFileSync(lessonsPath, "utf-8");
+        lessons = JSON.parse(lessonsData);
+      } else {
+        throw new Error("Lessons file not found");
+      }
+    } catch (error) {
+      console.warn("Could not load lessons from file, using embedded data:", error.message);
+      // Embedded lessons data (fallback)
+      lessons = [
       {
         id: "html-intro",
         title: "HTML Introduction",

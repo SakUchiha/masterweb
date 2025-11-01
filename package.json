@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "cd vibing/code-understanding-app && npm install && npm run build",
+    "build": "cd vibing/code-understanding-app && npm install && npm run build:frontend",
     "start": "vercel dev"
   },
   "dependencies": {
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^3.3.2"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18.0.0"
   }
 }
