@@ -23,7 +23,7 @@ If you want to completely remove the API key from git history:
 # Or download from: https://github.com/newren/git-filter-repo
 
 # Remove the API key from all commits
-git filter-repo --replace-text <(echo "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==>YOUR_GROQ_API_KEY_HERE")
+git filter-repo --replace-text <(echo "YOUR_ACTUAL_API_KEY==>YOUR_GROQ_API_KEY_HERE")
 
 # Force push (use with caution!)
 git push origin main --force
@@ -45,9 +45,7 @@ After pushing:
 ## Your API Key (Keep This Safe!)
 
 For reference when setting up Vercel:
-```
-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
-```
-
-**Only use this in Vercel environment variables, never in code!**
+- Get your API key from: https://console.groq.com/
+- Copy the key (starts with `gsk_`)
+- **Only use this in Vercel environment variables, never in code!**
 
