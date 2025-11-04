@@ -1,4 +1,4 @@
-#!/bin/bash
+gti #!/bin/bash
 
 # Groq AI Code Explanation Setup Complete
 # This script confirms that the Groq AI code explanation feature is fully linked and working

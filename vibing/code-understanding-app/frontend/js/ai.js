@@ -27,8 +27,8 @@ class AIAssistant {
       this.aiStatus = document.getElementById('aiStatus');
       this.statusRefreshBtn = document.getElementById('statusRefreshBtn');
       this.enhanceButton = document.getElementById('enhanceButton');
-      this.selectedModel = 'llama-3.1-8b-instant'
-      this.responseStyle = 'normal' // Default response style
+      this.selectedModel = 'llama-3.1-8b-instant';
+      this.responseStyle = 'normal'; // Default response style
 
       // Only initialize if essential elements are available
       if (this.chatMessages && this.chatInput && this.sendButton) {

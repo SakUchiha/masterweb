@@ -569,13 +569,24 @@ app.get("/api/groq/health", async (req, res) => {
     }
 
     // Test Groq API with models endpoint
-    const authResponse = await fetch("https://api.groq.com/openai/v1/models", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
+    try {
+      const authResponse = await fetch("https://api.groq.com/openai/v1/models", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+    } catch (fetchError) {
+      clearTimeout(timeoutId);
+      throw fetchError;
+    }
 
     if (!authResponse.ok) {
       const errorText = await authResponse.text();
@@ -1102,6 +1113,20 @@ Maintain a professional, authoritative tone while being encouraging and educatio
       const data = await response.json();
       console.log("API Response data keys:", Object.keys(data));
       console.log("API Response choices length:", data.choices?.length);
+
+      // Check if response has error field
+      if (data.error) {
+        console.log("API returned error:", data.error);
+        return res.status(502).json({
+          error: data.error.message || "AI service error",
+          code: data.error.type || "API_ERROR",
+          suggestions: [
+            "Check your API key configuration",
+            "Try again in a moment",
+            "Contact support if issue persists",
+          ],
+        });
+      }
 
       // Validate response format
       if (
