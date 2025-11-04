@@ -572,8 +572,9 @@ app.get("/api/groq/health", async (req, res) => {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
 
+    let authResponse;
     try {
-      const authResponse = await fetch("https://api.groq.com/openai/v1/models", {
+      authResponse = await fetch("https://api.groq.com/openai/v1/models", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${process.env.GROQ_API_KEY}`,

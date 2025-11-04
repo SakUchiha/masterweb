@@ -25,6 +25,46 @@
       "destination": "/api/lessons.js?id=:id"
     },
     {
+      "source": "/api/progress",
+      "destination": "/api/progress.js"
+    },
+    {
+      "source": "/api/progress/:userId",
+      "destination": "/api/progress.js?userId=:userId"
+    },
+    {
+      "source": "/api/achievements",
+      "destination": "/api/achievements.js"
+    },
+    {
+      "source": "/api/achievements/:userId",
+      "destination": "/api/achievements.js?userId=:userId"
+    },
+    {
+      "source": "/api/sessions/start",
+      "destination": "/api/sessions.js"
+    },
+    {
+      "source": "/api/sessions/:sessionId/end",
+      "destination": "/api/sessions.js?sessionId=:sessionId"
+    },
+    {
+      "source": "/api/analytics/lessons",
+      "destination": "/api/analytics.js"
+    },
+    {
+      "source": "/api/analytics/users/:userId",
+      "destination": "/api/analytics.js?userId=:userId"
+    },
+    {
+      "source": "/api/cache/stats",
+      "destination": "/api/cache.js"
+    },
+    {
+      "source": "/api/cache/clear",
+      "destination": "/api/cache.js"
+    },
+    {
       "source": "/css/:file*",
       "destination": "/vibing/code-understanding-app/dist/css/:file*"
     },
