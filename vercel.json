@@ -4,7 +4,7 @@
   "outputDirectory": "vibing/code-understanding-app/dist",
   "builds": [
     {
-      "src": "api/**/*.js",
+      "src": "vibing/code-understanding-app/backend/server.js/server.js",
       "use": "@vercel/node",
       "config": {
         "runtime": "nodejs20.x"
@@ -14,59 +14,59 @@
   "rewrites": [
     {
       "source": "/api/groq",
-      "destination": "/api/groq.js"
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
     },
     {
       "source": "/api/groq/health",
-      "destination": "/api/groq.js?health=true"
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
     },
     {
       "source": "/api/lessons",
-      "destination": "/api/lessons.js"
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
     },
     {
       "source": "/api/lessons/:id",
-      "destination": "/api/lessons.js?id=:id"
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
     },
     {
       "source": "/api/progress",
-      "destination": "/api/progress.js"
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
     },
     {
       "source": "/api/progress/:userId",
-      "destination": "/api/progress.js?userId=:userId"
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
     },
     {
       "source": "/api/achievements",
-      "destination": "/api/achievements.js"
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
     },
     {
       "source": "/api/achievements/:userId",
-      "destination": "/api/achievements.js?userId=:userId"
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
     },
     {
       "source": "/api/sessions/start",
-      "destination": "/api/sessions.js"
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
     },
     {
       "source": "/api/sessions/:sessionId/end",
-      "destination": "/api/sessions.js?sessionId=:sessionId"
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
     },
     {
       "source": "/api/analytics/lessons",
-      "destination": "/api/analytics.js"
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
     },
     {
       "source": "/api/analytics/users/:userId",
-      "destination": "/api/analytics.js?userId=:userId"
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
     },
     {
       "source": "/api/cache/stats",
-      "destination": "/api/cache.js"
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
     },
     {
       "source": "/api/cache/clear",
-      "destination": "/api/cache.js"
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
     },
     {
       "source": "/css/:file*",
