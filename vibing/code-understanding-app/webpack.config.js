@@ -29,7 +29,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "js/[name].[contenthash].js",
     clean: true,
-    publicPath: process.env.NODE_ENV === 'production' ? '/' : '/',
+    publicPath: '',
     globalObject: 'this',
   },
   module: {
