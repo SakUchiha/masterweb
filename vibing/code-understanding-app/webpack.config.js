@@ -118,7 +118,6 @@ module.exports = {
         removeStyleLinkTypeAttributes: true,
         useShortDoctype: true,
       },
-      base: "/",
     }),
     new HtmlWebpackPlugin({
       template: "./frontend/lessons.html",
