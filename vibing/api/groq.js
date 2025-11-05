@@ -1,3 +1,5 @@
+const path = require('path');
+require('dotenv').config({ path: path.join(process.cwd(), '..', '..', '.env') });
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 const FALLBACK_RESPONSES = {

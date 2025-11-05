@@ -1,3 +1,5 @@
+const path = require('path');
+require('dotenv').config({ path: path.join(process.cwd(), '..', '.env') });
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 const FALLBACK_RESPONSES = {
@@ -45,6 +47,8 @@ function shouldUseFallback(apiKey) {
   if (apiKey === "your_groq_api_key_here") return true;
   if (apiKey.length < 10) return true;
   if (demoModeEnabled) return true;
+  // For testing purposes, treat invalid keys as fallback
+  // if (apiKey.startsWith('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')) return true;
   return false;
 }
 
@@ -90,7 +94,13 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    const { messages, model = "llama-3.1-8b-instant", code, language, responseStyle = 'normal' } = req.body || {};
+    const body = req.body || {};
+    console.log('Request body:', JSON.stringify(body, null, 2));
+    console.log('Request method:', req.method);
+    console.log('Request headers:', req.headers);
+    console.log('Raw body type:', typeof req.body);
+    console.log('Raw body keys:', req.body ? Object.keys(req.body) : 'null');
+    const { messages, model = "llama-3.1-8b-instant", code, language, responseStyle = 'normal' } = body;
     const apiKey = process.env.GROQ_API_KEY;
 
     const isCodeExplanation = code && language;
