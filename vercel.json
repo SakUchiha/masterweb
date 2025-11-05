@@ -1,13 +1,14 @@
 {
   "version": 2,
-  "buildCommand": "cd vibing/code-understanding-app && npm install && npm run build:frontend",
+  "buildCommand": "cd vibing/code-understanding-app && npm install && npm run build",
   "outputDirectory": "vibing/code-understanding-app/dist",
+  "framework": null,
   "builds": [
     {
       "src": "vibing/code-understanding-app/backend/server.js/server.js",
       "use": "@vercel/node",
       "config": {
-        "runtime": "nodejs20.x"
+        "runtime": "nodejs22.x"
       }
     }
   ],
