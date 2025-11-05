@@ -2,11 +2,12 @@
   "version": 2,
   "buildCommand": "cd vibing/code-understanding-app && npm install && npm run build:frontend",
   "outputDirectory": "vibing/code-understanding-app/dist",
-  "functions": {
-    "api/**/*.js": {
-      "runtime": "@vercel/node@20"
+  "builds": [
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node@20"
     }
-  },
+  ],
   "rewrites": [
     {
       "source": "/api/groq",
