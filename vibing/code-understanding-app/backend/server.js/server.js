@@ -147,11 +147,30 @@ pages.forEach(page => {
   });
 });
 
-// Add catch-all route for client-side routing
+// Add catch-all route for client-side routing (but skip static files)
 app.use((req, res, next) => {
+  // Skip API routes
   if (req.path.startsWith('/api/')) {
     return next();
   }
+  
+  // Skip static files (css, js, images, fonts, favicon, etc.)
+  const staticFileExtensions = /\.(css|js|json|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|map)$/i;
+  if (staticFileExtensions.test(req.path)) {
+    return next();
+  }
+  
+  // For HTML routes without extension, serve the corresponding HTML file
+  if (!req.path.includes('.')) {
+    const htmlFile = req.path === '/' ? 'index.html' : `${req.path.slice(1)}.html`;
+    const filePath = path.join(staticDir, htmlFile);
+    
+    if (fs.existsSync(filePath)) {
+      return res.sendFile(filePath);
+    }
+  }
+  
+  // Default to index.html for unknown routes
   res.sendFile(path.join(staticDir, 'index.html'));
 });
 
