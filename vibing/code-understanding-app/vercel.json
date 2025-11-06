@@ -1,18 +1,51 @@
 {
   "version": 2,
-  "functions": {
-    "backend/server.js/server.js": {
-      "includeFiles": "frontend/**"
+  "builds": [
+    {
+      "src": "frontend/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "backend/server.js/server.js",
+      "use": "@vercel/node"
     }
-  },
+  ],
   "routes": [
+    {
+      "src": "/favicon.ico",
+      "dest": "/frontend/favicon.ico"
+    },
+    {
+      "src": "/css/(.*)",
+      "dest": "/frontend/css/$1"
+    },
+    {
+      "src": "/js/(.*)",
+      "dest": "/frontend/js/$1"
+    },
+    {
+      "src": "/images/(.*)",
+      "dest": "/frontend/images/$1"
+    },
+    {
+      "src": "/data/(.*)",
+      "dest": "/frontend/data/$1"
+    },
+    {
+      "src": "/(.*\\.(html|json|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot))",
+      "dest": "/frontend/$1"
+    },
     {
       "src": "/api/(.*)",
       "dest": "/backend/server.js/server.js"
     },
     {
-      "src": "/(.*)",
-      "dest": "/backend/server.js/server.js"
+      "src": "/(lessons|ai|editor|study-guide|contact|lesson-viewer|code-explainer|ask-ai)",
+      "dest": "/frontend/$1.html"
+    },
+    {
+      "src": "/",
+      "dest": "/frontend/index.html"
     }
   ],
   "env": {
