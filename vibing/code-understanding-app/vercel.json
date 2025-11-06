@@ -1,57 +1,50 @@
 {
   "version": 2,
-  "builds": [
+  "buildCommand": "npm run build",
+  "outputDirectory": "frontend",
+  "rewrites": [
     {
-      "src": "api/index.js",
-      "use": "@vercel/node",
-      "config": {
-        "maxDuration": 30
-      }
-    },
-    {
-      "src": "frontend/**",
-      "use": "@vercel/static"
+      "source": "/api/:path*",
+      "destination": "/api"
     }
   ],
-  "routes": [
+  "redirects": [
     {
-      "src": "/favicon.ico",
-      "dest": "/frontend/favicon.ico"
+      "source": "/lessons",
+      "destination": "/lessons.html"
     },
     {
-      "src": "/css/(.*)",
-      "dest": "/frontend/css/$1"
+      "source": "/ai",
+      "destination": "/ai.html"
     },
     {
-      "src": "/js/(.*)",
-      "dest": "/frontend/js/$1"
+      "source": "/editor",
+      "destination": "/editor.html"
     },
     {
-      "src": "/images/(.*)",
-      "dest": "/frontend/images/$1"
+      "source": "/study-guide",
+      "destination": "/study-guide.html"
     },
     {
-      "src": "/data/(.*)",
-      "dest": "/frontend/data/$1"
+      "source": "/lesson-viewer",
+      "destination": "/lesson-viewer.html"
     },
     {
-      "src": "/(.*\\.(html|json|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot))",
-      "dest": "/frontend/$1"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/index.js"
-    },
-    {
-      "src": "/(lessons|ai|editor|study-guide|contact|lesson-viewer|code-explainer|ask-ai)",
-      "dest": "/frontend/$1.html"
-    },
-    {
-      "src": "/",
-      "dest": "/frontend/index.html"
+      "source": "/code-explainer",
+      "destination": "/code-explainer.html"
     }
   ],
-  "env": {
-    "NODE_ENV": "production"
-  }
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
 }
