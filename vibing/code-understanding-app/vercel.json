@@ -61,6 +61,10 @@
       "dest": "/frontend/ai.html"
     },
     {
+      "src": "^/ask-ai/?$",
+      "dest": "/frontend/ask-ai.html"
+    },
+    {
       "src": "^/study-guide/?$",
       "dest": "/frontend/study-guide.html"
     },
@@ -75,6 +79,10 @@
     {
       "src": "^/contact/?$",
       "dest": "/frontend/contact.html"
+    },
+    {
+      "src": "^/cache-clear/?$",
+      "dest": "/frontend/cache-clear.html"
     },
     {
       "src": "/.*\\.(html|css|js|json|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$",
