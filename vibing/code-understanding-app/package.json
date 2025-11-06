@@ -4,16 +4,14 @@
   "description": "A modern, interactive web development learning platform designed to teach HTML, CSS, and JavaScript through hands-on coding exercises.",
   "main": "index.js",
   "scripts": {
-    "build": "cd backend/server.js && npm install",
+    "build": "echo 'Build complete'",
     "build:frontend": "webpack --mode=production",
-    "build:backend": "cd backend/server.js && npm install",
+    "build:backend": "echo 'Backend dependencies installed at root'",
     "build:dev": "webpack --mode=development",
-    "serve": "cd backend/server.js && node server.js",
+    "serve": "node backend/server.js/server.js",
     "start": "node backend/server.js/server.js",
     "dev": "webpack serve --mode development --port 3002",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "vercel-build": "cd backend/server.js && npm install",
-    "postinstall": "cd backend/server.js && npm install"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -40,6 +38,18 @@
     "webpack-dev-server": "^5.2.2"
   },
   "dependencies": {
-    "socket.io": "^4.8.1"
+    "bcryptjs": "^2.4.3",
+    "compression": "^1.8.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "express-slow-down": "^2.0.3",
+    "express-validator": "^7.0.1",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "node-fetch": "^3.3.2",
+    "socket.io": "^4.8.1",
+    "sqlite3": "^5.1.7"
   }
 }
