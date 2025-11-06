@@ -55,17 +55,21 @@ if (missingVars.length > 0) {
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 const cors = require("cors");
-const { createServer } = require("http");
-const { Server } = require("socket.io");
 const models = require("./models");
 const app = express();
-const server = createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST"],
-  },
-});
+// Only initialize socket.io for non-Vercel environments
+let io = null;
+if (!process.env.VERCEL) {
+  const { createServer } = require("http");
+  const { Server } = require("socket.io");
+  const server = createServer(app);
+  io = new Server(server, {
+    cors: {
+      origin: "*",
+      methods: ["GET", "POST"],
+    },
+  });
+}
 
 // Disable caching for all routes in development
 app.use((req, res, next) => {
@@ -1590,13 +1594,22 @@ app.use("/api/groq", aiLimiter);
 // Initialize database and start server
 const startServer = async () => {
   try {
-    // Initialize database tables
-    await models.initializeTables();
-    console.log('📊 Database tables initialized successfully');
+    // Initialize database tables (skip in Vercel if it fails)
+    if (!process.env.VERCEL) {
+      await models.initializeTables();
+      console.log('📊 Database tables initialized successfully');
+    } else {
+      try {
+        await models.initializeTables();
+        console.log('📊 Database tables initialized successfully');
+      } catch (dbError) {
+        console.warn('⚠️ Database initialization failed in Vercel, using JSON fallbacks');
+      }
+    }
 
     // Start the server
     const port = process.env.PORT || 3000;
-    
+
     // For Vercel, we need to use the provided port
     if (process.env.VERCEL) {
       console.log('🚀 Running in Vercel environment');
@@ -1619,6 +1632,10 @@ const startServer = async () => {
     console.error("Failed to start server:", error);
     if (!process.env.VERCEL) {
       process.exit(1);
+    } else {
+      // In Vercel, still export the app even if initialization fails
+      console.log('🚀 Exporting app for Vercel despite initialization errors');
+      module.exports = app;
     }
   }
 }

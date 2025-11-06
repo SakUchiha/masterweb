@@ -2,7 +2,7 @@
   "name": "w3-backend",
   "version": "1.0.0",
   "engines": {
-    "node": "22.x",
+    "node": "20.x",
     "npm": "10.x"
   },
   "scripts": {
