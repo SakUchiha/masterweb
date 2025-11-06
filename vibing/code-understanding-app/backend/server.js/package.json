@@ -2,7 +2,7 @@
   "name": "w3-backend",
   "version": "1.0.0",
   "engines": {
-    "node": "20.x",
+    "node": "22.x",
     "npm": "10.x"
   },
   "scripts": {
@@ -22,18 +22,14 @@
     "jsonwebtoken": "^9.0.2",
     "node-fetch": "^3.3.2",
     "socket.io": "^4.8.1",
-    "sqlite3": "^5.1.6"
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
   },
   "overrides": {
-    "npmlog": "^7.0.0",
     "rimraf": "^5.0.0",
     "glob": "^10.0.0",
-    "are-we-there-yet": "^4.0.0",
-    "@npmcli/move-file": "^3.0.0",
-    "gauge": "^5.0.0",
     "node-domexception": "^1.0.0"
   }
 }
