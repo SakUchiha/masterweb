@@ -14,7 +14,7 @@
     },
     {
       "src": "/favicon.ico",
-      "dest": "/frontend/favicon.ico"
+      "dest": "/public/favicon.ico"
     },
     {
       "src": "/manifest.json",
@@ -37,45 +37,58 @@
       "dest": "/frontend/data/$1"
     },
     {
-      "src": "/",
+      "src": "/images/(.*)",
+      "dest": "/frontend/images/$1"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/frontend/assets/$1"
+    },
+    {
+      "src": "^/$",
       "dest": "/frontend/index.html"
     },
     {
-      "src": "/lessons",
+      "src": "^/lessons/?$",
       "dest": "/frontend/lessons.html"
     },
     {
-      "src": "/editor",
+      "src": "^/editor/?$",
       "dest": "/frontend/editor.html"
     },
     {
-      "src": "/ai",
+      "src": "^/ai/?$",
       "dest": "/frontend/ai.html"
     },
     {
-      "src": "/study-guide",
+      "src": "^/study-guide/?$",
       "dest": "/frontend/study-guide.html"
     },
     {
-      "src": "/lesson-viewer",
+      "src": "^/lesson-viewer/?$",
       "dest": "/frontend/lesson-viewer.html"
     },
     {
-      "src": "/code-explainer",
+      "src": "^/code-explainer/?$",
       "dest": "/frontend/code-explainer.html"
     },
     {
-      "src": "/contact",
+      "src": "^/contact/?$",
       "dest": "/frontend/contact.html"
     },
     {
+      "src": "/.*\\.(html|css|js|json|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$",
+      "dest": "/frontend/$0"
+    },
+    {
       "src": "/(.*)",
-      "dest": "/frontend/$1"
+      "dest": "/frontend/index.html",
+      "status": 200
     }
   ],
   "headers": [
     {
-      "source": "/frontend/(.*)",
+      "source": "/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
