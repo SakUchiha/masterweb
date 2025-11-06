@@ -1,8 +1,45 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; connect-src 'self' http://localhost:4000 http://127.0.0.1:4000 ws://localhost:4000 ws://127.0.0.1:4000; frame-src 'self' blob: data:;"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0"><title>Code Runner</title><link rel="stylesheet" href="css/styles.css?v=2025.10.27.1"><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css"><style>.CodeMirror {
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self' 'unsafe-inline' blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; connect-src 'self' http://localhost:4000 http://127.0.0.1:4000 ws://localhost:4000 ws://127.0.0.1:4000 https://*.vercel.app; frame-src 'self' blob: data:;"
+    />
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>Code Runner</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="apple-touch-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="css/styles.css?v=2025.10.27.1" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- CodeMirror CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css"
+    />
+    <style>
+      .CodeMirror {
         height: 100%;
         font-size: 14px;
         line-height: 1.5;
-      }</style><style>.editor-container {
+      }
+    </style>
+
+    <style>
+      .editor-container {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 1rem;
@@ -203,7 +240,86 @@
           justify-content: center;
           padding: 0.75rem 1rem;
         }
-      }</style><script defer="defer" src="/js/main.f5a9d9bc9d0c09ab7cbe.js"></script><script defer="defer" src="/js/ui.f949bd7b08304618e339.js"></script><script defer="defer" src="/js/api.a58629a86ffbe7e7136d.js"></script><script defer="defer" src="/js/editor.29eaffae1095fd982387.js"></script><script defer="defer" src="/js/syntax-highlighter.c4a8c044342fac66afb6.js"></script><script defer="defer" src="/js/syntax-checker.75400b59f74b609cc490.js"></script><script defer="defer" src="/js/progress-tracker.f1f700aba78d898b0721.js"></script><script defer="defer" src="/js/error-boundary.3259bb93873fa3f0cfcd.js"></script><script defer="defer" src="/js/error-handler.30bb5a961460b2ad14a8.js"></script><script defer="defer" src="/js/config.330315c2a9a76106dcf6.js"></script></head><body><header class="main-header"><div class="container"><div class="logo"><i class="fas fa-code"></i><h1>KidLearner</h1></div><nav class="main-nav"><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home </a><a href="lessons.html" class="nav-link"><i class="fas fa-book"></i> Lessons </a><a href="study-guide.html" class="nav-link"><i class="fas fa-file-lines"></i> Study Guide </a><a href="editor.html" class="nav-link active"><i class="fas fa-code"></i> Code Runner </a><a href="ai.html" class="nav-link"><i class="fas fa-robot"></i> AI Assistant</a></nav></div></header><div class="container"><div class="editor-actions"><div class="editor-actions-left"><button class="action-btn" id="run"><i class="fas fa-play"></i> Run Code</button> <button class="action-btn secondary" id="clear"><i class="fas fa-trash"></i> Clear</button> <button class="action-btn secondary" id="save"><i class="fas fa-save"></i> Save</button></div><div class="editor-actions-right"><button class="auto-run-toggle" id="autoRunToggle"><i class="fas fa-sync-alt"></i> Auto Run: OFF</button></div></div><div class="editor-container"><div class="editor-panel"><div class="editor-header"><i class="fas fa-code"></i> <span>Code Runner</span></div><textarea id="code" placeholder="Write your HTML, CSS, and JavaScript code here..."></textarea></div><div class="editor-panel"><div class="editor-header"><i class="fas fa-eye"></i> <span>Live Preview</span></div><iframe id="output"></iframe></div></div></div><script>// Ensure buttons are visible and working
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Header -->
+    <header class="main-header">
+      <div class="container">
+        <div class="logo">
+          <i class="fas fa-code"></i>
+          <h1>KidLearner</h1>
+        </div>
+        <nav class="main-nav">
+          <a href="index.html" class="nav-link">
+            <i class="fas fa-home"></i> Home
+          </a>
+          <a href="lessons.html" class="nav-link">
+            <i class="fas fa-book"></i> Lessons
+          </a>
+          <a href="study-guide.html" class="nav-link">
+            <i class="fas fa-file-lines"></i> Study Guide
+          </a>
+          <a href="editor.html" class="nav-link active">
+            <i class="fas fa-code"></i> Code Runner
+          </a>
+          <a href="ai.html" class="nav-link">
+            <i class="fas fa-robot"></i> AI Assistant
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="editor-actions">
+        <div class="editor-actions-left">
+          <button class="action-btn" id="run">
+            <i class="fas fa-play"></i>
+            Run Code
+          </button>
+          <button class="action-btn secondary" id="clear">
+            <i class="fas fa-trash"></i>
+            Clear
+          </button>
+          <button class="action-btn secondary" id="save">
+            <i class="fas fa-save"></i>
+            Save
+          </button>
+        </div>
+        <div class="editor-actions-right">
+          <button class="auto-run-toggle" id="autoRunToggle">
+            <i class="fas fa-sync-alt"></i>
+            Auto Run: OFF
+          </button>
+        </div>
+      </div>
+
+
+      <div class="editor-container">
+        <div class="editor-panel">
+          <div class="editor-header">
+            <i class="fas fa-code"></i>
+            <span>Code Runner</span>
+          </div>
+          <textarea
+            id="code"
+            placeholder="Write your HTML, CSS, and JavaScript code here..."
+          ></textarea>
+        </div>
+
+        <div class="editor-panel">
+          <div class="editor-header">
+            <i class="fas fa-eye"></i>
+            <span>Live Preview</span>
+          </div>
+          <iframe id="output"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Ensure buttons are visible and working
       document.addEventListener("DOMContentLoaded", function () {
         console.log("Editor page loaded");
 
@@ -259,4 +375,11 @@
             console.log("Code saved");
           };
         }
-      });</script><script src="js/theme.js"></script><script src="js/navigation.js"></script></body></html>
+      });
+    </script>
+
+    <script src="js/theme.js"></script>
+    <script src="js/navigation.js"></script>
+    <!-- Scripts will be injected by webpack -->
+  </body>
+</html>

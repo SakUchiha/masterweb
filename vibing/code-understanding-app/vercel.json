@@ -1,50 +1,14 @@
 {
-  "version": 2,
-  "buildCommand": "npm run build",
-  "outputDirectory": "frontend",
+  "functions": {
+    "api/index.js": {
+      "maxDuration": 30
+    }
+  },
   "rewrites": [
     {
       "source": "/api/:path*",
       "destination": "/api"
     }
   ],
-  "redirects": [
-    {
-      "source": "/lessons",
-      "destination": "/lessons.html"
-    },
-    {
-      "source": "/ai",
-      "destination": "/ai.html"
-    },
-    {
-      "source": "/editor",
-      "destination": "/editor.html"
-    },
-    {
-      "source": "/study-guide",
-      "destination": "/study-guide.html"
-    },
-    {
-      "source": "/lesson-viewer",
-      "destination": "/lesson-viewer.html"
-    },
-    {
-      "source": "/code-explainer",
-      "destination": "/code-explainer.html"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
-        }
-      ]
-    }
-  ],
-  "cleanUrls": true,
-  "trailingSlash": false
+  "public": true
 }
