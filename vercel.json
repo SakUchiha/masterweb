@@ -1,0 +1,112 @@
+{
+  "version": 2,
+  "buildCommand": "cd vibing/code-understanding-app && npm install && npm run build",
+  "outputDirectory": "vibing/code-understanding-app/dist",
+  "framework": null,
+  "builds": [
+    {
+      "src": "vibing/code-understanding-app/backend/server.js/server.js",
+      "use": "@vercel/node",
+      "config": {
+        "runtime": "nodejs20.x"
+      }
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/groq",
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
+    },
+    {
+      "source": "/api/groq/health",
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
+    },
+    {
+      "source": "/api/lessons",
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
+    },
+    {
+      "source": "/api/lessons/:id",
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
+    },
+    {
+      "source": "/api/progress",
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
+    },
+    {
+      "source": "/api/progress/:userId",
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
+    },
+    {
+      "source": "/api/achievements",
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
+    },
+    {
+      "source": "/api/achievements/:userId",
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
+    },
+    {
+      "source": "/api/sessions/start",
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
+    },
+    {
+      "source": "/api/sessions/:sessionId/end",
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
+    },
+    {
+      "source": "/api/analytics/lessons",
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
+    },
+    {
+      "source": "/api/analytics/users/:userId",
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
+    },
+    {
+      "source": "/api/cache/stats",
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
+    },
+    {
+      "source": "/api/cache/clear",
+      "destination": "/vibing/code-understanding-app/backend/server.js/server.js"
+    },
+    {
+      "source": "/css/:file*",
+      "destination": "/vibing/code-understanding-app/dist/css/:file*"
+    },
+    {
+      "source": "/js/:file*",
+      "destination": "/vibing/code-understanding-app/dist/js/:file*"
+    },
+    {
+      "source": "/data/:file*",
+      "destination": "/vibing/code-understanding-app/dist/data/:file*"
+    },
+    {
+      "source": "/:file*\\.(ico|png|jpg|jpeg|gif|webp|svg|woff|woff2|ttf|eot|json)",
+      "destination": "/vibing/code-understanding-app/dist/:file*.$1"
+    },
+    {
+      "source": "/:file*\\.html",
+      "destination": "/vibing/code-understanding-app/dist/:file*.html"
+    },
+    {
+      "source": "/",
+      "destination": "/vibing/code-understanding-app/dist/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/vibing/code-understanding-app/dist/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Credentials", "value": "true" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET,POST,PUT,DELETE,OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version" }
+      ]
+    }
+  ]
+}

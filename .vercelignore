@@ -1,0 +1,30 @@
+# Vercel ignore file
+# Files and directories to exclude from Vercel deployment
+
+node_modules/
+.vscode/
+.idea/
+*.log
+*.backup
+.env
+.env.local
+*.md
+!README.md
+!DEPLOY_TO_VERCEL.md
+!QUICK_DEPLOY.md
+
+# Backup files
+*.backup
+*.bak
+*.old
+
+# Development files
+test-*.js
+*.test.js
+*.spec.js
+
+# Documentation (keep only essential)
+*.md
+!README.md
+!DEPLOY_TO_VERCEL.md
+!QUICK_DEPLOY.md

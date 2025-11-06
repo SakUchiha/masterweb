@@ -1,0 +1,49 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/data/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "vibing/code-understanding-app/frontend/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/groq",
+      "dest": "/api/groq.js",
+      "methods": ["GET", "POST", "OPTIONS"]
+    },
+    {
+      "src": "/api/lessons",
+      "dest": "/api/lessons.js",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/manifest.json",
+      "dest": "/vibing/code-understanding-app/frontend/manifest.json"
+    },
+    {
+      "src": "/(css|js)/(.+)",
+      "dest": "/vibing/code-understanding-app/frontend/$1/$2"
+    },
+    {
+      "src": "/(.+\\.(?:ico|png|jpg|jpeg|gif|webp)$)",
+      "dest": "/vibing/code-understanding-app/frontend/$1"
+    },
+    {
+      "src": "/(.+\\.html$)",
+      "dest": "/vibing/code-understanding-app/frontend/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/vibing/code-understanding-app/frontend/index.html"
+    }
+  ]
+}

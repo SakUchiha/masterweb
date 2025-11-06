@@ -1,0 +1,19 @@
+node_modules
+code-understanding-app/backend/server.js/node_modules
+code-understanding-app/backend/server.js/kidlearner.db
+code-understanding-app/backend/server.js/migration_log.json
+code-understanding-app/backend/server.js/server.js.backup
+**/*.backup
+**/*.log
+**/.DS_Store
+**/dist/**/maps
+
+# Local scripts
+clear-cache.sh
+clear-all-caches.sh
+start-app.sh
+start-app.bat
+
+# Git & CI
+.git
+.github
