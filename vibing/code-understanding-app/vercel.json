@@ -1,11 +1,1 @@
-{
-  "buildCommand": "cd backend/server.js && npm install",
-  "installCommand": "npm install",
-  "framework": null,
-  "rewrites": [
-    {
-      "source": "/api/:path*",
-      "destination": "/api"
-    }
-  ]
-}
+{}
