@@ -1,25 +1,21 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "backend/server.js/server.js",
-      "use": "@vercel/node"
+  "functions": {
+    "backend/server.js/server.js": {
+      "includeFiles": "frontend/**"
     }
-  ],
+  },
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "backend/server.js/server.js"
+      "dest": "/backend/server.js/server.js"
     },
     {
       "src": "/(.*)",
-      "dest": "backend/server.js/server.js"
+      "dest": "/backend/server.js/server.js"
     }
   ],
   "env": {
     "NODE_ENV": "production"
-  },
-  "includeFiles": [
-    "frontend/**"
-  ]
+  }
 }
