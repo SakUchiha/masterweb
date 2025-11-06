@@ -1686,13 +1686,14 @@ const startServer = async () => {
     // Start the server
     const port = process.env.PORT || 3000;
 
-    // For Vercel, we need to use the provided port
+    // For Vercel, we don't start a server, just export the app
     if (process.env.VERCEL) {
-      console.log('🚀 Running in Vercel environment');
-      // Export the app for Vercel serverless functions
-      module.exports = app;
+      console.log('🚀 Running in Vercel serverless environment');
+      console.log('📊 App initialized for serverless functions');
       return;
     }
+    
+    // Only start server in non-Vercel environments
     app.listen(port, () => {
       console.log(`🚀 KidLearner server running on port ${port}`);
       console.log(
@@ -1709,16 +1710,18 @@ const startServer = async () => {
     if (!process.env.VERCEL) {
       process.exit(1);
     } else {
-      // In Vercel, still export the app even if initialization fails
-      console.log('🚀 Exporting app for Vercel despite initialization errors');
-      module.exports = app;
+      // In Vercel, log the error but don't exit
+      console.warn('⚠️ Initialization error in Vercel, continuing with limited functionality');
     }
   }
 }
 
-// For Vercel serverless functions
+// Export the app immediately for Vercel
 if (process.env.VERCEL) {
-  startServer();
+  // Initialize asynchronously but export immediately
+  startServer().catch(err => console.warn('Async initialization error:', err));
+  module.exports = app;
 } else {
+  // For local development, start normally
   startServer();
 }
