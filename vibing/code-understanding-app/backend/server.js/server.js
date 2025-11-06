@@ -266,7 +266,8 @@ const corsOptions = {
     const allowedOrigins = [
       /https?:\/\/vibing-.*\.vercel\.app$/,
       /https?:\/\/vibing\.vercel\.app$/,
-      /https?:\/\/localhost:\d+$/
+      /https?:\/\/localhost:\d+$/,
+      /https?:\/\/127\.0\.0\.1:\d+$/
     ];
 
     // Check if the origin matches any of the allowed patterns

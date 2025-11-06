@@ -7,8 +7,8 @@ if (!window.CONFIG) {
   window.CONFIG = {
     // API endpoints - configurable based on environment
     // For Vercel deployment, use relative URLs for API calls
-    API_BASE_URL: isProd ? window.location.origin : "http://localhost:3000",
-    API_BASE_URL_ALT: isProd ? window.location.origin : "http://localhost:3000",
+    API_BASE_URL: window.location.origin,
+    API_BASE_URL_ALT: window.location.origin,
     FRONTEND_BASE_URL: window.location.origin,
 
     // Feature flags
