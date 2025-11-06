@@ -1,1 +1,6 @@
-.env
+.vercel
+API_KEY_FOR_VERCEL.txt
+*.env
+.env.local
+.env.*.local
+node_modules

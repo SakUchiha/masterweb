@@ -1,0 +1,18 @@
+# Don't upload these to Vercel
+node_modules
+.git
+.env.local
+.env.*.local
+*.log
+.DS_Store
+.vscode
+.idea
+*.swp
+*.swo
+dist
+.cache
+tmp
+temp
+backend/server.js/node_modules
+backend/server.js/kidlearner.db
+backend/server.js/.env
