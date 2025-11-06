@@ -40,23 +40,38 @@ if (typeof ErrorBoundary === "undefined") {
         }
       });
 
-      if (typeof uiManager === 'undefined') {
-        console.warn('UIManager not found, creating basic error display function');
-        window.uiManager = {
-          showError: function(message, callback) {
-            console.error(message);
-            const errorDiv = document.createElement('div');
-            errorDiv.className = 'error-message';
-            errorDiv.innerHTML = `
-              <div style="background: #ff5757; color: white; padding: 1rem; margin: 1rem; border-radius: 4px;">
-                <p>${message}</p>
-                ${callback ? '<button onclick="window.location.reload()">Retry</button>' : ''}
-              </div>
-            `;
-            document.body.appendChild(errorDiv);
-          }
-        };
-      }
+      // Wait for UIManager to be available
+      const checkUIManager = () => {
+        if (typeof window.uiManager === 'undefined') {
+          console.warn('UIManager not found, creating basic error display function');
+          window.uiManager = {
+            showError: function(message, callback) {
+              console.error(message);
+              const errorDiv = document.createElement('div');
+              errorDiv.className = 'error-message';
+              errorDiv.innerHTML = `
+                <div style="background: #ff5757; color: white; padding: 1rem; margin: 1rem; border-radius: 4px; position: fixed; top: 20px; right: 20px; z-index: 10000; max-width: 400px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                  <p style="margin: 0 0 10px 0;">${message}</p>
+                  ${callback ? '<button style="background: white; color: #ff5757; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold;" onclick="window.location.reload()">Retry</button>' : ''}
+                </div>
+              `;
+              document.body.appendChild(errorDiv);
+              
+              // Auto-remove after 10 seconds
+              setTimeout(() => {
+                if (errorDiv.parentNode) {
+                  errorDiv.remove();
+                }
+              }, 10000);
+            }
+          };
+        }
+      };
+      
+      // Check immediately and after a short delay
+      checkUIManager();
+      setTimeout(checkUIManager, 100);
+      
       console.log("Error boundary initialized");
     }
 
@@ -137,7 +152,12 @@ if (typeof ErrorBoundary === "undefined") {
         message += "Please try refreshing the page.";
       }
 
-      uiManager.showError(message, () => window.location.reload());
+      // Safely check for uiManager
+      if (typeof window.uiManager !== 'undefined' && window.uiManager.showError) {
+        window.uiManager.showError(message, () => window.location.reload());
+      } else {
+        console.error('Error:', message, errorInfo);
+      }
     }
 
     /**
