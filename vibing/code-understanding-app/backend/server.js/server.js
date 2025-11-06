@@ -71,6 +71,12 @@ if (!process.env.VERCEL) {
   });
 }
 
+// Request logger for debugging
+app.use((req, res, next) => {
+  console.log(`📥 ${req.method} ${req.path}`);
+  next();
+});
+
 // Disable caching for all routes in development
 app.use((req, res, next) => {
   // Check if request is for static files (CSS, JS, HTML)
@@ -93,9 +99,37 @@ app.use((req, res, next) => {
   next();
 });
 
-const frontendDir = path.join(__dirname, "../../frontend");
-const distDir = path.join(__dirname, "../../dist");
-const staticDir = frontendDir; // Always use frontend directory for single port setup
+// Determine the correct path for static files
+// On Vercel, __dirname is /var/task/backend/server.js
+// We need to go up to project root and then to frontend
+let frontendDir;
+let staticDir;
+
+if (process.env.VERCEL) {
+  // On Vercel, use absolute path from project root
+  const projectRoot = path.resolve(__dirname, '../..');
+  frontendDir = path.join(projectRoot, 'frontend');
+  staticDir = frontendDir;
+  console.log('🚀 Vercel environment detected');
+  console.log('📁 Project root:', projectRoot);
+  console.log('📁 Frontend directory:', frontendDir);
+  console.log('📁 __dirname:', __dirname);
+} else {
+  // Local development
+  frontendDir = path.join(__dirname, "../../frontend");
+  staticDir = frontendDir;
+  console.log('💻 Local development environment');
+  console.log('📁 Frontend directory:', frontendDir);
+}
+
+// Verify the directory exists
+if (!fs.existsSync(staticDir)) {
+  console.error('❌ Static directory does not exist:', staticDir);
+  console.error('📂 Available directories:', fs.readdirSync(path.dirname(staticDir)));
+} else {
+  console.log('✅ Static directory found:', staticDir);
+  console.log('📂 Files in static directory:', fs.readdirSync(staticDir).slice(0, 10));
+}
 
 // Serve static files from the compiled directory when available
 app.use(express.static(staticDir, {
@@ -139,11 +173,33 @@ const pages = [
   'contact.html'
 ];
 
+// Explicit route for favicon to ensure it's served
+app.get('/favicon.ico', (req, res) => {
+  const faviconPath = path.join(staticDir, 'favicon.ico');
+  console.log('🔍 Favicon requested, serving from:', faviconPath);
+  console.log('📂 File exists:', fs.existsSync(faviconPath));
+  
+  if (fs.existsSync(faviconPath)) {
+    res.sendFile(faviconPath);
+  } else {
+    console.error('❌ Favicon not found at:', faviconPath);
+    res.status(404).send('Favicon not found');
+  }
+});
+
 // Serve HTML pages
 pages.forEach(page => {
   const route = page === 'index.html' ? '/' : `/${page.replace('.html', '')}`;
   app.get(route, (req, res) => {
-    res.sendFile(path.join(staticDir, page));
+    const filePath = path.join(staticDir, page);
+    console.log(`📄 Serving ${page} from:`, filePath);
+    
+    if (fs.existsSync(filePath)) {
+      res.sendFile(filePath);
+    } else {
+      console.error(`❌ File not found: ${page} at`, filePath);
+      res.status(404).send(`Page not found: ${page}`);
+    }
   });
 });
 
