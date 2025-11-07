@@ -106,13 +106,12 @@ let frontendDir;
 let staticDir;
 
 if (process.env.VERCEL) {
-  // On Vercel, use absolute path from project root
-  const projectRoot = path.resolve(__dirname, '../..');
-  frontendDir = path.join(projectRoot, 'frontend');
+  // On Vercel, the frontend files are in the same directory as the serverless function
+  // Since vercel.json specifies "outputDirectory": "frontend", files are at the root level
+  frontendDir = path.resolve(__dirname, '../..');
   staticDir = frontendDir;
   console.log('🚀 Vercel environment detected');
-  console.log('📁 Project root:', projectRoot);
-  console.log('📁 Frontend directory:', frontendDir);
+  console.log('📁 Static directory (frontend):', staticDir);
   console.log('📁 __dirname:', __dirname);
 } else {
   // Local development
@@ -541,7 +540,14 @@ app.get("/api/analytics/users/:userId", async (req, res) => {
 app.get("/api/lessons", async (req, res) => {
   try {
     // Try to load lessons from JSON file first (for Vercel deployment)
-    const lessonsPath = path.join(__dirname, 'data', 'lessons.json');
+    let lessonsPath;
+    if (process.env.VERCEL) {
+      // In Vercel, data files are at the project root level
+      lessonsPath = path.join(__dirname, '../..', 'api', 'data', 'lessons.json');
+    } else {
+      lessonsPath = path.join(__dirname, 'data', 'lessons.json');
+    }
+
     let lessons;
 
     try {
@@ -551,12 +557,16 @@ app.get("/api/lessons", async (req, res) => {
     } catch (fileError) {
       console.warn("Could not load lessons from JSON file:", fileError.message);
 
-      // Fallback to database
-      try {
-        lessons = await models.getAllLessons();
-        console.log(`Loaded ${lessons ? lessons.length : 0} lessons from database`);
-      } catch (dbError) {
-        console.warn("Database error:", dbError.message);
+      // Fallback to database (only in non-Vercel environments)
+      if (!process.env.VERCEL) {
+        try {
+          lessons = await models.getAllLessons();
+          console.log(`Loaded ${lessons ? lessons.length : 0} lessons from database`);
+        } catch (dbError) {
+          console.warn("Database error:", dbError.message);
+          lessons = [];
+        }
+      } else {
         lessons = [];
       }
     }
@@ -606,7 +616,14 @@ app.get("/api/lessons", async (req, res) => {
 app.get("/api/lessons/:id", cacheMiddleware, async (req, res) => {
   try {
     // Try to load lesson from JSON file first (for Vercel deployment)
-    const lessonsPath = path.join(__dirname, 'data', 'lessons.json');
+    let lessonsPath;
+    if (process.env.VERCEL) {
+      // In Vercel, data files are at the project root level
+      lessonsPath = path.join(__dirname, '../..', 'api', 'data', 'lessons.json');
+    } else {
+      lessonsPath = path.join(__dirname, 'data', 'lessons.json');
+    }
+
     let lesson = null;
 
     try {
@@ -619,8 +636,8 @@ app.get("/api/lessons/:id", cacheMiddleware, async (req, res) => {
       console.warn("Could not load lesson from JSON file:", fileError.message);
     }
 
-    // If not found in JSON, try database
-    if (!lesson) {
+    // If not found in JSON, try database (only in non-Vercel environments)
+    if (!lesson && !process.env.VERCEL) {
       try {
         lesson = await models.getLessonById(req.params.id);
         if (lesson) {
@@ -1725,17 +1742,13 @@ app.use("/api/groq", aiLimiter);
 // Initialize database and start server
 const startServer = async () => {
   try {
-    // Initialize database tables (skip in Vercel if it fails)
+    // Initialize database tables (skip in Vercel - use JSON fallbacks)
     if (!process.env.VERCEL) {
       await models.initializeTables();
       console.log('📊 Database tables initialized successfully');
     } else {
-      try {
-        await models.initializeTables();
-        console.log('📊 Database tables initialized successfully');
-      } catch (dbError) {
-        console.warn('⚠️ Database initialization failed in Vercel, using JSON fallbacks');
-      }
+      console.log('🚀 Vercel deployment - using JSON fallbacks for data');
+      // Don't attempt database initialization in Vercel
     }
 
     // Start the server

@@ -9,26 +9,26 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
   mode: "production",
   entry: {
-    main: "./frontend/js/main.js",
-    app: "./frontend/js/app.js",
-    ui: "./frontend/js/ui.js",
-    api: "./frontend/js/api.js",
-    editor: "./frontend/js/editor.js",
-    ai: "./frontend/js/ai.js",
-    navigation: "./frontend/js/navigation.js",
-    "syntax-highlighter": "./frontend/js/syntax-highlighter.js",
-    "syntax-checker": "./frontend/js/syntax-checker.js",
-    "progress-tracker": "./frontend/js/progress-tracker.js",
-    "error-boundary": "./frontend/js/error-boundary.js",
-    "error-handler": "./frontend/js/error-handler.js",
-    form: "./frontend/js/form.js",
-    config: "./frontend/js/config.js",
-    "lazy-loader": "./frontend/js/lazy-loader.js",
+    main: "./js/main.js",
+    app: "./js/app.js",
+    ui: "./js/ui.js",
+    api: "./js/api.js",
+    editor: "./js/editor.js",
+    ai: "./js/ai.js",
+    navigation: "./js/navigation.js",
+    "syntax-highlighter": "./js/syntax-highlighter.js",
+    "syntax-checker": "./js/syntax-checker.js",
+    "progress-tracker": "./js/progress-tracker.js",
+    "error-boundary": "./js/error-boundary.js",
+    "error-handler": "./js/error-handler.js",
+    form: "./js/form.js",
+    config: "./js/config.js",
+    "lazy-loader": "./js/lazy-loader.js",
   },
   output: {
     path: path.resolve(__dirname, "frontend"),
     filename: "js/[name].[contenthash].js",
-    clean: true,
+    clean: false, // Don't clean to preserve existing files
     publicPath: '',
     globalObject: 'this',
   },
@@ -69,36 +69,36 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, "frontend/js"),
-          to: path.resolve(__dirname, "dist/js")
+          from: path.resolve(__dirname, "js"),
+          to: path.resolve(__dirname, "frontend/js")
         },
         {
-          from: path.resolve(__dirname, "frontend/css"),
-          to: path.resolve(__dirname, "dist/css")
+          from: path.resolve(__dirname, "css"),
+          to: path.resolve(__dirname, "frontend/css")
         },
         {
           from: path.resolve(__dirname, "backend/server.js/data"),
-          to: path.resolve(__dirname, "dist/data")
+          to: path.resolve(__dirname, "frontend/data")
         },
         {
-          from: path.resolve(__dirname, "frontend/data"),
-          to: path.resolve(__dirname, "dist/data")
+          from: path.resolve(__dirname, "data"),
+          to: path.resolve(__dirname, "frontend/data")
         },
         {
-          from: path.resolve(__dirname, "frontend/manifest.json"),
-          to: path.resolve(__dirname, "dist/manifest.json")
+          from: path.resolve(__dirname, "manifest.json"),
+          to: path.resolve(__dirname, "frontend/manifest.json")
         },
         {
-          from: path.resolve(__dirname, "frontend/sw.js"),
-          to: path.resolve(__dirname, "dist/sw.js")
+          from: path.resolve(__dirname, "sw.js"),
+          to: path.resolve(__dirname, "frontend/sw.js")
         },
         {
-          from: path.resolve(__dirname, "frontend/favicon.ico"),
-          to: path.resolve(__dirname, "dist/favicon.ico")
+          from: path.resolve(__dirname, "favicon.ico"),
+          to: path.resolve(__dirname, "frontend/favicon.ico")
         },
         {
-          from: path.resolve(__dirname, "frontend/favicon-dark.ico"),
-          to: path.resolve(__dirname, "dist/favicon-dark.ico")
+          from: path.resolve(__dirname, "favicon-dark.ico"),
+          to: path.resolve(__dirname, "frontend/favicon-dark.ico")
         },
         // Removed HTML files from copy since they're handled by HtmlWebpackPlugin
       ],
@@ -110,6 +110,19 @@ module.exports = {
       template: "./frontend/index.html",
       filename: "index.html",
       chunks: ["main", "app", "ui", "api", "navigation", "lazy-loader"],
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        useShortDoctype: true,
+      },
+    }),
+    new HtmlWebpackPlugin({
+      template: "./frontend/ask-ai.html",
+      filename: "ask-ai.html",
+      chunks: ["main", "ai", "api"],
       minify: {
         collapseWhitespace: true,
         removeComments: true,
@@ -199,32 +212,6 @@ module.exports = {
       template: "./frontend/contact.html",
       filename: "contact.html",
       chunks: ["main", "form"],
-      minify: {
-        collapseWhitespace: true,
-        removeComments: true,
-        removeRedundantAttributes: true,
-        removeScriptTypeAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        useShortDoctype: true,
-      },
-    }),
-    new HtmlWebpackPlugin({
-      template: "./frontend/ask-ai.html",
-      filename: "ask-ai.html",
-      chunks: ["main", "ai", "api"],
-      minify: {
-        collapseWhitespace: true,
-        removeComments: true,
-        removeRedundantAttributes: true,
-        removeScriptTypeAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        useShortDoctype: true,
-      },
-    }),
-    new HtmlWebpackPlugin({
-      template: "./frontend/code-explainer.html",
-      filename: "code-explainer.html",
-      chunks: ["main", "ai", "api"],
       minify: {
         collapseWhitespace: true,
         removeComments: true,
