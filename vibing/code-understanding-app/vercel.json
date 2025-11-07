@@ -15,43 +15,43 @@
     },
     {
       "source": "/lessons",
-      "destination": "/lessons.html"
+      "destination": "lessons.html"
     },
     {
       "source": "/editor",
-      "destination": "/editor.html"
+      "destination": "editor.html"
     },
     {
       "source": "/ai",
-      "destination": "/ai.html"
+      "destination": "ai.html"
     },
     {
       "source": "/ask-ai",
-      "destination": "/ask-ai.html"
+      "destination": "ask-ai.html"
     },
     {
       "source": "/code-explainer",
-      "destination": "/code-explainer.html"
+      "destination": "code-explainer.html"
     },
     {
       "source": "/contact",
-      "destination": "/contact.html"
+      "destination": "contact.html"
     },
     {
       "source": "/lesson-viewer",
-      "destination": "/lesson-viewer.html"
+      "destination": "lesson-viewer.html"
     },
     {
       "source": "/study-guide",
-      "destination": "/study-guide.html"
+      "destination": "study-guide.html"
     },
     {
       "source": "/cache-clear",
-      "destination": "/cache-clear.html"
+      "destination": "cache-clear.html"
     },
     {
       "source": "/(.*)",
-      "destination": "/index.html"
+      "destination": "index.html"
     }
   ],
   "headers": [
