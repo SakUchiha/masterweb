@@ -120,8 +120,8 @@ module.exports = {
       },
     }),
     new HtmlWebpackPlugin({
-      template: "./frontend/ask-ai.html",
-      filename: "ask-ai.html",
+      template: "./frontend/ai.html",
+      filename: "ai.html",
       chunks: ["main", "ai", "api"],
       minify: {
         collapseWhitespace: true,

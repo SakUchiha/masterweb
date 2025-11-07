@@ -11,7 +11,7 @@
  *   node test-deployment.js https://your-project.vercel.app
  */
 
-const fetch = require('node-fetch');
+const fetch = require('node-fetch').default;
 
 const BASE_URL = process.argv[2] || 'http://localhost:3000';
 
