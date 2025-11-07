@@ -102,22 +102,29 @@ module.exports = {
           from: path.resolve(__dirname, "favicon-dark.ico"),
           to: path.resolve(__dirname, "frontend/favicon-dark.ico")
         },
-        {
-          from: path.resolve(__dirname, "index.html"),
-          to: path.resolve(__dirname, "frontend/index.html")
-        },
-        {
-          from: path.resolve(__dirname, "lessons.html"),
-          to: path.resolve(__dirname, "frontend/lessons.html")
-        },
-        {
-          from: path.resolve(__dirname, "editor.html"),
-          to: path.resolve(__dirname, "frontend/editor.html")
-        },
+        // HTML files are now handled by HtmlWebpackPlugin
       ],
     }),
     new MiniCssExtractPlugin({
       filename: "css/[name].[contenthash].css",
+    }),
+    new HtmlWebpackPlugin({
+      template: "./index.html",
+      filename: "index.html",
+      chunks: ["main", "app", "ui", "api", "navigation", "lazy-loader"],
+      minify: true,
+    }),
+    new HtmlWebpackPlugin({
+      template: "./lessons.html",
+      filename: "lessons.html",
+      chunks: ["main", "app", "ui", "api", "navigation", "lazy-loader"],
+      minify: true,
+    }),
+    new HtmlWebpackPlugin({
+      template: "./editor.html",
+      filename: "editor.html",
+      chunks: ["main", "app", "ui", "api", "editor", "navigation", "lazy-loader", "syntax-highlighter", "syntax-checker"],
+      minify: true,
     }),
   ],
   optimization: {
