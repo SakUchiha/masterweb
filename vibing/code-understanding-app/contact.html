@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self' 'unsafe-inline' blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; connect-src 'self' http://localhost:4000 http://127.0.0.1:4000 ws://localhost:4000 ws://127.0.0.1:4000 https://*.vercel.app; frame-src 'self' blob: data:;"
+    />
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>Contact Us - Code Understanding</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="apple-touch-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="css/styles.css?v=2025.10.27.1" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .contact-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      .contact-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .contact-header h1 {
+        color: #2d3748;
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .contact-header p {
+        color: #666;
+        font-size: 1.1rem;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        margin-bottom: 3rem;
+      }
+
+      .contact-form-section {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+      }
+
+      .contact-info-section {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .contact-form h2 {
+        color: #2d3748;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #2d3748;
+        font-weight: 500;
+      }
+
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        width: 100%;
+        padding: 0.75rem;
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+        font-family: inherit;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: #667eea;
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+
+      .submit-btn {
+        background: #667eea;
+        color: white;
+        border: none;
+        padding: 0.75rem 2rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+
+      .submit-btn:hover {
+        background: #5a67d8;
+        transform: translateY(-2px);
+      }
+
+      .submit-btn:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .contact-info-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .contact-info-card i {
+        font-size: 2.5rem;
+        color: #667eea;
+        margin-bottom: 1rem;
+        display: block;
+      }
+
+      .contact-info-card h3 {
+        color: #2d3748;
+        margin-bottom: 1rem;
+      }
+
+      .contact-info-card p {
+        color: #666;
+        margin-bottom: 0.5rem;
+      }
+
+      .contact-info-card a {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .contact-info-card a:hover {
+        text-decoration: underline;
+      }
+
+      .faq-section {
+        background: #f8f9fa;
+        border-radius: 12px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .faq-section h2 {
+        color: #2d3748;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+
+      .faq-item {
+        background: white;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+
+      .faq-question {
+        padding: 1rem 1.5rem;
+        background: none;
+        border: none;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1rem;
+        font-weight: 500;
+        color: #2d3748;
+        transition: background 0.3s ease;
+      }
+
+      .faq-question:hover {
+        background: #f8f9fa;
+      }
+
+      .faq-question i {
+        color: #667eea;
+        transition: transform 0.3s ease;
+      }
+
+      .faq-item.active .faq-question i {
+        transform: rotate(180deg);
+      }
+
+      .faq-answer {
+        padding: 0 1.5rem 1rem;
+        color: #666;
+        line-height: 1.6;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      .faq-item.active .faq-answer {
+        max-height: 500px;
+        padding-top: 1rem;
+        border-top: 1px solid #e9ecef;
+      }
+
+      .social-links {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .social-links h3 {
+        color: #2d3748;
+        margin-bottom: 1rem;
+      }
+
+      .social-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .social-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        background: #667eea;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .social-btn:hover {
+        background: #5a67d8;
+        transform: translateY(-2px);
+      }
+
+      .social-btn i {
+        font-size: 1.2rem;
+      }
+
+      @media (max-width: 768px) {
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .social-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .social-btn {
+          width: 200px;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Header -->
+    <header class="main-header">
+      <div class="container">
+        <div class="logo">
+          <i class="fas fa-code"></i>
+          <h1>KidLearner</h1>
+        </div>
+        <nav class="main-nav">
+          <a href="index.html" class="nav-link">
+            <i class="fas fa-home"></i> Home
+          </a>
+          <a href="lessons.html" class="nav-link">
+            <i class="fas fa-book"></i> Lessons
+          </a>
+          <a href="study-guide.html" class="nav-link">
+            <i class="fas fa-file-lines"></i> Study Guide
+          </a>
+          <a href="editor.html" class="nav-link">
+            <i class="fas fa-code"></i> Code Runner
+          </a>
+          <a href="ai.html" class="nav-link">
+            <i class="fas fa-robot"></i> AI Assistant
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="contact-container">
+      <div class="contact-header">
+        <h1><i class="fas fa-envelope"></i> Contact Us</h1>
+        <p>Have questions, feedback, or need help? We'd love to hear from you. Get in touch and let's build something amazing together!</p>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Contact Form -->
+        <div class="contact-form-section">
+          <form class="contact-form" id="contactForm">
+            <h2><i class="fas fa-paper-plane"></i> Send us a Message</h2>
+
+            <div class="form-group">
+              <label for="name">Full Name *</label>
+              <input type="text" id="name" name="name" required placeholder="Enter your full name">
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" required placeholder="Enter your email address">
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Subject *</label>
+              <select id="subject" name="subject" required>
+                <option value="">Select a subject</option>
+                <option value="general">General Inquiry</option>
+                <option value="technical">Technical Support</option>
+                <option value="feedback">Feedback</option>
+                <option value="bug">Bug Report</option>
+                <option value="feature">Feature Request</option>
+                <option value="partnership">Partnership</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message *</label>
+              <textarea id="message" name="message" required placeholder="Tell us how we can help you..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+              <i class="fas fa-paper-plane"></i>
+              Send Message
+            </button>
+          </form>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="contact-info-section">
+          <div class="contact-info-card">
+            <i class="fas fa-question-circle"></i>
+            <h3>Need Help?</h3>
+            <p>Check out our comprehensive documentation and tutorials.</p>
+            <a href="study-guide.html">View Study Guide <i class="fas fa-arrow-right"></i></a>
+          </div>
+
+          <div class="contact-info-card">
+            <i class="fas fa-robot"></i>
+            <h3>AI Assistant</h3>
+            <p>Get instant help with coding questions from our AI tutor.</p>
+            <a href="ai.html">Chat with AI <i class="fas fa-arrow-right"></i></a>
+          </div>
+
+          <div class="contact-info-card">
+            <i class="fas fa-code"></i>
+            <h3>Practice Coding</h3>
+            <p>Test your skills with our interactive code editor.</p>
+            <a href="editor.html">Open Code Editor <i class="fas fa-arrow-right"></i></a>
+          </div>
+
+          <div class="contact-info-card">
+            <i class="fas fa-envelope"></i>
+            <h3>Email Support</h3>
+            <p>For detailed inquiries and support requests.</p>
+            <a href="mailto:support@kidlearner.com">support@kidlearner.com</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Social Links -->
+      <div class="social-links">
+        <h3>Follow Us</h3>
+        <div class="social-buttons">
+          <a href="#" class="social-btn">
+            <i class="fab fa-github"></i>
+            GitHub
+          </a>
+          <a href="#" class="social-btn">
+            <i class="fab fa-twitter"></i>
+            Twitter
+          </a>
+          <a href="#" class="social-btn">
+            <i class="fab fa-discord"></i>
+            Discord
+          </a>
+          <a href="#" class="social-btn">
+            <i class="fab fa-youtube"></i>
+            YouTube
+          </a>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="faq-section">
+        <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            How do I get started with coding?
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Start with our beginner-friendly HTML lessons in the Lessons section. We recommend following the Study Guide for a structured learning path. Don't worry if you have no prior experience - we break everything down step by step!</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Is the AI assistant free to use?
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Yes! Our AI assistant is completely free and available 24/7. It uses advanced AI to provide personalized help with HTML, CSS, and JavaScript questions. The AI learns from your interactions to give better answers over time.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Can I save my code and projects?
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Currently, your code is saved locally in your browser. We're working on cloud save features. For now, we recommend copying your important code to a text editor or using the browser's developer tools to export your work.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            What browsers are supported?
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>KidLearner works best with modern browsers like Chrome, Firefox, Safari, and Edge. We recommend using the latest version of your browser for the best experience. Some features may not work in older browsers like Internet Explorer.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            How can I report bugs or suggest features?
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Use the contact form above to report bugs or suggest new features. Include as much detail as possible - what you were doing, what you expected to happen, and what actually happened. We read every message and use feedback to improve the platform!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Contact form functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        console.log('Contact page loaded');
+
+        const contactForm = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+
+        // FAQ accordion functionality
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+          const question = item.querySelector('.faq-question');
+          question.addEventListener('click', () => {
+            item.classList.toggle('active');
+          });
+        });
+
+        // Form submission
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+
+          const formData = new FormData(contactForm);
+          const data = Object.fromEntries(formData);
+
+          // Simulate form submission
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+          setTimeout(() => {
+            // Show success message
+            alert('Thank you for your message! We\'ll get back to you within 24 hours.');
+
+            // Reset form
+            contactForm.reset();
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+          }, 2000);
+        });
+
+        // Form validation
+        const inputs = contactForm.querySelectorAll('input, textarea, select');
+        inputs.forEach(input => {
+          input.addEventListener('blur', function() {
+            if (this.hasAttribute('required') && !this.value.trim()) {
+              this.style.borderColor = '#dc3545';
+            } else {
+              this.style.borderColor = '#28a745';
+            }
+          });
+
+          input.addEventListener('input', function() {
+            if (this.style.borderColor === 'rgb(220, 53, 69)') {
+              this.style.borderColor = '#e9ecef';
+            }
+          });
+        });
+      });
+    </script>
+
+    <script src="js/theme.js"></script>
+    <script src="js/navigation.js"></script>
+  </body>
+</html>

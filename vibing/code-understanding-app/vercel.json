@@ -5,7 +5,8 @@
   "framework": null,
   "functions": {
     "api/index.js": {
-      "maxDuration": 15
+      "maxDuration": 15,
+      "runtime": "nodejs22.x"
     }
   },
   "rewrites": [

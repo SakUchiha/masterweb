@@ -1,4 +1,5 @@
-  // Core Node.js modules
+
+// Core Node.js modules
 const path = require('path');
 const fs = require('fs');
 
@@ -96,7 +97,7 @@ app.use((req, res, next) => {
 });
 
 // Determine the correct path for static files
-// On Vercel, __dirname is /var/task/backend/server.js
+// On Vercel, __dirname is /var/task
 // We need to go up to project root and then to frontend
 let frontendDir;
 let staticDir;
@@ -104,14 +105,14 @@ let staticDir;
 if (process.env.VERCEL) {
   // On Vercel, the frontend files are in the same directory as the serverless function
   // Since vercel.json specifies "outputDirectory": "frontend", files are at the root level
-  frontendDir = path.resolve(__dirname, '../..');
+  frontendDir = path.resolve(__dirname, '..');
   staticDir = frontendDir;
   console.log('🚀 Vercel environment detected');
   console.log('📁 Static directory (frontend):', staticDir);
   console.log('📁 __dirname:', __dirname);
 } else {
   // Local development
-  frontendDir = path.join(__dirname, "../../frontend");
+  frontendDir = path.join(__dirname, "frontend");
   staticDir = frontendDir;
   console.log('💻 Local development environment');
   console.log('📁 Frontend directory:', frontendDir);
@@ -173,7 +174,7 @@ app.get('/favicon.ico', (req, res) => {
   const faviconPath = path.join(staticDir, 'favicon.ico');
   console.log('🔍 Favicon requested, serving from:', faviconPath);
   console.log('📂 File exists:', fs.existsSync(faviconPath));
-  
+
   if (fs.existsSync(faviconPath)) {
     res.sendFile(faviconPath);
   } else {
@@ -188,7 +189,7 @@ pages.forEach(page => {
   app.get(route, (req, res) => {
     const filePath = path.join(staticDir, page);
     console.log(`📄 Serving ${page} from:`, filePath);
-    
+
     if (fs.existsSync(filePath)) {
       res.sendFile(filePath);
     } else {
@@ -204,23 +205,23 @@ app.use((req, res, next) => {
   if (req.path.startsWith('/api/')) {
     return next();
   }
-  
+
   // Skip static files (css, js, images, fonts, favicon, etc.)
   const staticFileExtensions = /\.(css|js|json|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|map)$/i;
   if (staticFileExtensions.test(req.path)) {
     return next();
   }
-  
+
   // For HTML routes without extension, serve the corresponding HTML file
   if (!req.path.includes('.')) {
     const htmlFile = req.path === '/' ? 'index.html' : `${req.path.slice(1)}.html`;
     const filePath = path.join(staticDir, htmlFile);
-    
+
     if (fs.existsSync(filePath)) {
       return res.sendFile(filePath);
     }
   }
-  
+
   // Default to index.html for unknown routes
   res.sendFile(path.join(staticDir, 'index.html'));
 });
@@ -363,7 +364,7 @@ app.get("/api/lessons", async (req, res) => {
     let lessonsPath;
     if (process.env.VERCEL) {
       // In Vercel, data files are at the project root level
-      lessonsPath = path.join(__dirname, '../..', 'api', 'data', 'lessons.json');
+      lessonsPath = path.join(__dirname, '..', 'api', 'data', 'lessons.json');
     } else {
       lessonsPath = path.join(__dirname, 'data', 'lessons.json');
     }
@@ -439,7 +440,7 @@ app.get("/api/lessons/:id", cacheMiddleware, async (req, res) => {
     let lessonsPath;
     if (process.env.VERCEL) {
       // In Vercel, data files are at the project root level
-      lessonsPath = path.join(__dirname, '../..', 'api', 'data', 'lessons.json');
+      lessonsPath = path.join(__dirname, '..', 'api', 'data', 'lessons.json');
     } else {
       lessonsPath = path.join(__dirname, 'data', 'lessons.json');
     }
@@ -629,7 +630,7 @@ function validateLanguage(language) {
 // Clean special characters from text
 function cleanSpecialCharacters(text) {
   if (!text || typeof text !== 'string') return text;
-  
+
   return text
     // Remove control characters EXCEPT newline (\n), carriage return (\r), and tab (\t)
     .replace(/[\x00-\x08\x0B-\x0C\x0E-\x1F\x7F-\x9F]/g, '')
@@ -1070,7 +1071,7 @@ Maintain a professional, authoritative tone while being encouraging and educatio
       // Check if response has error field
       if (data.error) {
         console.log("API returned error:", data.error);
-        
+
         // If it's an invalid API key error, fall back to demo mode
         if (data.error.code === 'invalid_api_key' || data.error.type === 'invalid_request_error') {
           console.log("Invalid API key detected, using fallback explanations");
@@ -1086,7 +1087,7 @@ Maintain a professional, authoritative tone while being encouraging and educatio
             note: "Invalid API key - using demo mode"
           });
         }
-        
+
         return res.status(502).json({
           error: data.error.message || "AI service error",
           code: data.error.type || "API_ERROR",
@@ -1222,6 +1223,7 @@ function getFallbackExplanation(
   const explanations = {
     html: {
       brief: `This HTML code creates a professional webpage structure. The \`<h1>\` tag defines a main heading, and the \`<p>\` tag creates a paragraph of text.`,
+
       normal: `This HTML code creates a professional webpage with:
 • \`<h1>Hello World</h1>\` - Semantic heading (level 1) for main page title
 • \`<p>This is a paragraph.</p>\` - Structured paragraph element with proper content
@@ -1235,375 +1237,9 @@ function getFallbackExplanation(
 • Include proper lang attribute for accessibility
 • Use semantic elements (header, main, footer) when appropriate
 • Validate markup with W3C validator`,
+
       detailed: `This HTML code demonstrates professional webpage structure and semantic markup:
 
 **Code Analysis:**
 • \`<h1>Hello World</h1>\` - Primary heading using semantic HTML5 element
-• \`<p>This is a paragraph.</p>\` - Content paragraph with proper text structure
-
-**Professional Standards:**
-• Semantic HTML5 markup for better SEO and accessibility
-• Proper element nesting and document hierarchy
-• Clean, maintainable code structure
-
-**Industry Best Practices:**
-• Use semantic elements (\`<article>, <section>, <aside>\`) for content structure
-• Include proper ARIA labels and alt text for accessibility compliance
-• Follow W3C validation standards
-• Consider responsive design from the start
-
-**Production Example:**
-\`\`\`html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Webpage</title>
-</head>
-<body>
-    <h1>Professional Content Structure</h1>
-    <p>Industry-standard semantic markup for modern web development.</p>
-</body>
-</html>
-\`\`\``,
-    },
-    css: {
-      brief: `This CSS code implements professional styling with modern layout techniques. It establishes typography, color schemes, and responsive design patterns.`,
-      normal: `This CSS code demonstrates professional styling practices:
-• \`body\` - Establishes system font stack and professional color palette
-• \`.container\` - Implements responsive layout with proper spacing
-
-**Modern CSS Techniques:**
-• CSS Grid/Flexbox for layout (industry standard)
-• Mobile-first responsive design approach
-• Professional typography with system fonts
-• Consistent spacing and visual hierarchy
-
-**Performance Considerations:**
-• Optimized CSS for fast loading
-• Modern layout methods reduce complexity
-• Scalable design patterns`,
-      detailed: `This CSS code implements professional styling with modern development practices:
-
-**Technical Implementation:**
-• \`body { font-family: Arial, sans-serif; color: #333; }\` - System font stack with professional color scheme
-• \`.container { max-width: 1200px; margin: 0 auto; padding: 20px; }\` - Responsive container with proper spacing
-
-**Professional Standards:**
-• Modern CSS reset practices
-• Mobile-first responsive design
-• Consistent visual hierarchy
-• Performance-optimized styling
-• Accessible color contrast ratios
-
-**Industry Best Practices:**
-• Use CSS custom properties (variables) for maintainability
-• Implement responsive design patterns
-• Follow BEM methodology for naming
-• Consider CSS-in-JS for large applications
-• Optimize for Core Web Vitals
-
-**Production Example:**
-\`\`\`css
-/* Professional CSS Architecture */
-:root {
-    --primary-color: #2c3e50;
-    --secondary-color: #3498db;
-    --text-color: #333;
-    --spacing-unit: 1rem;
-}
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    color: var(--text-color);
-    line-height: 1.6;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: calc(var(--spacing-unit) * 2);
-}
-\`\`\``,
-    },
-    javascript: {
-      brief: `This JavaScript code demonstrates professional function implementation with proper error handling and modern ES6+ syntax.`,
-      normal: `This JavaScript code implements a professional function:
-• Defines \`greet\` function with proper parameter handling
-• Returns formatted string using template literals (ES6+)
-• Demonstrates console output for debugging
-
-**Modern JavaScript Practices:**
-• ES6+ arrow functions and template literals
-• Proper function documentation
-• Error handling patterns
-• Clean, readable code structure
-
-**Professional Development:**
-• Follows industry naming conventions
-• Includes proper documentation
-• Demonstrates debugging techniques`,
-      detailed: `This JavaScript code demonstrates professional function implementation and modern development practices:
-
-**Code Analysis:**
-• \`function greet(name) { ... }\` - Function declaration with descriptive naming
-• \`return "Hello, " + name + "!";\` - String concatenation for dynamic content
-• \`console.log(greet("World")); \` - Function invocation and debugging output
-
-**Professional Standards:**
-• Modern JavaScript (ES6+) syntax
-• Proper function documentation
-• Error handling patterns
-• Clean code principles
-• Industry naming conventions
-
-**Best Practices:**
-• Use arrow functions for callbacks
-• Implement proper error handling
-• Add JSDoc comments for documentation
-• Follow consistent naming conventions
-• Consider TypeScript for large projects
-• Test functions with various inputs
-
-**Production Example:**
-\`\`\`javascript
-/**
- * Generates a personalized greeting message
- * @param {string} name - The person's name
- * @returns {string} Formatted greeting message
- */
-const createGreeting = (name) => {
-    if (!name || typeof name !== 'string') {
-        throw new Error('Name must be a non-empty string');
-    }
-    
-    return \`Hello, \${name}! Welcome to professional JavaScript development.\`;
-};
-
-// Usage with error handling
-try {
-    console.log(createGreeting('Professional Developer'));
-} catch (error) {
-    console.error('Greeting failed:', error.message);
-}
-\`\`\``,
-    },
-  };
-
-  const styleMap = { brief: "brief", normal: "normal", detailed: "detailed" };
-  const style = styleMap[responseStyle] || "normal";
-
-  return (
-    explanations[language]?.[style] ||
-    `This ${language.toUpperCase()} code performs specific functionality. Please ensure your Groq API key is configured to get detailed AI explanations.`
-  );
-}
-
-// Input validation middleware for AI requests
-function validateAIRequest(req, res, next) {
-  const { messages, model, code, language } = req.body;
-
-  // Check if this is a code explanation request (code and language provided)
-  const isCodeExplanation = code && language;
-
-  if (isCodeExplanation) {
-    // For code explanation, messages are optional, but code and language are required
-    if (!code || !language) {
-      return res.status(400).json({
-        error: "Code and language are required for code explanation",
-        code: "MISSING_PARAMETERS",
-        suggestions: ["Provide both code and language parameters"],
-      });
-    }
-  } else {
-    // For chat requests, messages are required
-    if (!Array.isArray(messages) || messages.length === 0) {
-      return res.status(400).json({
-        error: "Messages must be a non-empty array",
-        code: "INVALID_MESSAGES",
-      });
-    }
-
-    // Validate each message
-    for (const message of messages) {
-      if (!message.role || !message.content) {
-        return res.status(400).json({
-          error: "Each message must have role and content",
-          code: "INVALID_MESSAGE_FORMAT",
-        });
-      }
-      if (!["user", "assistant", "system"].includes(message.role)) {
-        return res.status(400).json({
-          error: "Message role must be user, assistant, or system",
-          code: "INVALID_ROLE",
-        });
-      }
-      if (
-        typeof message.content !== "string" ||
-        message.content.length > 10000
-      ) {
-        return res.status(400).json({
-          error: "Message content must be a string with max 10000 characters",
-          code: "INVALID_CONTENT",
-        });
-      }
-    }
-  }
-
-  next();
-}
-
-// Serve static files from the frontend directory
-app.use(express.static(path.join(__dirname, '../../frontend')));
-
-// API routes should be defined before the catch-all route
-
-// Handle client-side routing - serve index.html for all non-API GET requests
-app.get(/^(?!\/api\/).*/, (req, res) => {
-  res.sendFile(path.join(__dirname, '../../frontend/index.html'));
-});
-
-// Add security headers
-app.use((req, res, next) => {
-  res.setHeader("X-Content-Type-Options", "nosniff");
-  res.setHeader("X-Frame-Options", "DENY");
-  res.setHeader("X-XSS-Protection", "1; mode=block");
-  res.setHeader(
-    "Strict-Transport-Security",
-    "max-age=31536000; includeSubDomains"
-  );
-  next();
-});
-
-// Simple cache stats endpoint
-app.get("/api/cache/stats", (req, res) => {
-  res.json({
-    cacheSize: responseCache.size,
-    uptime: process.uptime(),
-  });
-});
-
-// Cache clear endpoint
-app.post("/api/cache/clear", (req, res) => {
-  const previousSize = responseCache.size;
-  responseCache.clear();
-
-  res.json({
-    message: "Cache cleared successfully",
-    previousSize,
-    currentSize: 0,
-  });
-});
-
-// Add response compression
-const compression = require("compression");
-app.use(
-  compression({
-    level: 6, // Good balance between speed and compression
-    threshold: 1024, // Only compress responses larger than 1KB
-    filter: (req, res) => {
-      // Don't compress if client doesn't support it
-      if (req.headers["x-no-compression"]) {
-        return false;
-      }
-      return compression.filter(req, res);
-    },
-  })
-);
-
-// Add rate limiting for API endpoints
-const rateLimit = require("express-rate-limit");
-
-// General API rate limiter
-const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
-  message: {
-    error: "Too many requests from this IP, please try again later.",
-    retryAfter: 15 * 60 * 1000,
-  },
-  standardHeaders: true,
-  legacyHeaders: false,
-});
-
-// AI-specific rate limiter (more restrictive for AI endpoints)
-const aiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 50, // limit each IP to 50 AI requests per windowMs
-  message: {
-    error:
-      "AI request limit exceeded. Please wait before making more requests.",
-    code: "AI_RATE_LIMIT_EXCEEDED",
-    retryAfter: 15 * 60 * 1000,
-    suggestions: [
-      "Wait 15 minutes before making more AI requests",
-      "Consider upgrading your plan for higher limits",
-    ],
-  },
-  standardHeaders: true,
-  legacyHeaders: false,
-  skip: (req) => {
-    // Skip rate limiting for health checks
-    return req.path === "/api/groq/health";
-  },
-});
-
-// Apply general rate limiting to API routes
-app.use("/api/", apiLimiter);
-
-// Apply AI-specific rate limiting to AI endpoints
-app.use("/api/groq", aiLimiter);
-
-// Initialize and start server
-const startServer = async () => {
-  try {
-    // Skip database initialization entirely for Vercel
-    if (!process.env.VERCEL && models) {
-      try {
-        await models.initializeTables();
-        console.log('📊 Database tables initialized successfully');
-      } catch (dbError) {
-        console.warn('Database initialization failed, using JSON fallbacks:', dbError.message);
-      }
-    } else {
-      console.log('🚀 Vercel deployment - using JSON fallbacks only');
-    }
-
-    // Start the server
-    const port = process.env.PORT || 3000;
-
-    // For Vercel, we don't start a server, just export the app
-    if (process.env.VERCEL) {
-      console.log('🚀 Running in Vercel serverless environment');
-      console.log('📊 App initialized for serverless functions');
-      return;
-    }
-
-    // Only start server in non-Vercel environments
-    app.listen(port, () => {
-      console.log(`🚀 KidLearner server running on port ${port}`);
-      console.log(`🗜️  Response compression enabled`);
-      console.log(`⚡ Rate limiting active`);
-      console.log(`📄 Using JSON data fallbacks`);
-    });
-  } catch (error) {
-    console.error("Failed to start server:", error);
-    if (!process.env.VERCEL) {
-      process.exit(1);
-    } else {
-      // In Vercel, log the error but don't exit
-      console.warn('⚠️ Initialization error in Vercel, continuing with limited functionality');
-    }
-  }
-}
-
-// Export the app immediately for Vercel
-if (process.env.VERCEL) {
-  // Initialize asynchronously but export immediately
-  startServer().catch(err => console.warn('Async initialization error:', err));
-  module.exports = app;
-} else {
-  // For local development, start normally
-  startServer();
-}
+• \`<p>This is a paragraph.</p>\` - Structured paragraph element with proper content

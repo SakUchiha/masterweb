@@ -5,8 +5,8 @@
 process.env.VERCEL = '1';
 process.env.NODE_ENV = 'production';
 
-// Import the Express app from the backend
-const app = require('../backend/server.js/server.js');
+// Import the Express app from the server
+const app = require('../server.js');
 
 // Export handler for Vercel serverless functions
 module.exports = app;

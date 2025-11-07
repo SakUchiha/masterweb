@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self' 'unsafe-inline' blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; connect-src 'self' http://localhost:4000 http://127.0.0.1:4000 ws://localhost:4000 ws://127.0.0.1:4000 https://*.vercel.app; frame-src 'self' blob: data:;"
+    />
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>Cache Clear - Code Understanding</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="apple-touch-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="css/styles.css?v=2025.10.27.1" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .cache-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .cache-header {
+        margin-bottom: 2rem;
+      }
+
+      .cache-header i {
+        font-size: 4rem;
+        color: #667eea;
+        margin-bottom: 1rem;
+        display: block;
+      }
+
+      .cache-header h1 {
+        color: #2d3748;
+        margin-bottom: 1rem;
+      }
+
+      .cache-header p {
+        color: #666;
+        font-size: 1.1rem;
+      }
+
+      .cache-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin: 2rem 0;
+      }
+
+      .cache-btn {
+        padding: 1rem 2rem;
+        border: 2px solid #667eea;
+        background: white;
+        color: #667eea;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+
+      .cache-btn:hover {
+        background: #667eea;
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .cache-btn.primary {
+        background: #667eea;
+        color: white;
+      }
+
+      .cache-btn.primary:hover {
+        background: #5a67d8;
+      }
+
+      .cache-status {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin: 2rem 0;
+        text-align: left;
+      }
+
+      .cache-status h3 {
+        color: #2d3748;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .cache-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #e9ecef;
+      }
+
+      .cache-item:last-child {
+        border-bottom: none;
+      }
+
+      .cache-item span:first-child {
+        font-weight: 500;
+        color: #2d3748;
+      }
+
+      .cache-item span:last-child {
+        color: #666;
+        font-family: monospace;
+      }
+
+      @media (max-width: 768px) {
+        .cache-actions {
+          flex-direction: column;
+        }
+
+        .cache-item {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.25rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Header -->
+    <header class="main-header">
+      <div class="container">
+        <div class="logo">
+          <i class="fas fa-code"></i>
+          <h1>KidLearner</h1>
+        </div>
+        <nav class="main-nav">
+          <a href="index.html" class="nav-link">
+            <i class="fas fa-home"></i> Home
+          </a>
+          <a href="lessons.html" class="nav-link">
+            <i class="fas fa-book"></i> Lessons
+          </a>
+          <a href="study-guide.html" class="nav-link">
+            <i class="fas fa-file-lines"></i> Study Guide
+          </a>
+          <a href="editor.html" class="nav-link">
+            <i class="fas fa-code"></i> Code Runner
+          </a>
+          <a href="ai.html" class="nav-link">
+            <i class="fas fa-robot"></i> AI Assistant
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="cache-container">
+      <div class="cache-header">
+        <i class="fas fa-broom"></i>
+        <h1>Cache Management</h1>
+        <p>Clear cached data to ensure you see the latest content and resolve any display issues.</p>
+      </div>
+
+      <div class="cache-actions">
+        <button class="cache-btn primary" onclick="clearAllCache()">
+          <i class="fas fa-trash-alt"></i>
+          Clear All Cache
+        </button>
+        <button class="cache-btn" onclick="clearAPICache()">
+          <i class="fas fa-server"></i>
+          Clear API Cache
+        </button>
+        <button class="cache-btn" onclick="clearBrowserCache()">
+          <i class="fas fa-globe"></i>
+          Clear Browser Cache
+        </button>
+        <button class="cache-btn" onclick="reloadPage()">
+          <i class="fas fa-refresh"></i>
+          Reload Page
+        </button>
+      </div>
+
+      <div class="cache-status">
+        <h3><i class="fas fa-info-circle"></i> Cache Status</h3>
+        <div class="cache-item">
+          <span>API Cache Size:</span>
+          <span id="apiCacheSize">Checking...</span>
+        </div>
+        <div class="cache-item">
+          <span>Local Storage:</span>
+          <span id="localStorageSize">Checking...</span>
+        </div>
+        <div class="cache-item">
+          <span>Last Cache Clear:</span>
+          <span id="lastCacheClear">Never</span>
+        </div>
+        <div class="cache-item">
+          <span>Cache Status:</span>
+          <span id="cacheStatus">Active</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Cache management functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        console.log('Cache Clear page loaded');
+        updateCacheStatus();
+
+        // Update cache status every 5 seconds
+        setInterval(updateCacheStatus, 5000);
+      });
+
+      function updateCacheStatus() {
+        // Check API cache size
+        fetch('/api/cache/stats')
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById('apiCacheSize').textContent = data.cacheSize + ' items';
+          })
+          .catch(() => {
+            document.getElementById('apiCacheSize').textContent = 'Unable to check';
+          });
+
+        // Check local storage size
+        try {
+          let totalSize = 0;
+          for (let key in localStorage) {
+            if (localStorage.hasOwnProperty(key)) {
+              totalSize += localStorage[key].length;
+            }
+          }
+          document.getElementById('localStorageSize').textContent = (totalSize / 1024).toFixed(2) + ' KB';
+        } catch (e) {
+          document.getElementById('localStorageSize').textContent = 'Unable to check';
+        }
+
+        // Check last cache clear
+        const lastClear = localStorage.getItem('lastCacheClear');
+        if (lastClear) {
+          document.getElementById('lastCacheClear').textContent = new Date(lastClear).toLocaleString();
+        }
+      }
+
+      function clearAllCache() {
+        if (confirm('Are you sure you want to clear all cache? This will remove all cached data.')) {
+          // Clear API cache
+          fetch('/api/cache/clear', { method: 'POST' })
+            .then(() => {
+              console.log('API cache cleared');
+            })
+            .catch(err => {
+              console.warn('Failed to clear API cache:', err);
+            });
+
+          // Clear local storage
+          try {
+            localStorage.clear();
+            localStorage.setItem('lastCacheClear', new Date().toISOString());
+          } catch (e) {
+            console.warn('Failed to clear local storage:', e);
+          }
+
+          // Clear session storage
+          try {
+            sessionStorage.clear();
+          } catch (e) {
+            console.warn('Failed to clear session storage:', e);
+          }
+
+          alert('All cache cleared successfully!');
+          updateCacheStatus();
+        }
+      }
+
+      function clearAPICache() {
+        fetch('/api/cache/clear', { method: 'POST' })
+          .then(response => response.json())
+          .then(data => {
+            alert(`API cache cleared! Removed ${data.previousSize} items.`);
+            updateCacheStatus();
+          })
+          .catch(err => {
+            alert('Failed to clear API cache. Please try again.');
+            console.error('API cache clear error:', err);
+          });
+      }
+
+      function clearBrowserCache() {
+        // Clear local storage (except essential data)
+        try {
+          const keysToKeep = ['theme', 'userPreferences'];
+          const keysToRemove = [];
+
+          for (let key in localStorage) {
+            if (localStorage.hasOwnProperty(key) && !keysToKeep.includes(key)) {
+              keysToRemove.push(key);
+            }
+          }
+
+          keysToRemove.forEach(key => localStorage.removeItem(key));
+          localStorage.setItem('lastCacheClear', new Date().toISOString());
+
+          alert('Browser cache cleared successfully!');
+          updateCacheStatus();
+        } catch (e) {
+          alert('Failed to clear browser cache.');
+          console.error('Browser cache clear error:', e);
+        }
+      }
+
+      function reloadPage() {
+        window.location.reload();
+      }
+    </script>
+
+    <script src="js/theme.js"></script>
+    <script src="js/navigation.js"></script>
+  </body>
+</html>

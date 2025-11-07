@@ -9,21 +9,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
   mode: "production",
   entry: {
-    main: "./js/main.js",
-    app: "./js/app.js",
-    ui: "./js/ui.js",
-    api: "./js/api.js",
-    editor: "./js/editor.js",
-    ai: "./js/ai.js",
-    navigation: "./js/navigation.js",
-    "syntax-highlighter": "./js/syntax-highlighter.js",
-    "syntax-checker": "./js/syntax-checker.js",
-    "progress-tracker": "./js/progress-tracker.js",
-    "error-boundary": "./js/error-boundary.js",
-    "error-handler": "./js/error-handler.js",
-    form: "./js/form.js",
-    config: "./js/config.js",
-    "lazy-loader": "./js/lazy-loader.js",
+    // No entry points needed - files are already built
   },
   output: {
     path: path.resolve(__dirname, "frontend"),
@@ -68,64 +54,13 @@ module.exports = {
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: ['**/*', '!index.html', '!lessons.html', '!editor.html']
     }),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, "js"),
-          to: path.resolve(__dirname, "frontend/js")
-        },
-        {
-          from: path.resolve(__dirname, "css"),
-          to: path.resolve(__dirname, "frontend/css")
-        },
-        {
-          from: path.resolve(__dirname, "backend/server.js/data"),
-          to: path.resolve(__dirname, "frontend/data")
-        },
-        {
-          from: path.resolve(__dirname, "data"),
-          to: path.resolve(__dirname, "frontend/data")
-        },
-        {
-          from: path.resolve(__dirname, "manifest.json"),
-          to: path.resolve(__dirname, "frontend/manifest.json")
-        },
-        {
-          from: path.resolve(__dirname, "sw.js"),
-          to: path.resolve(__dirname, "frontend/sw.js")
-        },
-        {
-          from: path.resolve(__dirname, "favicon.ico"),
-          to: path.resolve(__dirname, "frontend/favicon.ico")
-        },
-        {
-          from: path.resolve(__dirname, "favicon-dark.ico"),
-          to: path.resolve(__dirname, "frontend/favicon-dark.ico")
-        },
-        // HTML files are now handled by HtmlWebpackPlugin
-      ],
-    }),
+    // Files are already built and in frontend/ directory
+    // No need to copy anything during Vercel build
     new MiniCssExtractPlugin({
       filename: "css/[name].[contenthash].css",
     }),
-    new HtmlWebpackPlugin({
-      template: "./index.html",
-      filename: "index.html",
-      chunks: ["main", "app", "ui", "api", "navigation", "lazy-loader"],
-      minify: true,
-    }),
-    new HtmlWebpackPlugin({
-      template: "./lessons.html",
-      filename: "lessons.html",
-      chunks: ["main", "app", "ui", "api", "navigation", "lazy-loader"],
-      minify: true,
-    }),
-    new HtmlWebpackPlugin({
-      template: "./editor.html",
-      filename: "editor.html",
-      chunks: ["main", "app", "ui", "api", "editor", "navigation", "lazy-loader", "syntax-highlighter", "syntax-checker"],
-      minify: true,
-    }),
+    // HTML files are already built and in frontend/ directory
+    // No need to regenerate them during build
   ],
   optimization: {
     minimize: true,
