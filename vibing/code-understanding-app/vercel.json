@@ -1,7 +1,7 @@
 {
   "version": 2,
   "buildCommand": "npm run build",
-  "outputDirectory": "dist",
+  "outputDirectory": "frontend",
   "cleanUrls": true,
   "trailingSlash": false,
   "functions": {
@@ -15,44 +15,8 @@
       "destination": "/api/index.js"
     },
     {
-      "source": "/",
+      "source": "/(.*)",
       "destination": "/index.html"
-    },
-    {
-      "source": "/ai",
-      "destination": "/ai.html"
-    },
-    {
-      "source": "/ask-ai",
-      "destination": "/ask-ai.html"
-    },
-    {
-      "source": "/code-explainer",
-      "destination": "/code-explainer.html"
-    },
-    {
-      "source": "/editor",
-      "destination": "/editor.html"
-    },
-    {
-      "source": "/lessons",
-      "destination": "/lessons.html"
-    },
-    {
-      "source": "/lesson-viewer",
-      "destination": "/lesson-viewer.html"
-    },
-    {
-      "source": "/study-guide",
-      "destination": "/study-guide.html"
-    },
-    {
-      "source": "/contact",
-      "destination": "/contact.html"
-    },
-    {
-      "source": "/cache-clear",
-      "destination": "/cache-clear.html"
     }
   ],
   "headers": [

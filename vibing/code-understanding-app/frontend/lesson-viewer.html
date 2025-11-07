@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KidLearner - Lesson Viewer</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="apple-touch-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        .lesson-viewer {
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KidLearner - Lesson Viewer</title><link rel="icon" type="image/x-icon" href="favicon.ico"><link rel="apple-touch-icon" href="favicon.ico"><link rel="stylesheet" href="css/styles.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"><style>.lesson-viewer {
             min-height: 100vh;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 2rem 0;
@@ -257,61 +246,7 @@
             .slide-container { box-shadow: none !important; border-radius: 0 !important; max-width: 100% !important; }
             .slide-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             .nav-button { display: none !important; }
-        }
-    </style>
-</head>
-<body>
-    <div class="lesson-viewer">
-        <div class="slide-container">
-            <div class="slide-header">
-                <h1 id="lessonTitle">Loading Lesson...</h1>
-                <div class="lesson-info">
-                    <span id="lessonCategory">Category</span>
-                    <span id="lessonDifficulty">Difficulty</span>
-                    <span id="lessonDuration">Duration</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill"></div>
-                </div>
-            </div>
-            
-            <div class="slide-content" id="slideContent">
-                <div style="text-align: center; padding: 3rem;">
-                    <i class="fas fa-spinner fa-spin" style="font-size: 3rem; color: #667eea;"></i>
-                    <p style="margin-top: 1rem; font-size: 1.2rem; color: #666;">Loading lesson content...</p>
-                </div>
-            </div>
-            
-            <div class="slide-navigation">
-                <button class="nav-button" id="prevButton" onclick="previousSlide()">
-                    <i class="fas fa-arrow-left"></i>
-                    Previous
-                </button>
-                
-                <div class="slide-counter">
-                    <span id="currentSlide">1</span> / <span id="totalSlides">1</span>
-                </div>
-                <div class="viewer-actions">
-                    <button class="action-button" id="printButton" onclick="printSlides()">
-                        <i class="fas fa-print"></i>
-                        Print / Save PDF
-                    </button>
-                    <button class="action-button" id="markCompleteButton" onclick="markLessonComplete()">
-                        <i class="fas fa-check"></i>
-                        Mark Complete
-                    </button>
-                </div>
-                <button class="nav-button" id="nextButton" onclick="nextSlide()">
-                    Next
-                    <i class="fas fa-arrow-right"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <script src="js/navigation.js"></script>
-    <script>
-        let currentLesson = null;
+        }</style><script defer="defer" src="js/main.af2be9ee32bb8a5b9f37.js"></script><script defer="defer" src="js/app.3c3d3a5959c970f18af0.js"></script><script defer="defer" src="js/ui.f949bd7b08304618e339.js"></script><script defer="defer" src="js/api.a58629a86ffbe7e7136d.js"></script></head><body><div class="lesson-viewer"><div class="slide-container"><div class="slide-header"><h1 id="lessonTitle">Loading Lesson...</h1><div class="lesson-info"><span id="lessonCategory">Category</span> <span id="lessonDifficulty">Difficulty</span> <span id="lessonDuration">Duration</span></div><div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div></div><div class="slide-content" id="slideContent"><div style="text-align: center; padding: 3rem;"><i class="fas fa-spinner fa-spin" style="font-size: 3rem; color: #667eea;"></i><p style="margin-top: 1rem; font-size: 1.2rem; color: #666;">Loading lesson content...</p></div></div><div class="slide-navigation"><button class="nav-button" id="prevButton" onclick="previousSlide()"><i class="fas fa-arrow-left"></i> Previous</button><div class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">1</span></div><div class="viewer-actions"><button class="action-button" id="printButton" onclick="printSlides()"><i class="fas fa-print"></i> Print / Save PDF</button> <button class="action-button" id="markCompleteButton" onclick="markLessonComplete()"><i class="fas fa-check"></i> Mark Complete</button></div><button class="nav-button" id="nextButton" onclick="nextSlide()">Next <i class="fas fa-arrow-right"></i></button></div></div></div><script src="js/navigation.js"></script><script>let currentLesson = null;
         let currentSlideIndex = 0;
         let slides = [];
         const COMPLETED_KEY = 'completedLessons';
@@ -543,7 +478,4 @@
                     </button>
                 </div>
             `;
-        }
-    </script>
-</body>
-</html>
+        }</script></body></html>

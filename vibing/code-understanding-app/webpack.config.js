@@ -26,7 +26,7 @@ module.exports = {
     "lazy-loader": "./frontend/js/lazy-loader.js",
   },
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "frontend"),
     filename: "js/[name].[contenthash].js",
     clean: true,
     publicPath: '',
