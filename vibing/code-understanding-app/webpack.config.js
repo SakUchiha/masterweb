@@ -65,7 +65,9 @@ module.exports = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['**/*', '!index.html', '!lessons.html', '!editor.html']
+    }),
     new CopyWebpackPlugin({
       patterns: [
         {
@@ -100,14 +102,23 @@ module.exports = {
           from: path.resolve(__dirname, "favicon-dark.ico"),
           to: path.resolve(__dirname, "frontend/favicon-dark.ico")
         },
-        // Removed HTML files from copy since they're handled by HtmlWebpackPlugin
+        {
+          from: path.resolve(__dirname, "index.html"),
+          to: path.resolve(__dirname, "frontend/index.html")
+        },
+        {
+          from: path.resolve(__dirname, "lessons.html"),
+          to: path.resolve(__dirname, "frontend/lessons.html")
+        },
+        {
+          from: path.resolve(__dirname, "editor.html"),
+          to: path.resolve(__dirname, "frontend/editor.html")
+        },
       ],
     }),
     new MiniCssExtractPlugin({
       filename: "css/[name].[contenthash].css",
     }),
-    // Disable HTML plugins for Vercel - use static files instead
-    // HTML files are copied directly to frontend directory
   ],
   optimization: {
     minimize: true,
