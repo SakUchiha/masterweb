@@ -2,8 +2,7 @@
   "version": 2,
   "buildCommand": "npm run build",
   "outputDirectory": "frontend",
-  "cleanUrls": true,
-  "trailingSlash": false,
+  "framework": null,
   "functions": {
     "api/index.js": {
       "maxDuration": 15
@@ -27,8 +26,28 @@
       "destination": "/ai.html"
     },
     {
+      "source": "/ask-ai",
+      "destination": "/ask-ai.html"
+    },
+    {
+      "source": "/code-explainer",
+      "destination": "/code-explainer.html"
+    },
+    {
       "source": "/contact",
       "destination": "/contact.html"
+    },
+    {
+      "source": "/lesson-viewer",
+      "destination": "/lesson-viewer.html"
+    },
+    {
+      "source": "/study-guide",
+      "destination": "/study-guide.html"
+    },
+    {
+      "source": "/cache-clear",
+      "destination": "/cache-clear.html"
     },
     {
       "source": "/(.*)",
