@@ -6,13 +6,30 @@
   "trailingSlash": false,
   "functions": {
     "api/index.js": {
-      "maxDuration": 30
+      "maxDuration": 15,
+      "runtime": "nodejs22.x"
     }
   },
   "rewrites": [
     {
       "source": "/api/:path*",
       "destination": "/api/index.js"
+    },
+    {
+      "source": "/lessons",
+      "destination": "/lessons.html"
+    },
+    {
+      "source": "/editor",
+      "destination": "/editor.html"
+    },
+    {
+      "source": "/ai",
+      "destination": "/ai.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
     },
     {
       "source": "/(.*)",
@@ -25,7 +42,7 @@
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
+          "value": "public, max-age=300, must-revalidate"
         }
       ]
     }

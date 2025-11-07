@@ -55,21 +55,17 @@ if (missingVars.length > 0) {
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 const cors = require("cors");
-const models = require("./models");
-const app = express();
-// Only initialize socket.io for non-Vercel environments
-let io = null;
+// Remove models import for Vercel - use JSON fallbacks only
+let models = null;
 if (!process.env.VERCEL) {
-  const { createServer } = require("http");
-  const { Server } = require("socket.io");
-  const server = createServer(app);
-  io = new Server(server, {
-    cors: {
-      origin: "*",
-      methods: ["GET", "POST"],
-    },
-  });
+  try {
+    models = require("./models");
+  } catch (e) {
+    console.warn('Models not available, using JSON fallbacks only');
+  }
 }
+const app = express();
+// Socket.io removed for Vercel serverless compatibility
 
 // Request logger for debugging
 app.use((req, res, next) => {
@@ -241,94 +237,38 @@ app.use((req, res, next) => {
   res.status(404).send('404 Not Found');
 });
 
-// Advanced caching system for API responses
+// Simplified caching for Vercel serverless
 const responseCache = new Map();
-const CACHE_CONFIG = {
-  lessons: { duration: 10 * 60 * 1000, maxSize: 50 }, // 10 minutes, max 50 entries
-  health: { duration: 2 * 60 * 1000, maxSize: 10 }, // 2 minutes, max 10 entries
-  default: { duration: 5 * 60 * 1000, maxSize: 100 }, // 5 minutes, max 100 entries
-};
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
-// Cache statistics
-const cacheStats = {
-  hits: 0,
-  misses: 0,
-  evictions: 0,
-  size: 0,
-};
-
-// Enhanced cache middleware with LRU eviction
+// Simple cache middleware
 function cacheMiddleware(req, res, next) {
   const key = req.originalUrl;
-  const endpoint = req.path.split("/")[2]; // Extract endpoint name
-  const config = CACHE_CONFIG[endpoint] || CACHE_CONFIG.default;
-
   const cached = responseCache.get(key);
 
-  if (cached && Date.now() - cached.timestamp < config.duration) {
-    cacheStats.hits++;
-    // Update access time for LRU
-    cached.lastAccessed = Date.now();
+  if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
     return res.json(cached.data);
   }
-
-  cacheStats.misses++;
 
   // Store original send method
   const originalSend = res.json;
   res.json = function (data) {
-    // Check cache size and evict if necessary
-    if (responseCache.size >= config.maxSize) {
-      evictLRU();
+    // Simple cache without LRU for serverless
+    if (responseCache.size >= 50) {
+      // Clear cache when it gets too big
+      responseCache.clear();
     }
 
     responseCache.set(key, {
       data,
       timestamp: Date.now(),
-      lastAccessed: Date.now(),
-      endpoint,
     });
-    cacheStats.size = responseCache.size;
 
     originalSend.call(this, data);
   };
 
   next();
 }
-
-// LRU eviction function
-function evictLRU() {
-  let oldestKey = null;
-  let oldestTime = Date.now();
-
-  for (const [key, value] of responseCache) {
-    if (value.lastAccessed < oldestTime) {
-      oldestTime = value.lastAccessed;
-      oldestKey = key;
-    }
-  }
-
-  if (oldestKey) {
-    responseCache.delete(oldestKey);
-    cacheStats.evictions++;
-  }
-}
-
-// Cache cleanup function
-function cleanupExpiredCache() {
-  const now = Date.now();
-  for (const [key, value] of responseCache) {
-    const config = CACHE_CONFIG[value.endpoint] || CACHE_CONFIG.default;
-    if (now - value.timestamp > config.duration) {
-      responseCache.delete(key);
-      cacheStats.evictions++;
-    }
-  }
-  cacheStats.size = responseCache.size;
-}
-
-// Run cleanup every 5 minutes
-setInterval(cleanupExpiredCache, 5 * 60 * 1000);
 
 // Configure CORS with specific options
 const resolvedVercelUrl = process.env.VERCEL_URL
@@ -371,169 +311,49 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-// User management endpoints
+// User management endpoints - disabled for Vercel (JSON only)
 app.post("/api/users", async (req, res) => {
-  try {
-    const { username, email, password_hash } = req.body;
-    if (!username) {
-      return res.status(400).json({ error: "Username is required" });
-    }
-
-    const result = await models.createUser({ username, email, password_hash });
-    res.status(201).json({ id: result.id, username, email });
-  } catch (error) {
-    console.error("Error creating user:", error);
-    if (error.message.includes("UNIQUE constraint failed")) {
-      res.status(409).json({ error: "Username or email already exists" });
-    } else {
-      res.status(500).json({ error: "Failed to create user" });
-    }
-  }
+  res.status(503).json({ error: "User management not available in serverless mode" });
 });
 
 app.get("/api/users/:id", async (req, res) => {
-  try {
-    const user = await models.getUserById(req.params.id);
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
-    }
-    // Don't return password hash
-    const { password_hash, ...userData } = user;
-    res.json(userData);
-  } catch (error) {
-    console.error("Error fetching user:", error);
-    res.status(500).json({ error: "Failed to fetch user" });
-  }
+  res.status(503).json({ error: "User management not available in serverless mode" });
 });
 
-// Progress tracking endpoints
+// Progress tracking endpoints - disabled for Vercel (JSON only)
 app.post("/api/progress", async (req, res) => {
-  try {
-    const { user_id, lesson_id, completed, score, time_spent, attempts } =
-      req.body;
-
-    if (!lesson_id) {
-      return res.status(400).json({ error: "Lesson ID is required" });
-    }
-
-    const result = await models.updateProgress({
-      user_id,
-      lesson_id,
-      completed: completed || false,
-      score: score || 0,
-      time_spent: time_spent || 0,
-      attempts: attempts || 1,
-    });
-
-    res.json({ success: true, id: result.id });
-  } catch (error) {
-    console.error("Error updating progress:", error);
-    res.status(500).json({ error: "Failed to update progress" });
-  }
+  res.json({ success: true, message: "Progress tracking disabled in serverless mode" });
 });
 
 app.get("/api/progress/:userId", async (req, res) => {
-  try {
-    const progress = await models.getUserProgress(req.params.userId);
-    res.json(progress);
-  } catch (error) {
-    console.error("Error fetching progress:", error);
-    res.status(500).json({ error: "Failed to fetch progress" });
-  }
+  res.json([]);
 });
 
-// Achievement endpoints
+// Achievement endpoints - disabled for Vercel (JSON only)
 app.post("/api/achievements", async (req, res) => {
-  try {
-    const { user_id, achievement_type, achievement_name, description, points } =
-      req.body;
-
-    if (!user_id || !achievement_type || !achievement_name) {
-      return res
-        .status(400)
-        .json({ error: "User ID, achievement type, and name are required" });
-    }
-
-    const result = await models.unlockAchievement({
-      user_id,
-      achievement_type,
-      achievement_name,
-      description,
-      points: points || 0,
-    });
-
-    res.status(201).json({ success: true, id: result.id });
-  } catch (error) {
-    console.error("Error unlocking achievement:", error);
-    if (error.message.includes("UNIQUE constraint failed")) {
-      res.status(409).json({ error: "Achievement already unlocked" });
-    } else {
-      res.status(500).json({ error: "Failed to unlock achievement" });
-    }
-  }
+  res.json({ success: true, message: "Achievements disabled in serverless mode" });
 });
 
 app.get("/api/achievements/:userId", async (req, res) => {
-  try {
-    const achievements = await models.getUserAchievements(req.params.userId);
-    res.json(achievements);
-  } catch (error) {
-    console.error("Error fetching achievements:", error);
-    res.status(500).json({ error: "Failed to fetch achievements" });
-  }
+  res.json([]);
 });
 
-// Session tracking endpoints
+// Session tracking endpoints - disabled for Vercel (JSON only)
 app.post("/api/sessions/start", async (req, res) => {
-  try {
-    const { user_id, session_type, lesson_id } = req.body;
-
-    if (!session_type) {
-      return res.status(400).json({ error: "Session type is required" });
-    }
-
-    const result = await models.startSession({
-      user_id,
-      session_type,
-      lesson_id,
-    });
-    res.status(201).json({ success: true, sessionId: result.id });
-  } catch (error) {
-    console.error("Error starting session:", error);
-    res.status(500).json({ error: "Failed to start session" });
-  }
+  res.json({ success: true, sessionId: "serverless-" + Date.now() });
 });
 
 app.post("/api/sessions/:sessionId/end", async (req, res) => {
-  try {
-    const { actions } = req.body;
-    await models.endSession(req.params.sessionId, actions);
-    res.json({ success: true });
-  } catch (error) {
-    console.error("Error ending session:", error);
-    res.status(500).json({ error: "Failed to end session" });
-  }
+  res.json({ success: true });
 });
 
-// Analytics endpoints
+// Analytics endpoints - disabled for Vercel (JSON only)
 app.get("/api/analytics/lessons", async (req, res) => {
-  try {
-    const stats = await models.getLessonCompletionStats();
-    res.json(stats);
-  } catch (error) {
-    console.error("Error fetching lesson stats:", error);
-    res.status(500).json({ error: "Failed to fetch lesson statistics" });
-  }
+  res.json({ totalLessons: 0, completedLessons: 0, averageScore: 0 });
 });
 
 app.get("/api/analytics/users/:userId", async (req, res) => {
-  try {
-    const stats = await models.getUserStats(req.params.userId);
-    res.json(stats);
-  } catch (error) {
-    console.error("Error fetching user stats:", error);
-    res.status(500).json({ error: "Failed to fetch user statistics" });
-  }
+  res.json({ totalSessions: 0, totalTime: 0, achievements: 0 });
 });
 
 // Get all lessons
@@ -1656,22 +1476,18 @@ app.use((req, res, next) => {
   next();
 });
 
-// Cache statistics endpoint
+// Simple cache stats endpoint
 app.get("/api/cache/stats", (req, res) => {
   res.json({
-    ...cacheStats,
     cacheSize: responseCache.size,
-    config: CACHE_CONFIG,
     uptime: process.uptime(),
   });
 });
 
-// Cache clear endpoint (for maintenance)
+// Cache clear endpoint
 app.post("/api/cache/clear", (req, res) => {
   const previousSize = responseCache.size;
   responseCache.clear();
-  cacheStats.size = 0;
-  cacheStats.evictions += previousSize;
 
   res.json({
     message: "Cache cleared successfully",
@@ -1739,16 +1555,19 @@ app.use("/api/", apiLimiter);
 // Apply AI-specific rate limiting to AI endpoints
 app.use("/api/groq", aiLimiter);
 
-// Initialize database and start server
+// Initialize and start server
 const startServer = async () => {
   try {
-    // Initialize database tables (skip in Vercel - use JSON fallbacks)
-    if (!process.env.VERCEL) {
-      await models.initializeTables();
-      console.log('📊 Database tables initialized successfully');
+    // Skip database initialization entirely for Vercel
+    if (!process.env.VERCEL && models) {
+      try {
+        await models.initializeTables();
+        console.log('📊 Database tables initialized successfully');
+      } catch (dbError) {
+        console.warn('Database initialization failed, using JSON fallbacks:', dbError.message);
+      }
     } else {
-      console.log('🚀 Vercel deployment - using JSON fallbacks for data');
-      // Don't attempt database initialization in Vercel
+      console.log('🚀 Vercel deployment - using JSON fallbacks only');
     }
 
     // Start the server
@@ -1760,18 +1579,13 @@ const startServer = async () => {
       console.log('📊 App initialized for serverless functions');
       return;
     }
-    
+
     // Only start server in non-Vercel environments
     app.listen(port, () => {
       console.log(`🚀 KidLearner server running on port ${port}`);
-      console.log(
-        `📊 Cache system initialized with ${
-          Object.keys(CACHE_CONFIG).length
-        } configurations`
-      );
       console.log(`🗜️  Response compression enabled`);
       console.log(`⚡ Rate limiting active`);
-      console.log(`💾 Database integration active`);
+      console.log(`📄 Using JSON data fallbacks`);
     });
   } catch (error) {
     console.error("Failed to start server:", error);
