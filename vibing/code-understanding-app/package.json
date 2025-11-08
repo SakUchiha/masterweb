@@ -4,7 +4,7 @@
   "description": "A modern, interactive web development learning platform designed to teach HTML, CSS, and JavaScript through hands-on coding exercises.",
   "main": "index.js",
   "scripts": {
-    "build": "echo 'Build completed - using pre-built frontend files'",
+    "build": "webpack --mode=production",
     "build:frontend": "echo 'Frontend already built'",
     "build:backend": "echo 'Backend dependencies installed at root'",
     "build:dev": "webpack --mode=development",
