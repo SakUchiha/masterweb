@@ -114,8 +114,12 @@ router.post('/', async (req, res) => {
       }
     } else {
       response = {
-        response: "Hello! I'm your KidLearner AI assistant. Ask me anything about HTML, CSS, or JavaScript!",
-        error: "Invalid request format"
+        response: "**Welcome to KidLearner AI Assistant! 🤖**\n\nI'm here to help you learn HTML, CSS, and JavaScript through interactive coding lessons. I can:\n\n**Code Help:**\n• Explain code snippets\n• Debug errors\n• Suggest improvements\n• Teach best practices\n\n**Learning Support:**\n• Answer questions about web development\n• Provide step-by-step tutorials\n• Recommend learning resources\n• Help with projects\n\n**Available Topics:**\n• **HTML**: Structure and semantics\n• **CSS**: Styling and layouts\n• **JavaScript**: Interactivity and logic\n\n**What would you like to learn today?** Feel free to ask me anything about web development! 🚀",
+        choices: [{
+          message: {
+            content: "**Welcome to KidLearner AI Assistant! 🤖**\n\nI'm here to help you learn HTML, CSS, and JavaScript through interactive coding lessons. I can:\n\n**Code Help:**\n• Explain code snippets\n• Debug errors\n• Suggest improvements\n• Teach best practices\n\n**Learning Support:**\n• Answer questions about web development\n• Provide step-by-step tutorials\n• Recommend learning resources\n• Help with projects\n\n**Available Topics:**\n• **HTML**: Structure and semantics\n• **CSS**: Styling and layouts\n• **JavaScript**: Interactivity and logic\n\n**What would you like to learn today?** Feel free to ask me anything about web development! 🚀"
+          }
+        }]
       };
     }
 
