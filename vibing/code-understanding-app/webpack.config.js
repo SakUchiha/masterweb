@@ -12,10 +12,10 @@ module.exports = {
     // No entry points needed - files are already built
   },
   output: {
-    path: path.resolve(__dirname, "frontend"),
+    path: path.resolve(__dirname, "dist"),
     filename: "js/[name].[contenthash].js",
-    clean: false, // Don't clean to preserve existing files
-    publicPath: '',
+    clean: true,
+    publicPath: '/',
     globalObject: 'this',
   },
   module: {
@@ -52,15 +52,20 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ['**/*', '!index.html', '!lessons.html', '!editor.html']
+      cleanOnceBeforeBuildPatterns: ['**/*']
     }),
-    // Files are already built and in frontend/ directory
-    // No need to copy anything during Vercel build
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: "*.html", to: "[name][ext]" },
+        { from: "css/*.css", to: "css/[name][ext]" },
+        { from: "js/*.js", to: "js/[name][ext]" },
+        { from: "favicon.ico", to: "[name][ext]" },
+        { from: "manifest.json", to: "[name][ext]" }
+      ]
+    }),
     new MiniCssExtractPlugin({
       filename: "css/[name].[contenthash].css",
     }),
-    // HTML files are already built and in frontend/ directory
-    // No need to regenerate them during build
   ],
   optimization: {
     minimize: true,

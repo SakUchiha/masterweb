@@ -1,85 +1,496 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KidLearner - Study Guide (Cache Test)</title><link rel="icon" type="image/x-icon" href="favicon.ico"><link rel="apple-touch-icon" href="favicon.ico"><link rel="stylesheet" href="css/styles.css"><link rel="stylesheet" href="css/study-guide-fixes.css"><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"><script src="js/theme.js"></script><script src="js/navigation.js"></script><style>.study-guide {
-      padding: 4rem 0;
-      background: #f8f9fa;
-    }
-    
-    .guide-section {
-      background: white;
-      margin: 2rem 0;
-      padding: 2rem;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-    
-    .guide-section h2 {
-      color: #667eea;
-      margin-bottom: 1.5rem;
-      font-size: 1.8rem;
-    }
-    
-    .guide-section h3 {
-      color: #333;
-      margin: 1.5rem 0 1rem 0;
-      font-size: 1.3rem;
-    }
-    
-    .guide-section ul {
-      margin: 1rem 0;
-      padding-left: 1.5rem;
-    }
-    
-    .guide-section li {
-      margin: 0.5rem 0;
-      line-height: 1.6;
-    }
-    
-    .code-snippet {
-      background: #2d3748;
-      color: #e2e8f0;
-      padding: 1rem;
-      border-radius: 8px;
-      font-family: 'Courier New', monospace;
-      margin: 1rem 0;
-      overflow-x: auto;
-    }
-    
-    .tip-box {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 1.5rem;
-      border-radius: 10px;
-      margin: 1.5rem 0;
-    }
-    
-    .tip-box h4 {
-      margin: 0 0 0.5rem 0;
-      font-size: 1.1rem;
-    }
-    
-    .quick-reference {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin: 2rem 0;
-    }
-    
-    .reference-card {
-      background: white;
-      padding: 1.5rem;
-      border-radius: 10px;
-      border-left: 4px solid #667eea;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    }
-    
-    .reference-card h4 {
-      color: #667eea;
-      margin: 0 0 1rem 0;
-    }
-    
-    .reference-card code {
-      background: #f8f9fa;
-      padding: 0.2rem 0.4rem;
-      border-radius: 3px;
-      font-family: 'Courier New', monospace;
-      color: #e83e8c;
-    }</style><script defer="defer" src="js/main.af2be9ee32bb8a5b9f37.js"></script><script defer="defer" src="js/app.3c3d3a5959c970f18af0.js"></script><script defer="defer" src="js/ui.f949bd7b08304618e339.js"></script></head><body><header class="main-header"><div class="container"><div class="logo"><i class="fas fa-code"></i><h1>KidLearner</h1></div><nav class="main-nav"><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home </a><a href="lessons.html" class="nav-link"><i class="fas fa-book"></i> Lessons </a><a href="study-guide.html" class="nav-link active"><i class="fas fa-file-lines"></i> Study Guide </a><a href="editor.html" class="nav-link"><i class="fas fa-code"></i> Code Editor </a><a href="ai.html" class="nav-link"><i class="fas fa-robot"></i> AI Assistant</a></nav></div></header><section class="study-guide"><div class="container"><div class="guide-section"><h2><i class="fas fa-graduation-cap"></i> Web Development Study Guide</h2><p>This comprehensive guide covers the fundamentals of HTML, CSS, and JavaScript. Use it as a reference while learning or as a quick lookup during coding.</p></div><div class="guide-section"><h2><i class="fab fa-html5"></i> HTML Fundamentals</h2><h3>What is HTML?</h3><p>HTML (HyperText Markup Language) is the standard markup language for creating web pages. It describes the structure of a web page using markup.</p><h3>Basic HTML Structure</h3><div class="code-snippet">&lt;!DOCTYPE html&gt; &lt;html lang="en"&gt; &lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;title&gt;My Web Page&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;h1&gt;Hello World!&lt;/h1&gt; &lt;p&gt;This is a paragraph.&lt;/p&gt; &lt;/body&gt; &lt;/html&gt;</div><h3>Common HTML Tags</h3><div class="quick-reference"><div class="reference-card"><h4>Text Elements</h4><ul><li><code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code> - Headings</li><li><code>&lt;p&gt;</code> - Paragraphs</li><li><code>&lt;strong&gt;</code> - Bold text</li><li><code>&lt;em&gt;</code> - Italic text</li></ul></div><div class="reference-card"><h4>Structure Elements</h4><ul><li><code>&lt;div&gt;</code> - Container</li><li><code>&lt;span&gt;</code> - Inline container</li><li><code>&lt;header&gt;</code> - Page header</li><li><code>&lt;main&gt;</code> - Main content</li><li><code>&lt;footer&gt;</code> - Page footer</li></ul></div><div class="reference-card"><h4>Interactive Elements</h4><ul><li><code>&lt;a href="url"&gt;</code> - Links</li><li><code>&lt;img src="image.jpg" alt="description"&gt;</code> - Images</li><li><code>&lt;button&gt;</code> - Buttons</li><li><code>&lt;input&gt;</code> - Form inputs</li></ul></div></div><div class="tip-box"><h4><i class="fas fa-lightbulb"></i> Pro Tip</h4><p>Always include the <code>alt</code> attribute for images to make your website accessible to screen readers.</p></div></div><div class="guide-section"><h2><i class="fab fa-css3-alt"></i> CSS Styling</h2><h3>What is CSS?</h3><p>CSS (Cascading Style Sheets) controls the visual appearance of HTML elements. It allows you to style colors, fonts, layouts, and more.</p><h3>CSS Syntax</h3><div class="code-snippet">selector { property: value; property: value; } /* Example */ h1 { color: blue; font-size: 24px; text-align: center; }</div><h3>CSS Selectors</h3><div class="quick-reference"><div class="reference-card"><h4>Element Selectors</h4><ul><li><code>h1</code> - All h1 elements</li><li><code>p</code> - All paragraph elements</li><li><code>div</code> - All div elements</li></ul></div><div class="reference-card"><h4>Class & ID Selectors</h4><ul><li><code>.classname</code> - Elements with class</li><li><code>#idname</code> - Element with ID</li><li><code>div.classname</code> - Div with class</li></ul></div><div class="reference-card"><h4>Common Properties</h4><ul><li><code>color</code> - Text color</li><li><code>background-color</code> - Background</li><li><code>font-size</code> - Text size</li><li><code>margin</code> - Outer spacing</li><li><code>padding</code> - Inner spacing</li></ul></div></div><div class="tip-box"><h4><i class="fas fa-lightbulb"></i> Pro Tip</h4><p>Use the CSS box model to understand how margin, border, padding, and content work together to create spacing.</p></div></div><div class="guide-section"><h2><i class="fab fa-js-square"></i> JavaScript Programming</h2><h3>What is JavaScript?</h3><p>JavaScript is a programming language that adds interactivity to web pages. It can respond to user actions and manipulate page content.</p><h3>Basic JavaScript Syntax</h3><div class="code-snippet">// Variables let name = "John"; const age = 25; var city = "New York"; // Functions function greet(name) { return "Hello, " + name + "!"; } // Event handling document.getElementById("myButton").onclick = function() { alert("Button clicked!"); };</div><h3>JavaScript Concepts</h3><div class="quick-reference"><div class="reference-card"><h4>Data Types</h4><ul><li><code>let num = 42;</code> - Numbers</li><li><code>let text = "Hello";</code> - Strings</li><li><code>let flag = true;</code> - Booleans</li><li><code>let arr = [1, 2, 3];</code> - Arrays</li></ul></div><div class="reference-card"><h4>DOM Manipulation</h4><ul><li><code>getElementById()</code> - Get element by ID</li><li><code>innerHTML</code> - Change content</li><li><code>style.property</code> - Change styles</li><li><code>addEventListener()</code> - Add events</li></ul></div><div class="reference-card"><h4>Common Events</h4><ul><li><code>onclick</code> - Mouse click</li><li><code>onload</code> - Page loads</li><li><code>onchange</code> - Input changes</li><li><code>onkeydown</code> - Key pressed</li></ul></div></div><div class="tip-box"><h4><i class="fas fa-lightbulb"></i> Pro Tip</h4><p>Always use <code>let</code> or <code>const</code> instead of <code>var</code> for better variable scoping and to avoid common JavaScript pitfalls.</p></div></div><div class="guide-section"><h2><i class="fas fa-star"></i> Best Practices</h2><h3>HTML Best Practices</h3><ul><li>Use semantic HTML elements (header, main, article, footer)</li><li>Always include alt attributes for images</li><li>Use proper heading hierarchy (h1, h2, h3, etc.)</li><li>Validate your HTML code</li></ul><h3>CSS Best Practices</h3><ul><li>Use external stylesheets for better organization</li><li>Follow a consistent naming convention (like BEM)</li><li>Use CSS Grid and Flexbox for layouts</li><li>Write mobile-first responsive designs</li></ul><h3>JavaScript Best Practices</h3><ul><li>Use meaningful variable and function names</li><li>Comment your code for complex logic</li><li>Handle errors gracefully with try-catch</li><li>Test your code in different browsers</li></ul></div><div class="guide-section"><h2><i class="fas fa-bookmark"></i> Additional Resources</h2><h3>Online Documentation</h3><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">MDN HTML Documentation</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">MDN CSS Documentation</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">MDN JavaScript Documentation</a></li></ul><h3>Practice Tools</h3><ul><li><a href="editor.html">KidLearner Code Editor</a> - Practice coding with auto-run</li><li><a href="ai.html">AI Assistant</a> - Get help with your code</li><li><a href="lessons.html">Interactive Lessons</a> - Step-by-step tutorials</li></ul></div></div></section><footer class="main-footer"><div class="container"><div class="footer-content"><div class="footer-section"><h3>KidLearner</h3><p>Interactive web development learning platform</p></div><div class="footer-section"><h4>Learn</h4><ul><li><a href="lessons.html">HTML Lessons</a></li><li><a href="lessons.html">CSS Lessons</a></li><li><a href="lessons.html">JavaScript Lessons</a></li></ul></div><div class="footer-section"><h4>Tools</h4><ul><li><a href="editor.html">Code Editor</a></li><li><a href="ai.html">AI Assistant</a></li><li><a href="study-guide.html">Study Guide</a></li></ul></div><div class="footer-section"><h4>Support</h4><ul><li><a href="ai.html">Get Help</a></li><li><a href="editor.html">Practice</a></li><li><a href="lessons.html">Tutorials</a></li></ul></div></div><div class="footer-bottom"><p>&copy; 2025 KidLearner. Made with Software Development for learners.</p></div></div></footer></body></html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self' 'unsafe-inline' blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; connect-src 'self' http://localhost:4000 http://127.0.0.1:4000 ws://localhost:4000 ws://127.0.0.1:4000 https://*.vercel.app; frame-src 'self' blob: data:;"
+    />
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>Study Guide - Code Understanding</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="apple-touch-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="/css/styles.css?v=2025.10.27.1" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .study-guide-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      .study-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .study-header h1 {
+        color: #2d3748;
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .study-header p {
+        color: #666;
+        font-size: 1.1rem;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .study-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .study-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .study-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .study-card-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1.5rem;
+        text-align: center;
+      }
+
+      .study-card-header i {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        display: block;
+      }
+
+      .study-card-header h3 {
+        margin: 0;
+        font-size: 1.3rem;
+      }
+
+      .study-card-content {
+        padding: 1.5rem;
+      }
+
+      .study-card-content p {
+        color: #666;
+        margin-bottom: 1rem;
+        line-height: 1.6;
+      }
+
+      .study-topics {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .study-topics li {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #f0f0f0;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .study-topics li:last-child {
+        border-bottom: none;
+      }
+
+      .study-topics li i {
+        color: #667eea;
+        width: 16px;
+      }
+
+      .study-progress {
+        margin-top: 2rem;
+        padding: 2rem;
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        border-radius: 12px;
+        color: white;
+        text-align: center;
+      }
+
+      .study-progress h2 {
+        margin: 0 0 1rem 0;
+        font-size: 1.8rem;
+      }
+
+      .progress-stats {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .progress-stat {
+        text-align: center;
+      }
+
+      .progress-stat .number {
+        font-size: 2rem;
+        font-weight: bold;
+        display: block;
+      }
+
+      .progress-stat .label {
+        font-size: 0.9rem;
+        opacity: 0.9;
+      }
+
+      .progress-bar {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        height: 8px;
+        overflow: hidden;
+        margin: 1rem 0;
+      }
+
+      .progress-fill {
+        background: white;
+        height: 100%;
+        border-radius: 10px;
+        width: 65%;
+        transition: width 0.3s ease;
+      }
+
+      .quick-actions {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+      }
+
+      .action-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        cursor: pointer;
+        border: 2px solid transparent;
+      }
+
+      .action-card:hover {
+        transform: translateY(-3px);
+        border-color: #667eea;
+      }
+
+      .action-card i {
+        font-size: 2rem;
+        color: #667eea;
+        margin-bottom: 1rem;
+        display: block;
+      }
+
+      .action-card h4 {
+        margin: 0 0 0.5rem 0;
+        color: #2d3748;
+      }
+
+      .action-card p {
+        color: #666;
+        margin: 0;
+        font-size: 0.9rem;
+      }
+
+      .study-tips {
+        background: #f8f9fa;
+        border-radius: 12px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .study-tips h3 {
+        color: #2d3748;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .tips-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1rem;
+      }
+
+      .tip-item {
+        background: white;
+        padding: 1rem;
+        border-radius: 8px;
+        border-left: 4px solid #667eea;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+
+      .tip-item h5 {
+        margin: 0 0 0.5rem 0;
+        color: #2d3748;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .tip-item p {
+        margin: 0;
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 768px) {
+        .study-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .progress-stats {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .quick-actions {
+          grid-template-columns: 1fr;
+        }
+
+        .tips-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Header -->
+    <header class="main-header">
+      <div class="container">
+        <div class="logo">
+          <i class="fas fa-code"></i>
+          <h1>KidLearner</h1>
+        </div>
+        <nav class="main-nav">
+          <a href="index.html" class="nav-link">
+            <i class="fas fa-home"></i> Home
+          </a>
+          <a href="lessons.html" class="nav-link">
+            <i class="fas fa-book"></i> Lessons
+          </a>
+          <a href="study-guide.html" class="nav-link active">
+            <i class="fas fa-file-lines"></i> Study Guide
+          </a>
+          <a href="editor.html" class="nav-link">
+            <i class="fas fa-code"></i> Code Runner
+          </a>
+          <a href="ai.html" class="nav-link">
+            <i class="fas fa-robot"></i> AI Assistant
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="study-guide-container">
+      <div class="study-header">
+        <h1><i class="fas fa-graduation-cap"></i> Study Guide</h1>
+        <p>Your comprehensive roadmap to mastering HTML, CSS, and JavaScript. Track your progress and get expert tips for effective learning.</p>
+      </div>
+
+      <!-- Progress Section -->
+      <div class="study-progress">
+        <h2><i class="fas fa-chart-line"></i> Your Learning Progress</h2>
+        <div class="progress-stats">
+          <div class="progress-stat">
+            <span class="number" id="completedLessons">12</span>
+            <span class="label">Lessons Completed</span>
+          </div>
+          <div class="progress-stat">
+            <span class="number" id="hoursStudied">28</span>
+            <span class="label">Hours Studied</span>
+          </div>
+          <div class="progress-stat">
+            <span class="number" id="projectsBuilt">5</span>
+            <span class="label">Projects Built</span>
+          </div>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p><strong>65% Complete</strong> - Keep up the great work! You're making excellent progress.</p>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="quick-actions">
+        <div class="action-card" onclick="startNextLesson()">
+          <i class="fas fa-play-circle"></i>
+          <h4>Continue Learning</h4>
+          <p>Pick up where you left off with your next lesson</p>
+        </div>
+        <div class="action-card" onclick="openPractice()">
+          <i class="fas fa-code"></i>
+          <h4>Practice Mode</h4>
+          <p>Test your skills with interactive coding challenges</p>
+        </div>
+        <div class="action-card" onclick="viewProjects()">
+          <i class="fas fa-project-diagram"></i>
+          <h4>View Projects</h4>
+          <p>See example projects and get inspired</p>
+        </div>
+        <div class="action-card" onclick="getHelp()">
+          <i class="fas fa-question-circle"></i>
+          <h4>Get Help</h4>
+          <p>Ask the AI assistant for personalized guidance</p>
+        </div>
+      </div>
+
+      <!-- Study Topics Grid -->
+      <div class="study-grid">
+        <div class="study-card">
+          <div class="study-card-header">
+            <i class="fas fa-code"></i>
+            <h3>HTML Fundamentals</h3>
+          </div>
+          <div class="study-card-content">
+            <p>Master the building blocks of web pages with semantic HTML5 elements and proper document structure.</p>
+            <ul class="study-topics">
+              <li><i class="fas fa-check-circle"></i> HTML Document Structure</li>
+              <li><i class="fas fa-check-circle"></i> Semantic Elements</li>
+              <li><i class="fas fa-check-circle"></i> Forms and Input Types</li>
+              <li><i class="fas fa-clock"></i> Tables and Lists</li>
+              <li><i class="fas fa-clock"></i> Multimedia Elements</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="study-card">
+          <div class="study-card-header">
+            <i class="fas fa-palette"></i>
+            <h3>CSS Styling</h3>
+          </div>
+          <div class="study-card-content">
+            <p>Learn modern CSS techniques including Flexbox, Grid, animations, and responsive design principles.</p>
+            <ul class="study-topics">
+              <li><i class="fas fa-check-circle"></i> CSS Selectors and Properties</li>
+              <li><i class="fas fa-check-circle"></i> Box Model and Layout</li>
+              <li><i class="fas fa-clock"></i> Flexbox and Grid Systems</li>
+              <li><i class="fas fa-clock"></i> Responsive Design</li>
+              <li><i class="fas fa-clock"></i> CSS Animations</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="study-card">
+          <div class="study-card-header">
+            <i class="fas fa-bolt"></i>
+            <h3>JavaScript Programming</h3>
+          </div>
+          <div class="study-card-content">
+            <p>Master JavaScript fundamentals, DOM manipulation, and modern ES6+ features for interactive web applications.</p>
+            <ul class="study-topics">
+              <li><i class="fas fa-check-circle"></i> Variables and Data Types</li>
+              <li><i class="fas fa-check-circle"></i> Functions and Scope</li>
+              <li><i class="fas fa-clock"></i> DOM Manipulation</li>
+              <li><i class="fas fa-clock"></i> Event Handling</li>
+              <li><i class="fas fa-clock"></i> Asynchronous Programming</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="study-card">
+          <div class="study-card-header">
+            <i class="fas fa-rocket"></i>
+            <h3>Advanced Topics</h3>
+          </div>
+          <div class="study-card-content">
+            <p>Take your skills to the next level with advanced concepts and modern development practices.</p>
+            <ul class="study-topics">
+              <li><i class="fas fa-clock"></i> API Integration</li>
+              <li><i class="fas fa-clock"></i> State Management</li>
+              <li><i class="fas fa-clock"></i> Performance Optimization</li>
+              <li><i class="fas fa-clock"></i> Testing and Debugging</li>
+              <li><i class="fas fa-clock"></i> Deployment and Hosting</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Study Tips -->
+      <div class="study-tips">
+        <h3><i class="fas fa-lightbulb"></i> Expert Study Tips</h3>
+        <div class="tips-grid">
+          <div class="tip-item">
+            <h5><i class="fas fa-clock"></i> Consistent Practice</h5>
+            <p>Code every day, even if it's just 30 minutes. Consistency beats intensity when learning programming.</p>
+          </div>
+          <div class="tip-item">
+            <h5><i class="fas fa-project-diagram"></i> Build Projects</h5>
+            <p>Apply what you learn by building real projects. Start small and gradually increase complexity.</p>
+          </div>
+          <div class="tip-item">
+            <h5><i class="fas fa-users"></i> Join Communities</h5>
+            <p>Connect with other learners on platforms like Stack Overflow, Reddit, and GitHub. Teaching others reinforces your knowledge.</p>
+          </div>
+          <div class="tip-item">
+            <h5><i class="fas fa-bug"></i> Embrace Debugging</h5>
+            <p>Errors are learning opportunities. Learn to read error messages and use debugging tools effectively.</p>
+          </div>
+          <div class="tip-item">
+            <h5><i class="fas fa-book"></i> Read Documentation</h5>
+            <p>Get comfortable reading official documentation. MDN Web Docs is your best friend for web development.</p>
+          </div>
+          <div class="tip-item">
+            <h5><i class="fas fa-refresh"></i> Review Regularly</h5>
+            <p>Regularly review previously learned concepts. Spaced repetition helps with long-term retention.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Study guide functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        console.log('Study Guide page loaded');
+
+        // Initialize progress animation
+        setTimeout(() => {
+          const progressFill = document.getElementById('progressFill');
+          if (progressFill) {
+            progressFill.style.width = '65%';
+          }
+        }, 500);
+
+        // Add click handlers for action cards
+        window.startNextLesson = function() {
+          window.location.href = 'lessons.html';
+        };
+
+        window.openPractice = function() {
+          window.location.href = 'editor.html';
+        };
+
+        window.viewProjects = function() {
+          // Could link to a projects page or section
+          alert('Projects section coming soon!');
+        };
+
+        window.getHelp = function() {
+          window.location.href = 'ai.html';
+        };
+      });
+    </script>
+
+    <script src="/js/theme.js"></script>
+    <script src="/js/navigation.js"></script>
+  </body>
+</html>
