@@ -115,9 +115,9 @@ module.exports = {
   resolve: {
     extensions: [".js", ".json"],
     alias: {
-      "@": path.resolve(__dirname, "frontend/js"),
-      "@css": path.resolve(__dirname, "frontend/css"),
-      "@data": path.resolve(__dirname, "frontend/data"),
+      "@": path.resolve(__dirname, "dist/js"),
+      "@css": path.resolve(__dirname, "dist/css"),
+      "@data": path.resolve(__dirname, "dist/data"),
     },
   },
   devtool: false, // Disable source maps for production
