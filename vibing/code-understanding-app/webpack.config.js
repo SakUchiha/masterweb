@@ -6,11 +6,14 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-module.exports = {
-  mode: "production",
-  entry: {
-    // No entry points needed - files are already built
-  },
+module.exports = (env, argv) => {
+  const isDevelopment = argv.mode === 'development';
+
+  return {
+    mode: isDevelopment ? "development" : "production",
+    entry: {
+      // No entry points needed - files are already built
+    },
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "js/[name].[contenthash].js",
@@ -120,10 +123,29 @@ module.exports = {
       "@data": path.resolve(__dirname, "dist/data"),
     },
   },
-  devtool: false, // Disable source maps for production
+  devtool: isDevelopment ? 'eval-source-map' : false,
   performance: {
     hints: "warning",
     maxEntrypointSize: 512000,
     maxAssetSize: 512000,
   },
+  devServer: isDevelopment ? {
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    compress: true,
+    port: 3002,
+    hot: true,
+    open: false,
+    historyApiFallback: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:4000',
+        changeOrigin: true,
+        secure: false,
+        logLevel: 'debug'
+      }
+    }
+  } : undefined,
+  };
 };
