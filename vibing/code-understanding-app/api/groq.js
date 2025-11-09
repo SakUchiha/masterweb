@@ -160,67 +160,6 @@ Keep it concise, friendly, and educational.`;
     }
 
     res.json(response);
-    let response;
-
-    if (code && language) {
-      // Code explanation
-      response = {
-        response: `AI Analysis for ${language.toUpperCase()}:\n\n${code}\n\n**Key Points:**\n• This code demonstrates ${language} syntax\n• Best practices are followed\n• Consider error handling for production use\n\n**Suggestions:**\n• Add comments for clarity\n• Consider performance optimizations\n• Test edge cases thoroughly`,
-        explanation: `Professional code analysis for ${language} code.`
-      };
-    } else if (messages && messages.length > 0) {
-      // Chat interaction
-      const userMessage = messages[messages.length - 1]?.content || '';
-
-      if (userMessage.toLowerCase().includes('html')) {
-        response = {
-          response: "**HTML Best Practices Guide**\n\n**Semantic HTML:**\n• Use `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<aside>`, `<footer>`\n• Choose semantic elements over generic `<div>`\n\n**Accessibility:**\n• Add `alt` attributes to images\n• Use proper heading hierarchy (h1→h2→h3)\n• Ensure sufficient color contrast\n\n**Performance:**\n• Minimize DOM depth\n• Use CSS for styling, not inline styles\n• Optimize images and media\n\n**What specific HTML topic would you like to explore?** 🎯",
-          choices: [{
-            message: {
-              content: "**HTML Best Practices Guide**\n\n**Semantic HTML:**\n• Use `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<aside>`, `<footer>`\n• Choose semantic elements over generic `<div>`\n\n**Accessibility:**\n• Add `alt` attributes to images\n• Use proper heading hierarchy (h1→h2→h3)\n• Ensure sufficient color contrast\n\n**Performance:**\n• Minimize DOM depth\n• Use CSS for styling, not inline styles\n• Optimize images and media\n\n**What specific HTML topic would you like to explore?** 🎯"
-            }
-          }]
-        };
-      } else if (userMessage.toLowerCase().includes('css')) {
-        response = {
-          response: "**CSS Mastery Guide**\n\n**Layout Systems:**\n• **Flexbox**: Perfect for 1D layouts (rows/columns)\n• **Grid**: Powerful for 2D layouts\n• **Floats**: Legacy, avoid for new projects\n\n**Responsive Design:**\n• Mobile-first approach\n• Use `rem`/`em` for scalable typography\n• Media queries for breakpoints\n\n**Modern CSS:**\n• CSS Variables for theming\n• CSS Grid for complex layouts\n• Flexbox for component alignment\n\n**Performance Tips:**\n• Minimize repaints/reflows\n• Use `transform` for animations\n• Optimize selectors\n\n**Which CSS concept interests you most?** 🎨",
-          choices: [{
-            message: {
-              content: "**CSS Mastery Guide**\n\n**Layout Systems:**\n• **Flexbox**: Perfect for 1D layouts (rows/columns)\n• **Grid**: Powerful for 2D layouts\n• **Floats**: Legacy, avoid for new projects\n\n**Responsive Design:**\n• Mobile-first approach\n• Use `rem`/`em` for scalable typography\n• Media queries for breakpoints\n\n**Modern CSS:**\n• CSS Variables for theming\n• CSS Grid for complex layouts\n• Flexbox for component alignment\n\n**Performance Tips:**\n• Minimize repaints/reflows\n• Use `transform` for animations\n• Optimize selectors\n\n**Which CSS concept interests you most?** 🎨"
-            }
-          }]
-        };
-      } else if (userMessage.toLowerCase().includes('javascript') || userMessage.toLowerCase().includes('js')) {
-        response = {
-          response: "**JavaScript Development Guide**\n\n**Core Concepts:**\n• **Variables**: `const`/`let` vs `var`\n• **Functions**: Arrow functions, closures\n• **Objects**: Prototypes, classes\n• **Arrays**: Methods, iteration\n\n**Modern JavaScript:**\n• **ES6+ Features**: Destructuring, spread/rest\n• **Async/Await**: Clean async code\n• **Modules**: Import/export system\n• **Promises**: Async programming\n\n**Best Practices:**\n• Use `const` by default\n• Prefer arrow functions\n• Handle errors properly\n• Write clean, readable code\n\n**Debugging Tips:**\n• Use browser dev tools\n• Console.log strategically\n• Learn debugging techniques\n\n**What JavaScript topic shall we explore?** ⚡",
-          choices: [{
-            message: {
-              content: "**JavaScript Development Guide**\n\n**Core Concepts:**\n• **Variables**: `const`/`let` vs `var`\n• **Functions**: Arrow functions, closures\n• **Objects**: Prototypes, classes\n• **Arrays**: Methods, iteration\n\n**Modern JavaScript:**\n• **ES6+ Features**: Destructuring, spread/rest\n• **Async/Await**: Clean async code\n• **Modules**: Import/export system\n• **Promises**: Async programming\n\n**Best Practices:**\n• Use `const` by default\n• Prefer arrow functions\n• Handle errors properly\n• Write clean, readable code\n\n**Debugging Tips:**\n• Use browser dev tools\n• Console.log strategically\n• Learn debugging techniques\n\n**What JavaScript topic shall we explore?** ⚡"
-            }
-          }]
-        };
-      } else {
-        response = {
-          response: "**Welcome to KidLearner AI Assistant! 🤖**\n\nI'm here to help you learn HTML, CSS, and JavaScript through interactive coding lessons. I can:\n\n**Code Help:**\n• Explain code snippets\n• Debug errors\n• Suggest improvements\n• Teach best practices\n\n**Learning Support:**\n• Answer questions about web development\n• Provide step-by-step tutorials\n• Recommend learning resources\n• Help with projects\n\n**Available Topics:**\n• **HTML**: Structure and semantics\n• **CSS**: Styling and layouts\n• **JavaScript**: Interactivity and logic\n\n**What would you like to learn today?** Feel free to ask me anything about web development! 🚀",
-          choices: [{
-            message: {
-              content: "**Welcome to KidLearner AI Assistant! 🤖**\n\nI'm here to help you learn HTML, CSS, and JavaScript through interactive coding lessons. I can:\n\n**Code Help:**\n• Explain code snippets\n• Debug errors\n• Suggest improvements\n• Teach best practices\n\n**Learning Support:**\n• Answer questions about web development\n• Provide step-by-step tutorials\n• Recommend learning resources\n• Help with projects\n\n**Available Topics:**\n• **HTML**: Structure and semantics\n• **CSS**: Styling and layouts\n• **JavaScript**: Interactivity and logic\n\n**What would you like to learn today?** Feel free to ask me anything about web development! 🚀"
-            }
-          }]
-        };
-      }
-    } else {
-      response = {
-        response: "**Welcome to KidLearner AI Assistant! 🤖**\n\nI'm here to help you learn HTML, CSS, and JavaScript through interactive coding lessons. I can:\n\n**Code Help:**\n• Explain code snippets\n• Debug errors\n• Suggest improvements\n• Teach best practices\n\n**Learning Support:**\n• Answer questions about web development\n• Provide step-by-step tutorials\n• Recommend learning resources\n• Help with projects\n\n**Available Topics:**\n• **HTML**: Structure and semantics\n• **CSS**: Styling and layouts\n• **JavaScript**: Interactivity and logic\n\n**What would you like to learn today?** Feel free to ask me anything about web development! 🚀",
-        choices: [{
-          message: {
-            content: "**Welcome to KidLearner AI Assistant! 🤖**\n\nI'm here to help you learn HTML, CSS, and JavaScript through interactive coding lessons. I can:\n\n**Code Help:**\n• Explain code snippets\n• Debug errors\n• Suggest improvements\n• Teach best practices\n\n**Learning Support:**\n• Answer questions about web development\n• Provide step-by-step tutorials\n• Recommend learning resources\n• Help with projects\n\n**Available Topics:**\n• **HTML**: Structure and semantics\n• **CSS**: Styling and layouts\n• **JavaScript**: Interactivity and logic\n\n**What would you like to learn today?** Feel free to ask me anything about web development! 🚀"
-          }
-        }]
-      };
-    }
-
-    res.json(response);
 
   } catch (error) {
     console.error('Groq API Error:', error);
