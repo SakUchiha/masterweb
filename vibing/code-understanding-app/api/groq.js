@@ -61,8 +61,105 @@ router.post('/', async (req, res) => {
       return res.json(mockResponse);
     }
 
-    // Real Groq API integration would go here
-    // For now, return enhanced mock responses
+    // Real Groq API integration
+    const Groq = require('groq-sdk');
+    const groq = new Groq({
+      apiKey: groqApiKey,
+    });
+
+    let response;
+
+    if (code && language) {
+      // Code explanation using real Groq API
+      const prompt = `You are an expert ${language} developer and educator. Analyze this ${language} code and provide a clear, educational explanation:
+
+${code}
+
+Please provide:
+1. What this code does
+2. Key concepts demonstrated
+3. Best practices shown or that could be applied
+4. Any suggestions for improvement
+5. Educational insights for learning ${language}
+
+Keep your response helpful, encouraging, and focused on teaching web development concepts.`;
+
+      const completion = await groq.chat.completions.create({
+        messages: [{ role: 'user', content: prompt }],
+        model: model || 'llama-3.1-8b-instant',
+        temperature: 0.3,
+        max_tokens: 1000,
+      });
+
+      response = {
+        response: completion.choices[0]?.message?.content || 'Unable to generate explanation',
+        explanation: `AI-powered analysis of ${language} code`
+      };
+    } else if (messages && messages.length > 0) {
+      // Chat interaction using real Groq API
+      const userMessage = messages[messages.length - 1]?.content || '';
+
+      const systemPrompt = `You are Professor Groq, an expert web development educator specializing in HTML, CSS, and JavaScript. Your role is to:
+
+1. Teach web development concepts clearly and patiently
+2. Provide practical, working code examples
+3. Explain complex topics in simple, digestible steps
+4. Encourage best practices and modern techniques
+5. Help debug code issues with clear explanations
+6. Suggest improvements and optimizations
+7. Be encouraging and supportive to learners
+
+Always format your responses with proper markdown, code blocks, and clear structure. Use emojis sparingly but effectively. Focus on being educational and helpful.
+
+Current user question: ${userMessage}`;
+
+      const completion = await groq.chat.completions.create({
+        messages: [
+          { role: 'system', content: systemPrompt },
+          ...messages.slice(-5) // Keep last 5 messages for context
+        ],
+        model: model || 'llama-3.1-8b-instant',
+        temperature: 0.7,
+        max_tokens: 1500,
+      });
+
+      response = {
+        response: completion.choices[0]?.message?.content || 'Unable to generate response',
+        choices: [{
+          message: {
+            content: completion.choices[0]?.message?.content || 'Unable to generate response'
+          }
+        }]
+      };
+    } else {
+      // Default welcome message using real Groq API
+      const welcomePrompt = `You are Professor Groq, a friendly and expert web development educator. Create a welcoming introduction for new students learning HTML, CSS, and JavaScript. Include:
+
+1. A warm greeting
+2. What you can help with
+3. Available topics
+4. Encouragement to start learning
+
+Keep it concise, friendly, and educational.`;
+
+      const completion = await groq.chat.completions.create({
+        messages: [{ role: 'user', content: welcomePrompt }],
+        model: model || 'llama-3.1-8b-instant',
+        temperature: 0.8,
+        max_tokens: 500,
+      });
+
+      response = {
+        response: completion.choices[0]?.message?.content || 'Welcome to KidLearner AI Assistant!',
+        choices: [{
+          message: {
+            content: completion.choices[0]?.message?.content || 'Welcome to KidLearner AI Assistant!'
+          }
+        }]
+      };
+    }
+
+    res.json(response);
     let response;
 
     if (code && language) {
