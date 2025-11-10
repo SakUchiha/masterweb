@@ -40,10 +40,18 @@
       }
 
       .study-header p {
-        color: #666;
+        color: #000;
         font-size: 1.1rem;
         max-width: 600px;
         margin: 0 auto;
+      }
+
+      .study-card-content p {
+        color: #000;
+        margin-bottom: 1rem;
+        line-height: 1.6;
+        font-size: 1.1rem;
+        font-weight: 500;
       }
 
       .study-grid {
@@ -53,17 +61,315 @@
         margin-bottom: 3rem;
       }
 
+      .lessons-section {
+        margin-bottom: 3rem;
+      }
+
+      .lessons-section h2 {
+        text-align: center;
+        color: #2d3748;
+        font-size: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .filter-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .filter-btn {
+        padding: 0.75rem 1.5rem;
+        border: 2px solid #667eea;
+        background: white;
+        color: #667eea;
+        border-radius: 25px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: #667eea;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+      }
+
+      .lessons-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .lesson-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+      }
+
+      .lesson-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .lesson-card-inner {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .lesson-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 1.5rem 1rem;
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      .lesson-category {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      .lesson-category i {
+        font-size: 1rem;
+      }
+
+      .lesson-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-end;
+      }
+
+      .duration,
+      .difficulty {
+        font-size: 0.8rem;
+        color: #666;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      .difficulty.beginner {
+        color: #28a745;
+      }
+
+      .difficulty.intermediate {
+        color: #ffc107;
+      }
+
+      .difficulty.advanced {
+        color: #dc3545;
+      }
+
+      .lesson-content {
+        padding: 1.5rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .lesson-content h3 {
+        color: #2d3748;
+        margin: 0 0 1rem 0;
+        font-size: 1.3rem;
+      }
+
+      .lesson-summary,
+      .lesson-description {
+        color: #666;
+        margin-bottom: 1rem;
+        line-height: 1.6;
+      }
+
+      .lesson-summary {
+        font-weight: 500;
+        color: #444;
+      }
+
+      .learning-objectives {
+        margin: 1rem 0;
+      }
+
+      .learning-objectives h4 {
+        color: #2d3748;
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+      }
+
+      .learning-objectives ul {
+        margin: 0;
+        padding-left: 1.2rem;
+      }
+
+      .learning-objectives li {
+        color: #333;
+        margin-bottom: 0.25rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+        line-height: 1.4;
+      }
+
+      .progress-container {
+        margin-top: auto;
+        margin-bottom: 1rem;
+      }
+
+      .progress-bar {
+        background: #e9ecef;
+        border-radius: 10px;
+        height: 8px;
+        overflow: hidden;
+        margin-bottom: 0.5rem;
+      }
+
+      .progress-bar div {
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        height: 100%;
+        border-radius: 10px;
+        transition: width 0.3s ease;
+      }
+
+      .progress-text {
+        font-size: 0.8rem;
+        color: #666;
+        text-align: center;
+        display: block;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+
+      .btn-primary {
+        background: #667eea;
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: #5a67d8;
+        transform: translateY(-2px);
+      }
+
+      .start-lesson {
+        width: 100%;
+        margin-top: auto;
+      }
+
+      .loading-state,
+      .error-state {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 3rem;
+      }
+
+      .loading-state .spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #667eea;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 1rem;
+      }
+
+      .error-state i {
+        font-size: 3rem;
+        color: #dc3545;
+        margin-bottom: 1rem;
+        display: block;
+      }
+
+      .skeleton-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .skeleton {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+      }
+
+      .skeleton-title {
+        height: 24px;
+        width: 70%;
+      }
+
+      .skeleton-text {
+        height: 16px;
+        width: 100%;
+      }
+
+      .skeleton-text:nth-child(3) {
+        width: 60%;
+      }
+
+      .no-lessons {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 3rem;
+        color: #666;
+        font-style: italic;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      @keyframes loading {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+
       .study-card {
         background: white;
         border-radius: 12px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         overflow: hidden;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 2px solid transparent;
       }
 
       .study-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        border-color: #667eea;
       }
 
       .study-card-header {
@@ -71,27 +377,52 @@
         color: white;
         padding: 1.5rem;
         text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .study-card-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.1) 100%);
+        animation: shimmer 3s ease-in-out infinite;
       }
 
       .study-card-header i {
         font-size: 2rem;
         margin-bottom: 0.5rem;
         display: block;
+        position: relative;
+        z-index: 1;
       }
 
       .study-card-header h3 {
         margin: 0;
         font-size: 1.3rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
       }
 
       .study-card-content {
         padding: 1.5rem;
+        position: relative;
       }
 
       .study-card-content p {
         color: #666;
         margin-bottom: 1rem;
         line-height: 1.6;
+        font-size: 1.1rem;
+        font-weight: 500;
       }
 
       .study-topics {
@@ -101,11 +432,22 @@
       }
 
       .study-topics li {
-        padding: 0.5rem 0;
+        padding: 0.75rem 0;
         border-bottom: 1px solid #f0f0f0;
         display: flex;
         align-items: center;
         gap: 0.5rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border-radius: 6px;
+        padding-left: 0.5rem;
+        margin-left: -0.5rem;
+        padding-right: 0.5rem;
+      }
+
+      .study-topics li:hover {
+        background: rgba(102, 126, 234, 0.1);
+        transform: translateX(5px);
       }
 
       .study-topics li:last-child {
@@ -115,6 +457,15 @@
       .study-topics li i {
         color: #667eea;
         width: 16px;
+        font-size: 1.1rem;
+      }
+
+      .study-topics li.completed i {
+        color: #28a745;
+      }
+
+      .study-topics li.in-progress i {
+        color: #ffc107;
       }
 
       .study-progress {
@@ -124,11 +475,26 @@
         border-radius: 12px;
         color: white;
         text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .study-progress::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.1) 100%);
+        animation: shimmer 4s ease-in-out infinite;
       }
 
       .study-progress h2 {
         margin: 0 0 1rem 0;
         font-size: 1.8rem;
+        position: relative;
+        z-index: 1;
       }
 
       .progress-stats {
@@ -140,17 +506,21 @@
 
       .progress-stat {
         text-align: center;
+        position: relative;
+        z-index: 1;
       }
 
       .progress-stat .number {
         font-size: 2rem;
         font-weight: bold;
         display: block;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
       }
 
       .progress-stat .label {
         font-size: 0.9rem;
         opacity: 0.9;
+        font-weight: 500;
       }
 
       .progress-bar {
@@ -182,14 +552,32 @@
         padding: 1.5rem;
         text-align: center;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
+        transition: all 0.3s ease;
         cursor: pointer;
         border: 2px solid transparent;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .action-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+        transition: left 0.5s ease;
+      }
+
+      .action-card:hover::before {
+        left: 100%;
       }
 
       .action-card:hover {
         transform: translateY(-3px);
         border-color: #667eea;
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
       }
 
       .action-card i {
@@ -197,17 +585,30 @@
         color: #667eea;
         margin-bottom: 1rem;
         display: block;
+        position: relative;
+        z-index: 1;
+        transition: transform 0.3s ease;
+      }
+
+      .action-card:hover i {
+        transform: scale(1.1);
       }
 
       .action-card h4 {
         margin: 0 0 0.5rem 0;
         color: #2d3748;
+        position: relative;
+        z-index: 1;
+        font-weight: 600;
       }
 
       .action-card p {
         color: #666;
         margin: 0;
         font-size: 0.9rem;
+        position: relative;
+        z-index: 1;
+        line-height: 1.5;
       }
 
       .study-tips {
@@ -269,6 +670,19 @@
 
         .tips-grid {
           grid-template-columns: 1fr;
+        }
+
+        .lessons-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .filter-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .filter-btn {
+          width: 200px;
         }
       }
     </style>
@@ -425,6 +839,31 @@
         </div>
       </div>
 
+      <!-- Lessons Section -->
+      <div class="lessons-section">
+        <h2><i class="fas fa-graduation-cap"></i> Interactive Lessons</h2>
+
+        <!-- Filter Buttons -->
+        <div class="filter-buttons">
+          <button class="filter-btn active" data-category="all">
+            <i class="fas fa-list"></i> All Lessons
+          </button>
+          <button class="filter-btn" data-category="HTML">
+            <i class="fab fa-html5"></i> HTML
+          </button>
+          <button class="filter-btn" data-category="CSS">
+            <i class="fab fa-css3-alt"></i> CSS
+          </button>
+          <button class="filter-btn" data-category="JavaScript">
+            <i class="fab fa-js"></i> JavaScript
+          </button>
+        </div>
+
+        <div class="lessons-grid" id="lessonsGrid">
+          <!-- Lessons will be loaded here by JavaScript -->
+        </div>
+      </div>
+
       <!-- Study Tips -->
       <div class="study-tips">
         <h3><i class="fas fa-lightbulb"></i> Expert Study Tips</h3>
@@ -487,6 +926,155 @@
         window.getHelp = function() {
           window.location.href = 'ai.html';
         };
+
+        // Load lessons for the study guide
+        loadLessonsForStudyGuide();
+
+        // Setup filter buttons
+        setupFilterButtons();
+      });
+
+      // Global variables for study guide
+      let allLessons = [];
+      let filteredLessons = [];
+
+      // Load lessons functionality for study guide
+      async function loadLessonsForStudyGuide() {
+        const lessonsGrid = document.getElementById('lessonsGrid');
+        if (!lessonsGrid) return;
+
+        try {
+          console.log('Fetching lessons for study guide...');
+          const response = await fetch('/api/lessons');
+
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+          }
+
+          const data = await response.json();
+          console.log('Lessons loaded for study guide:', data.length);
+
+          // Process lessons data
+          allLessons = data.map(lesson => ({
+            ...lesson,
+            progress: lesson.progress || 0,
+            level: lesson.difficulty,
+            icon: lesson.category === 'HTML' ? 'fab fa-html5' :
+                  lesson.category === 'CSS' ? 'fab fa-css3-alt' :
+                  'fab fa-js'
+          }));
+
+          filteredLessons = [...allLessons];
+          renderLessonsForStudyGuide(filteredLessons);
+
+        } catch (error) {
+          console.error('Error loading lessons for study guide:', error);
+          lessonsGrid.innerHTML = `
+            <div class="error-state">
+              <i class="fas fa-exclamation-circle"></i>
+              <p>Failed to load lessons: ${error.message}</p>
+            </div>
+          `;
+        }
+      }
+
+      // Setup filter buttons
+      function setupFilterButtons() {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+
+        filterButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            // Update active state
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            const category = button.dataset.category;
+
+            if (category === 'all') {
+              filteredLessons = [...allLessons];
+            } else {
+              filteredLessons = allLessons.filter(lesson => lesson.category === category);
+            }
+
+            renderLessonsForStudyGuide(filteredLessons);
+          });
+        });
+      }
+
+      // Render lessons for study guide
+      function renderLessonsForStudyGuide(lessons) {
+        const lessonsGrid = document.getElementById('lessonsGrid');
+        if (!lessonsGrid) return;
+
+        lessonsGrid.innerHTML = '';
+
+        if (lessons.length === 0) {
+          lessonsGrid.innerHTML = '<p class="no-lessons">No lessons available.</p>';
+          return;
+        }
+
+        lessons.forEach(lesson => {
+          const lessonCard = createLessonCardForStudyGuide(lesson);
+          lessonsGrid.appendChild(lessonCard);
+        });
+      }
+
+      // Create lesson card for study guide
+      function createLessonCardForStudyGuide(lesson) {
+        const card = document.createElement('div');
+        card.className = 'lesson-card';
+        card.dataset.category = lesson.category;
+
+        card.innerHTML = `
+          <div class="lesson-card-inner">
+            <div class="lesson-header">
+              <div class="lesson-category">
+                <i class="${lesson.icon}"></i>
+                <span>${lesson.category}</span>
+              </div>
+              <div class="lesson-meta">
+                <span class="duration"><i class="far fa-clock"></i> ${lesson.duration}</span>
+                <span class="difficulty ${lesson.difficulty.toLowerCase()}">${lesson.difficulty}</span>
+              </div>
+            </div>
+            <div class="lesson-content">
+              <h3>${lesson.title}</h3>
+              <p class="lesson-summary">${lesson.summary || ''}</p>
+              <p class="lesson-description">${lesson.description || ''}</p>
+              ${lesson.learningObjectives && lesson.learningObjectives.length > 0 ? `
+                <div class="learning-objectives">
+                  <h4>Learning Objectives:</h4>
+                  <ul>
+                    ${lesson.learningObjectives.map(obj => `<li>${obj}</li>`).join('')}
+                  </ul>
+                </div>
+              ` : ''}
+              <div class="progress-container">
+                <div class="progress-bar">
+                  <div style="width: ${lesson.progress}%"></div>
+                </div>
+                <span class="progress-text">${lesson.progress}% Complete</span>
+              </div>
+              <button class="btn btn-primary start-lesson" data-lesson-id="${lesson.id}">
+                ${lesson.progress > 0 ? 'Continue' : 'Start'} Lesson
+              </button>
+            </div>
+          </div>
+        `;
+
+        return card;
+      }
+
+      // Handle lesson start button clicks
+      document.addEventListener('click', (event) => {
+        const startButton = event.target.closest('.start-lesson');
+        if (startButton) {
+          const lessonId = startButton.dataset.lessonId;
+          if (lessonId) {
+            localStorage.setItem('currentLesson', lessonId);
+            window.location.href = `lesson-viewer.html?id=${lessonId}`;
+          }
+        }
       });
     </script>
 

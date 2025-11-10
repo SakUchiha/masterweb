@@ -638,38 +638,75 @@
         };
       });
 
-      function loadLessonData(lessonId) {
-        // Mock lesson data - in a real app, this would come from an API
-        const lessonData = {
-          'html-intro': {
-            title: 'Introduction to HTML',
-            duration: '15 minutes',
-            difficulty: 'Beginner',
-            category: 'HTML',
-            summary: 'Learn the fundamentals of HTML structure and basic elements.',
-            objectives: [
-              'Understand HTML document structure',
-              'Learn basic HTML elements and tags',
-              'Create your first HTML page',
-              'Practice proper HTML formatting'
-            ]
+      async function loadLessonData(lessonId) {
+        try {
+          console.log('Fetching lesson data for:', lessonId);
+          const response = await fetch(`/api/lessons`);
+
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
           }
-        };
 
-        const lesson = lessonData[lessonId] || lessonData['html-intro'];
+          const lessons = await response.json();
+          const lesson = lessons.find(l => l.id === lessonId);
 
-        // Update page content
-        document.getElementById('lessonTitle').textContent = lesson.title;
-        document.getElementById('lessonDuration').textContent = lesson.duration;
-        document.getElementById('lessonDifficulty').textContent = lesson.difficulty;
-        document.getElementById('lessonCategory').textContent = lesson.category;
-        document.getElementById('lessonSummary').textContent = lesson.summary;
+          if (!lesson) {
+            throw new Error('Lesson not found');
+          }
 
-        // Update objectives
-        const objectivesList = document.getElementById('learningObjectives');
-        objectivesList.innerHTML = lesson.objectives.map(obj =>
-          `<li><i class="fas fa-check-circle"></i> ${obj}</li>`
-        ).join('');
+          console.log('Lesson loaded:', lesson);
+
+          // Update page content
+          document.getElementById('lessonTitle').textContent = lesson.title;
+          document.getElementById('lessonDuration').textContent = lesson.duration;
+          document.getElementById('lessonDifficulty').textContent = lesson.difficulty;
+          document.getElementById('lessonCategory').textContent = lesson.category;
+          document.getElementById('lessonSummary').textContent = lesson.summary;
+
+          // Update objectives
+          const objectivesList = document.getElementById('learningObjectives');
+          if (lesson.learningObjectives && lesson.learningObjectives.length > 0) {
+            objectivesList.innerHTML = lesson.learningObjectives.map(obj =>
+              `<li><i class="fas fa-check-circle"></i> ${obj}</li>`
+            ).join('');
+          } else {
+            objectivesList.innerHTML = '<li><i class="fas fa-check-circle"></i> Complete this lesson to master the fundamentals</li>';
+          }
+
+          // Update lesson content if slides exist
+          if (lesson.slides && lesson.slides.length > 0) {
+            updateLessonContent(lesson.slides);
+          }
+
+        } catch (error) {
+          console.error('Error loading lesson data:', error);
+          // Fallback to basic content
+          document.getElementById('lessonTitle').textContent = 'Lesson Not Found';
+          document.getElementById('lessonContent').innerHTML = '<p>Sorry, this lesson could not be loaded. Please try again later.</p>';
+        }
+      }
+
+      function updateLessonContent(slides) {
+        const contentDiv = document.getElementById('lessonContent');
+        if (!contentDiv || !slides.length) return;
+
+        // Convert slides to HTML content
+        const htmlContent = slides.map(slide => {
+          let content = slide.content;
+
+          // Convert markdown-like elements to HTML
+          content = content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+          content = content.replace(/\*(.*?)\*/g, '<em>$1</em>');
+          content = content.replace(/`(.*?)`/g, '<code>$1</code>');
+          content = content.replace(/\n/g, '<br>');
+
+          return `<div class="slide-content">
+            <h3>${slide.title}</h3>
+            <div class="slide-text">${content}</div>
+          </div>`;
+        }).join('');
+
+        contentDiv.innerHTML = htmlContent;
       }
     </script>
 

@@ -3,14 +3,31 @@ const router = express.Router();
 const fs = require('fs').promises;
 const path = require('path');
 
-// Path to lessons data
-const LESSONS_FILE = path.join(__dirname, 'data', 'lessons.json');
+// Path to lessons data - Fixed for Vercel serverless environment
+const LESSONS_FILE = process.env.VERCEL
+  ? path.join(process.cwd(), 'api', 'data', 'lessons.json')
+  : path.join(__dirname, 'data', 'lessons.json');
 
 // GET /api/lessons - Get all lessons
 router.get('/', async (req, res) => {
   try {
+    console.log('Attempting to read lessons file from:', LESSONS_FILE);
+
+    // Check if file exists first
+    try {
+      await fs.access(LESSONS_FILE);
+    } catch (accessError) {
+      console.error('Lessons file not found:', LESSONS_FILE);
+      return res.status(500).json({
+        error: 'File not found',
+        message: 'Lessons data file is missing'
+      });
+    }
+
     const data = await fs.readFile(LESSONS_FILE, 'utf8');
     const lessons = JSON.parse(data);
+
+    console.log('Successfully loaded', lessons.length, 'lessons');
 
     // Add progress tracking (in a real app, this would come from a database)
     const lessonsWithProgress = lessons.map(lesson => ({
@@ -27,7 +44,8 @@ router.get('/', async (req, res) => {
     console.error('Error reading lessons:', error);
     res.status(500).json({
       error: 'Failed to load lessons',
-      message: 'Unable to read lessons data'
+      message: 'Unable to read lessons data',
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
 });

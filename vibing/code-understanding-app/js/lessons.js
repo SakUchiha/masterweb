@@ -1,1 +1,213 @@
-document.addEventListener("DOMContentLoaded",function(){let s=[];async function n(){try{const n=await fetch(`${CONFIG.API_BASE_URL}/api/lessons`);if(!n.ok)throw new Error("Failed to fetch lessons");s=await n.json(),s=s.map(s=>({...s,progress:0,level:s.difficulty,icon:"HTML"===s.category?"fab fa-html5":"CSS"===s.category?"fab fa-css3-alt":"fab fa-js"})),l(s),function(){if(!a)return;const n=s.length,e=s.filter(s=>100===s.progress).length,t=Math.round(e/n*100)||0;a.innerHTML=`\n      <div class="stat-item">\n        <span class="stat-value">${n}</span>\n        <span class="stat-label">Total Lessons</span>\n      </div>\n      <div class="stat-item">\n        <span class="stat-value">${e}</span>\n        <span class="stat-label">Completed</span>\n      </div>\n      <div class="stat-item">\n        <span class="stat-value">${t}%</span>\n        <span class="stat-label">Overall Progress</span>\n      </div>\n    `}()}catch(s){!function(s){if(!e)return;e.innerHTML=`\n      <div class="error-state">\n        <i class="fas fa-exclamation-circle"></i>\n        <p>${s}</p>\n        <button class="btn btn-primary" onclick="location.reload()">\n          Try Again\n        </button>\n      </div>\n    `}("Failed to load lessons. Please try again.")}}const e=document.querySelector(".lessons-grid"),t=document.querySelectorAll(".filter-btn"),a=document.querySelector(".progress-stats");function i(){!function(){if(!e)return;const s=Array(6).fill().map(()=>'\n      <div class="skeleton-card">\n        <div class="skeleton skeleton-title"></div>\n        <div class="skeleton skeleton-text"></div>\n        <div class="skeleton skeleton-text"></div>\n        <div class="skeleton skeleton-text"></div>\n      </div>\n    ').join("");e.innerHTML=`\n      <div class="loading-state">\n        <div class="spinner"></div>\n        <p>Loading lessons...</p>\n      </div>\n      ${s}\n    `}(),n(),t.forEach(n=>{n.addEventListener("click",()=>{var e;t.forEach(s=>s.classList.remove("active")),n.classList.add("active"),l("all"===(e=n.dataset.category)?s:s.filter(s=>s.category===e))})}),document.addEventListener("click",s=>{var n;s.target.closest(".start-lesson")&&(n=s.target.closest(".start-lesson").dataset.lessonId,localStorage.setItem("currentLesson",n),window.location.href=`lesson-viewer.html?id=${n}`)})}function l(s){e&&(e.innerHTML="",0!==s.length?s.forEach(s=>{const n=function(s){const n=document.createElement("div");return n.className="lesson-card",n.dataset.category=s.category,n.innerHTML=`\n      <div class="lesson-card-inner">\n        <div class="lesson-header">\n          <div class="lesson-category">\n            <i class="${s.icon}"></i>\n            <span>${s.category}</span>\n          </div>\n          <div class="lesson-meta">\n            <span class="duration"><i class="far fa-clock"></i> ${s.duration}</span>\n            <span class="difficulty ${s.difficulty.toLowerCase()}">${s.difficulty}</span>\n          </div>\n        </div>\n        <div class="lesson-content">\n          <h3>${s.title}</h3>\n          <p class="lesson-summary">${s.summary||""}</p>\n          <p class="lesson-description">${s.description||""}</p>\n          ${s.learningObjectives?`\n            <div class="learning-objectives">\n              <h4>Learning Objectives:</h4>\n              <ul>\n                ${s.learningObjectives.map(s=>`<li>${s}</li>`).join("")}\n              </ul>\n            </div>\n          `:""}\n          <div class="progress-container">\n            <div class="progress-bar" style="width: ${s.progress}%"></div>\n            <span class="progress-text">${s.progress}% Complete</span>\n          </div>\n          <button class="btn start-lesson" data-lesson-id="${s.id}">\n            ${s.progress>0?"Continue":"Start"} Lesson\n          </button>\n        </div>\n      </div>\n    `,n}(s);e.appendChild(n)}):e.innerHTML='<p class="no-lessons">No lessons found. Try a different filter.</p>')}window.loadLessons=i,window.fetchLessons=n,i()});
+document.addEventListener("DOMContentLoaded", function() {
+  let lessons = [];
+  let filteredLessons = [];
+
+  // DOM elements
+  const lessonsGrid = document.querySelector(".lessons-grid");
+  const progressStats = document.querySelector(".progress-stats");
+  const filterButtons = document.querySelectorAll(".filter-btn");
+
+  // Initialize the app
+  async function init() {
+    showLoadingState();
+    await loadLessons();
+    setupEventListeners();
+  }
+
+  // Load lessons from API
+  async function loadLessons() {
+    try {
+      console.log('Fetching lessons from:', `${CONFIG.API_BASE_URL}/api/lessons`);
+
+      const response = await fetch(`${CONFIG.API_BASE_URL}/api/lessons`);
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      console.log('Lessons loaded:', data.length);
+
+      // Process lessons data
+      lessons = data.map(lesson => ({
+        ...lesson,
+        progress: lesson.progress || 0,
+        level: lesson.difficulty,
+        icon: lesson.category === 'HTML' ? 'fab fa-html5' :
+              lesson.category === 'CSS' ? 'fab fa-css3-alt' :
+              'fab fa-js'
+      }));
+
+      filteredLessons = [...lessons];
+      renderLessons(filteredLessons);
+      updateProgressStats();
+
+    } catch (error) {
+      console.error('Error loading lessons:', error);
+      showErrorState(`Failed to load lessons: ${error.message}`);
+    }
+  }
+
+  // Render lessons to the grid
+  function renderLessons(lessonsToRender) {
+    if (!lessonsGrid) return;
+
+    lessonsGrid.innerHTML = '';
+
+    if (lessonsToRender.length === 0) {
+      lessonsGrid.innerHTML = '<p class="no-lessons">No lessons found. Try a different filter.</p>';
+      return;
+    }
+
+    lessonsToRender.forEach(lesson => {
+      const lessonCard = createLessonCard(lesson);
+      lessonsGrid.appendChild(lessonCard);
+    });
+  }
+
+  // Create a lesson card element
+  function createLessonCard(lesson) {
+    const card = document.createElement('div');
+    card.className = 'lesson-card';
+    card.dataset.category = lesson.category;
+
+    card.innerHTML = `
+      <div class="lesson-card-inner">
+        <div class="lesson-header">
+          <div class="lesson-category">
+            <i class="${lesson.icon}"></i>
+            <span>${lesson.category}</span>
+          </div>
+          <div class="lesson-meta">
+            <span class="duration"><i class="far fa-clock"></i> ${lesson.duration}</span>
+            <span class="difficulty ${lesson.difficulty.toLowerCase()}">${lesson.difficulty}</span>
+          </div>
+        </div>
+        <div class="lesson-content">
+          <h3>${lesson.title}</h3>
+          <p class="lesson-summary">${lesson.summary || ''}</p>
+          <p class="lesson-description">${lesson.description || ''}</p>
+          ${lesson.learningObjectives ? `
+            <div class="learning-objectives">
+              <h4>Learning Objectives:</h4>
+              <ul>
+                ${lesson.learningObjectives.map(obj => `<li>${obj}</li>`).join('')}
+              </ul>
+            </div>
+          ` : ''}
+          <div class="progress-container">
+            <div class="progress-bar">
+              <div style="width: ${lesson.progress}%"></div>
+            </div>
+            <span class="progress-text">${lesson.progress}% Complete</span>
+          </div>
+          <button class="btn btn-primary start-lesson" data-lesson-id="${lesson.id}">
+            ${lesson.progress > 0 ? 'Continue' : 'Start'} Lesson
+          </button>
+        </div>
+      </div>
+    `;
+
+    return card;
+  }
+
+  // Update progress statistics
+  function updateProgressStats() {
+    if (!progressStats) return;
+
+    const totalLessons = lessons.length;
+    const completedLessons = lessons.filter(l => l.progress === 100).length;
+    const progressPercentage = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
+
+    progressStats.innerHTML = `
+      <div class="stat-item">
+        <span class="stat-value">${totalLessons}</span>
+        <span class="stat-label">Total Lessons</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">${completedLessons}</span>
+        <span class="stat-label">Completed</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">${progressPercentage}%</span>
+        <span class="stat-label">Overall Progress</span>
+      </div>
+    `;
+  }
+
+  // Show loading state
+  function showLoadingState() {
+    if (!lessonsGrid) return;
+
+    lessonsGrid.innerHTML = `
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading lessons...</p>
+      </div>
+      ${Array(6).fill().map(() => `
+        <div class="skeleton-card">
+          <div class="skeleton skeleton-title"></div>
+          <div class="skeleton skeleton-text"></div>
+          <div class="skeleton skeleton-text"></div>
+          <div class="skeleton skeleton-text"></div>
+        </div>
+      `).join('')}
+    `;
+  }
+
+  // Show error state
+  function showErrorState(message) {
+    if (!lessonsGrid) return;
+
+    lessonsGrid.innerHTML = `
+      <div class="error-state">
+        <i class="fas fa-exclamation-circle"></i>
+        <p>${message}</p>
+        <button class="btn btn-primary" onclick="location.reload()">
+          Try Again
+        </button>
+      </div>
+    `;
+  }
+
+  // Setup event listeners
+  function setupEventListeners() {
+    // Filter buttons
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Update active state
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        const category = button.dataset.category;
+
+        if (category === 'all') {
+          filteredLessons = [...lessons];
+        } else {
+          filteredLessons = lessons.filter(lesson => lesson.category === category);
+        }
+
+        renderLessons(filteredLessons);
+      });
+    });
+
+    // Lesson start buttons (delegated)
+    document.addEventListener('click', (event) => {
+      const startButton = event.target.closest('.start-lesson');
+      if (startButton) {
+        const lessonId = startButton.dataset.lessonId;
+        if (lessonId) {
+          localStorage.setItem('currentLesson', lessonId);
+          window.location.href = `lesson-viewer.html?id=${lessonId}`;
+        }
+      }
+    });
+  }
+
+  // Public API for external access
+  window.loadLessons = init;
+  window.fetchLessons = loadLessons;
+
+  // Start the app
+  init();
+});

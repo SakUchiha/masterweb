@@ -138,14 +138,13 @@ module.exports = (env, argv) => {
     hot: true,
     open: false,
     historyApiFallback: true,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:4000',
-        changeOrigin: true,
-        secure: false,
-        logLevel: 'debug'
-      }
-    }
+    proxy: [{
+      context: ['/api'],
+      target: 'http://localhost:4000',
+      changeOrigin: true,
+      secure: false,
+      logLevel: 'debug'
+    }]
   } : undefined,
   };
 };

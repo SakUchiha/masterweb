@@ -76,6 +76,32 @@
       "Use semantic elements for page structure",
       "Improve accessibility with proper markup",
       "Create well-structured web pages"
+    ],
+    "slides": [
+      {
+        "id": 1,
+        "title": "Why Semantic HTML Matters",
+        "content": "<h2>Why Semantic HTML Matters</h2><p>Semantic HTML uses elements that clearly describe their meaning and purpose. This improves accessibility, SEO, and code maintainability.</p><p>Instead of using generic <code><div></code> elements everywhere, semantic elements like <code><header></code>, <code><nav></code>, and <code><main></code> provide context about the content they contain.</p>",
+        "type": "content"
+      },
+      {
+        "id": 2,
+        "title": "Structural Elements",
+        "content": "<h2>Structural Elements</h2><ul><li><strong><header></strong> - Contains introductory content or navigation</li><li><strong><nav></strong> - Navigation links</li><li><strong><main></strong> - Main content of the page</li><li><strong><section></strong> - Thematic grouping of content</li><li><strong><article></strong> - Self-contained content</li><li><strong><aside></strong> - Sidebar or supplementary content</li><li><strong><footer></strong> - Footer information</li></ul>",
+        "type": "content"
+      },
+      {
+        "id": 3,
+        "title": "Semantic Page Structure",
+        "content": "<h2>Semantic Page Structure</h2><p>A well-structured semantic HTML page follows this pattern:</p><pre><code><header>\n  <nav>...</nav>\n</header>\n<main>\n  <section>...</section>\n  <aside>...</aside>\n</main>\n<footer>...</footer></code></pre><p>This structure helps screen readers navigate and search engines understand your content.</p>",
+        "type": "content"
+      },
+      {
+        "id": 4,
+        "title": "Accessibility Benefits",
+        "content": "<h2>Accessibility Benefits</h2><p>Semantic HTML improves accessibility by:</p><ul><li>Providing landmarks for screen readers</li><li>Creating logical content hierarchy</li><li>Enabling keyboard navigation</li><li>Supporting assistive technologies</li></ul><p>Screen readers can jump between sections using semantic landmarks, making content much easier to navigate.</p>",
+        "type": "content"
+      }
     ]
   },
   {
@@ -91,6 +117,38 @@
       "Learn how to apply styles to HTML elements",
       "Work with colors, fonts, and spacing",
       "Understand the box model"
+    ],
+    "slides": [
+      {
+        "id": 1,
+        "title": "What is CSS?",
+        "content": "<h2>What is CSS?</h2><p>CSS (Cascading Style Sheets) is a language used to describe the presentation of a document written in HTML. It controls how HTML elements look on screen, paper, or in other media.</p><p>CSS separates content from presentation, making websites more maintainable and flexible.</p>",
+        "type": "content"
+      },
+      {
+        "id": 2,
+        "title": "CSS Syntax",
+        "content": "<h2>CSS Syntax</h2><p>CSS rules consist of a selector and declaration block:</p><pre><code>selector {\n  property: value;\n  property: value;\n}</code></pre><p>The selector targets HTML elements, and the declarations specify what styles to apply.</p>",
+        "type": "content"
+      },
+      {
+        "id": 3,
+        "title": "Common Selectors",
+        "content": "<h2>Common Selectors</h2><ul><li><strong>Element selector:</strong> <code>p { color: blue; }</code></li><li><strong>Class selector:</strong> <code>.highlight { background: yellow; }</code></li><li><strong>ID selector:</strong> <code>#header { font-size: 24px; }</code></li><li><strong>Universal selector:</strong> <code>* { margin: 0; }</code></li></ul>",
+        "type": "content"
+      },
+      {
+        "id": 4,
+        "title": "Colors and Fonts",
+        "content": "<h2>Colors and Fonts</h2><p>CSS provides many ways to specify colors:</p><ul><li>Named colors: <code>red</code>, <code>blue</code>, <code>green</code></li><li>Hex codes: <code>#ff0000</code>, <code>#3366cc</code></li><li>RGB values: <code>rgb(255, 0, 0)</code></li></ul><p>Font properties include <code>font-family</code>, <code>font-size</code>, and <code>font-weight</code>.</p>",
+        "type": "content"
+      },
+      {
+        "id": 5,
+        "title": "The Box Model",
+        "content": "<h2>The Box Model</h2><p>Every HTML element is a rectangular box with content, padding, border, and margin:</p><ul><li><strong>Content:</strong> The actual content (text, images, etc.)</li><li><strong>Padding:</strong> Space between content and border</li><li><strong>Border:</strong> Line around the padding</li><li><strong>Margin:</strong> Space outside the border</li></ul><p>Understanding the box model is crucial for layout and spacing.</p>",
+        "type": "content"
+      }
     ]
   },
   {
@@ -106,6 +164,38 @@
       "Create responsive layouts with Flexbox",
       "Align and justify content effectively",
       "Build navigation bars and card layouts"
+    ],
+    "slides": [
+      {
+        "id": 1,
+        "title": "Introduction to Flexbox",
+        "content": "<h2>Introduction to Flexbox</h2><p>Flexbox (Flexible Box Layout) is a CSS layout module designed to provide a more efficient way to lay out, align, and distribute space among items in a container, even when their size is unknown or dynamic.</p><p>Flexbox makes it easy to create responsive layouts without using floats or positioning.</p>",
+        "type": "content"
+      },
+      {
+        "id": 2,
+        "title": "Flex Container Properties",
+        "content": "<h2>Flex Container Properties</h2><p>To use Flexbox, set <code>display: flex</code> on the parent element. Key properties include:</p><ul><li><strong>flex-direction:</strong> row, column, row-reverse, column-reverse</li><li><strong>justify-content:</strong> flex-start, center, flex-end, space-between, space-around</li><li><strong>align-items:</strong> stretch, flex-start, center, flex-end, baseline</li><li><strong>flex-wrap:</strong> nowrap, wrap, wrap-reverse</li></ul>",
+        "type": "content"
+      },
+      {
+        "id": 3,
+        "title": "Flex Item Properties",
+        "content": "<h2>Flex Item Properties</h2><p>Flex items have their own properties that control how they behave:</p><ul><li><strong>flex-grow:</strong> How much the item should grow (default: 0)</li><li><strong>flex-shrink:</strong> How much the item should shrink (default: 1)</li><li><strong>flex-basis:</strong> Initial size of the item</li><li><strong>flex:</strong> Shorthand for grow, shrink, and basis</li><li><strong>align-self:</strong> Override container's align-items for individual items</li></ul>",
+        "type": "content"
+      },
+      {
+        "id": 4,
+        "title": "Common Flexbox Patterns",
+        "content": "<h2>Common Flexbox Patterns</h2><p>Navigation bar:</p><pre><code>.nav { display: flex; justify-content: space-between; }</code></pre><p>Card layout:</p><pre><code>.cards { display: flex; flex-wrap: wrap; gap: 1rem; }</code></pre><p>Centered content:</p><pre><code>.center { display: flex; justify-content: center; align-items: center; }</code></pre>",
+        "type": "content"
+      },
+      {
+        "id": 5,
+        "title": "Flexbox vs. Other Layouts",
+        "content": "<h2>Flexbox vs. Other Layouts</h2><p>Flexbox is ideal for:</p><ul><li>One-dimensional layouts (row or column)</li><li>Aligning items within a container</li><li>Distributing space between items</li><li>Reordering items visually</li></ul><p>For two-dimensional layouts, consider CSS Grid instead.</p>",
+        "type": "content"
+      }
     ]
   },
   {
@@ -121,6 +211,44 @@
       "Create mobile-first responsive designs",
       "Work with responsive units (rem, em, %, vw, vh)",
       "Test and debug responsive layouts"
+    ],
+    "slides": [
+      {
+        "id": 1,
+        "title": "What is Responsive Design?",
+        "content": "<h2>What is Responsive Design?</h2><p>Responsive web design makes web pages render well on all devices and window sizes. It uses flexible layouts, flexible images, and CSS media queries to adapt the layout to the viewing environment.</p><p>With responsive design, you can create one website that works on desktop, tablet, and mobile devices.</p>",
+        "type": "content"
+      },
+      {
+        "id": 2,
+        "title": "Media Queries",
+        "content": "<h2>Media Queries</h2><p>Media queries allow you to apply different styles based on device characteristics:</p><pre><code>@media (max-width: 768px) {\n  .container { padding: 1rem; }\n  .sidebar { display: none; }\n}</code></pre><p>Common breakpoints: 576px (small), 768px (medium), 992px (large), 1200px (extra large).</p>",
+        "type": "content"
+      },
+      {
+        "id": 3,
+        "title": "Mobile-First Approach",
+        "content": "<h2>Mobile-First Approach</h2><p>Start designing for mobile devices first, then add styles for larger screens:</p><pre><code>/* Mobile styles */\n.container { width: 100%; }\n\n/* Tablet and up */\n@media (min-width: 768px) {\n  .container { width: 750px; }\n}\n\n/* Desktop and up */\n@media (min-width: 992px) {\n  .container { width: 970px; }\n}</code></pre>",
+        "type": "content"
+      },
+      {
+        "id": 4,
+        "title": "Responsive Units",
+        "content": "<h2>Responsive Units</h2><ul><li><strong>rem/em:</strong> Relative to font-size (accessible)</li><li><strong>%:</strong> Relative to parent element</li><li><strong>vw/vh:</strong> Relative to viewport width/height</li><li><strong>vmin/vmax:</strong> Relative to smaller/larger viewport dimension</li></ul><p>Use relative units instead of fixed pixels for better responsiveness.</p>",
+        "type": "content"
+      },
+      {
+        "id": 5,
+        "title": "Responsive Images",
+        "content": "<h2>Responsive Images</h2><p>Use responsive images that scale with the container:</p><pre><code>img {\n  max-width: 100%;\n  height: auto;\n}</code></pre><p>For different image sizes per device, use the <code>srcset</code> attribute or CSS background images with media queries.</p>",
+        "type": "content"
+      },
+      {
+        "id": 6,
+        "title": "Testing Responsive Design",
+        "content": "<h2>Testing Responsive Design</h2><p>Test your responsive designs using:</p><ul><li>Browser developer tools (responsive mode)</li><li>Real devices when possible</li><li>Online testing tools</li><li>Different browsers and orientations</li></ul><p>Always test touch interactions on actual mobile devices.</p>",
+        "type": "content"
+      }
     ]
   },
   {
@@ -136,6 +264,38 @@
       "Work with strings, numbers, and booleans",
       "Use operators and expressions",
       "Write your first JavaScript programs"
+    ],
+    "slides": [
+      {
+        "id": 1,
+        "title": "What is JavaScript?",
+        "content": "<h2>What is JavaScript?</h2><p>JavaScript is a programming language that adds interactivity to web pages. It runs in the browser and allows you to create dynamic content, control multimedia, animate images, and much more.</p><p>JavaScript is one of the three core technologies of web development, alongside HTML and CSS.</p>",
+        "type": "content"
+      },
+      {
+        "id": 2,
+        "title": "Variables and Data Types",
+        "content": "<h2>Variables and Data Types</h2><p>Variables store data values. JavaScript has several data types:</p><ul><li><strong>Strings:</strong> Text data (<code>'Hello World'</code>)</li><li><strong>Numbers:</strong> Numeric values (<code>42</code>, <code>3.14</code>)</li><li><strong>Booleans:</strong> True/false values (<code>true</code>, <code>false</code>)</li><li><strong>Arrays:</strong> Collections of values (<code>[1, 2, 3]</code>)</li><li><strong>Objects:</strong> Complex data structures</li></ul>",
+        "type": "content"
+      },
+      {
+        "id": 3,
+        "title": "Declaring Variables",
+        "content": "<h2>Declaring Variables</h2><p>Use <code>let</code>, <code>const</code>, or <code>var</code> to declare variables:</p><pre><code>let name = 'John';        // Can be reassigned\nconst age = 25;          // Cannot be reassigned\nlet score;               // Undefined initially\nscore = 100;             // Assign later</code></pre><p>Use <code>const</code> for values that won't change, <code>let</code> for variables that will.</p>",
+        "type": "content"
+      },
+      {
+        "id": 4,
+        "title": "Operators",
+        "content": "<h2>Operators</h2><p>JavaScript has various operators for calculations and comparisons:</p><ul><li><strong>Arithmetic:</strong> <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code></li><li><strong>Assignment:</strong> <code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code></li><li><strong>Comparison:</strong> <code>==</code>, <code>===</code>, <code>!=</code>, <code><</code>, <code>></code></li><li><strong>Logical:</strong> <code>&&</code>, <code>||</code>, <code>!</code></li></ul>",
+        "type": "content"
+      },
+      {
+        "id": 5,
+        "title": "Basic JavaScript Program",
+        "content": "<h2>Basic JavaScript Program</h2><p>Here's a simple program that demonstrates basic concepts:</p><pre><code>let name = 'Alice';\nlet age = 30;\nlet isStudent = true;\n\nconsole.log('Hello, ' + name + '!');\nconsole.log('You are ' + age + ' years old.');\n\nif (isStudent) {\n  console.log('You are a student.');\n} else {\n  console.log('You are not a student.');\n}</code></pre>",
+        "type": "content"
+      }
     ]
   },
   {
@@ -151,6 +311,50 @@
       "Use parameters and return values",
       "Understand function scope",
       "Create arrow functions"
+    ],
+    "slides": [
+      {
+        "id": 1,
+        "title": "What are Functions?",
+        "content": "<h2>What are Functions?</h2><p>Functions are reusable blocks of code that perform specific tasks. They allow you to write code once and use it multiple times, making your programs more organized and maintainable.</p><p>Functions can take input (parameters), process it, and return output (return values).</p>",
+        "type": "content"
+      },
+      {
+        "id": 2,
+        "title": "Function Declaration",
+        "content": "<h2>Function Declaration</h2><p>The basic syntax for declaring a function:</p><pre><code>function functionName(parameter1, parameter2) {\n  // Code to execute\n  return result;\n}</code></pre><p>Example:</p><pre><code>function greet(name) {\n  return 'Hello, ' + name + '!';\n}</code></pre>",
+        "type": "content"
+      },
+      {
+        "id": 3,
+        "title": "Calling Functions",
+        "content": "<h2>Calling Functions</h2><p>To execute a function, you call it by its name followed by parentheses:</p><pre><code>let message = greet('Alice');\nconsole.log(message); // Output: Hello, Alice!\n\ngreet('Bob'); // Output: Hello, Bob!</code></pre><p>You can call functions multiple times with different arguments.</p>",
+        "type": "content"
+      },
+      {
+        "id": 4,
+        "title": "Parameters and Arguments",
+        "content": "<h2>Parameters and Arguments</h2><p>Parameters are variables defined in the function declaration. Arguments are the values passed when calling the function:</p><pre><code>function add(a, b) {  // a and b are parameters\n  return a + b;\n}\n\nadd(5, 3);  // 5 and 3 are arguments</code></pre><p>Functions can have zero or more parameters.</p>",
+        "type": "content"
+      },
+      {
+        "id": 5,
+        "title": "Return Values",
+        "content": "<h2>Return Values</h2><p>The <code>return</code> statement sends a value back to the caller:</p><pre><code>function calculateArea(width, height) {\n  let area = width * height;\n  return area;\n}\n\nlet roomArea = calculateArea(10, 8);\nconsole.log('Room area:', roomArea); // 80</code></pre><p>If no return statement, the function returns <code>undefined</code>.</p>",
+        "type": "content"
+      },
+      {
+        "id": 6,
+        "title": "Function Scope",
+        "content": "<h2>Function Scope</h2><p>Variables declared inside functions are local to that function:</p><pre><code>function myFunction() {\n  let localVar = 'I am local';\n  console.log(localVar); // Works\n}\n\nconsole.log(localVar); // Error: localVar is not defined</code></pre><p>Variables declared outside functions are global and accessible everywhere.</p>",
+        "type": "content"
+      },
+      {
+        "id": 7,
+        "title": "Arrow Functions",
+        "content": "<h2>Arrow Functions</h2><p>Arrow functions provide a shorter syntax for function expressions:</p><pre><code>// Traditional function expression\nconst add = function(a, b) {\n  return a + b;\n};\n\n// Arrow function\nconst add = (a, b) => a + b;\n\n// Arrow function with body\nconst greet = name => {\n  return 'Hello, ' + name;\n};</code></pre>",
+        "type": "content"
+      }
     ]
   },
   {
@@ -166,6 +370,50 @@
       "Modify element content and styles",
       "Handle user events (clicks, input, etc.)",
       "Create interactive web applications"
+    ],
+    "slides": [
+      {
+        "id": 1,
+        "title": "What is the DOM?",
+        "content": "<h2>What is the DOM?</h2><p>The Document Object Model (DOM) is a programming interface for HTML and XML documents. It represents the page as a tree of objects that JavaScript can interact with.</p><p>The DOM allows JavaScript to change the document structure, style, and content dynamically.</p>",
+        "type": "content"
+      },
+      {
+        "id": 2,
+        "title": "Selecting Elements",
+        "content": "<h2>Selecting Elements</h2><p>JavaScript provides several methods to select DOM elements:</p><ul><li><strong>getElementById:</strong> <code>document.getElementById('myId')</code></li><li><strong>getElementsByClassName:</strong> <code>document.getElementsByClassName('myClass')</code></li><li><strong>getElementsByTagName:</strong> <code>document.getElementsByTagName('p')</code></li><li><strong>querySelector:</strong> <code>document.querySelector('.myClass')</code></li><li><strong>querySelectorAll:</strong> <code>document.querySelectorAll('p')</code></li></ul>",
+        "type": "content"
+      },
+      {
+        "id": 3,
+        "title": "Modifying Content",
+        "content": "<h2>Modifying Content</h2><p>Change element content using textContent or innerHTML:</p><pre><code>let element = document.getElementById('myElement');\nelement.textContent = 'New text content';\nelement.innerHTML = '<strong>New HTML content</strong>';</code></pre><p>Use textContent for plain text, innerHTML for HTML content.</p>",
+        "type": "content"
+      },
+      {
+        "id": 4,
+        "title": "Modifying Styles",
+        "content": "<h2>Modifying Styles</h2><p>Change element styles using the style property:</p><pre><code>let element = document.querySelector('.box');\nelement.style.backgroundColor = 'blue';\nelement.style.fontSize = '20px';\nelement.style.display = 'none';</code></pre><p>You can also add/remove CSS classes:</p><pre><code>element.classList.add('active');\nelement.classList.remove('hidden');\nelement.classList.toggle('visible');</code></pre>",
+        "type": "content"
+      },
+      {
+        "id": 5,
+        "title": "Event Handling",
+        "content": "<h2>Event Handling</h2><p>Respond to user interactions with event listeners:</p><pre><code>let button = document.getElementById('myButton');\nbutton.addEventListener('click', function() {\n  alert('Button clicked!');\n});</code></pre><p>Common events: click, mouseover, keydown, submit, load.</p>",
+        "type": "content"
+      },
+      {
+        "id": 6,
+        "title": "Creating Elements",
+        "content": "<h2>Creating Elements</h2><p>Create new elements and add them to the DOM:</p><pre><code>let newDiv = document.createElement('div');\nnewDiv.textContent = 'Hello World!';\nnewDiv.className = 'greeting';\n\ndocument.body.appendChild(newDiv);</code></pre><p>Use appendChild, insertBefore, or insertAdjacentHTML to add elements.</p>",
+        "type": "content"
+      },
+      {
+        "id": 7,
+        "title": "DOM Traversal",
+        "content": "<h2>DOM Traversal</h2><p>Navigate through the DOM tree:</p><ul><li><strong>Parent:</strong> <code>element.parentElement</code></li><li><strong>Children:</strong> <code>element.children</code>, <code>element.firstElementChild</code></li><li><strong>Siblings:</strong> <code>element.nextElementSibling</code>, <code>element.previousElementSibling</code></li></ul><p>These properties help you move around the DOM structure.</p>",
+        "type": "content"
+      }
     ]
   }
 ]
